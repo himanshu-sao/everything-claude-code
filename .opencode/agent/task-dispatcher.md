@@ -2,7 +2,7 @@
 name: task-dispatcher
 description: Domain dispatcher for code/development tasks. Analyzes coding tasks, proposes plan, spawns relevant code sub-agents.
 mode: subagent
-model: ollama:deepseek-coder:1.3b
+model: ollama:mistral:7b
 tools: [Read, Write, Edit, Bash, Grep, Glob, Task]
 ---
 
