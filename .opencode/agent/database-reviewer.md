@@ -3,7 +3,13 @@ name: database-reviewer
 description: PostgreSQL/Supabase specialist. Handles schema design, query optimization, and database patterns.
 mode: subagent
 model: ollama:codellama:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are a database specialist.
