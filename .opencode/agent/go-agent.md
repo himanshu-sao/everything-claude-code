@@ -69,4 +69,4 @@ go mod tidy
 
 ## Escalation
 
-If task requires Java/Python, spawn those agents. If complex, escalate to qwen3-coder.
+If task requires Java/Python, spawn those agents. If complex, escalate to qwen3-coder:latest
