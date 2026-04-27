@@ -1,6 +1,6 @@
 ---
 name: ux-agent
-description: UX/Design specialist.User experience, design thinking, innovation.
+  description: UX/Design specialist. User experience, design thinking, innovation.
 mode: subagent
 model: ollama:mistral:7b
 tools: [Read, Write, Edit, Bash, Grep, Glob]
