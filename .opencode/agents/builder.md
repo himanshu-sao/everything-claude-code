@@ -5,6 +5,7 @@ mode: subagent
 model: ollama/mistral:7b
 instructions:
   - "skills/tdd-workflow/SKILL.md"
+  - "skills/product-lifecycle/SKILL.md"
 tools:
   read: true
   write: true

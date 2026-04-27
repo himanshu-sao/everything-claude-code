@@ -29,6 +29,8 @@ Task: go-agent for [task description]
 ### Architecture & Planning
 - **architect** - Design system, create plans
 - **planner** - Task breakdown, track progress
+- **ba-agent** - Requirement analysis, PRD creation
+- **story-writer** - Story translation, Jira AC
 - **builder** - Implementation, TDD workflow
 - **improver** - Collect feedback, update agents
 
@@ -72,6 +74,7 @@ Invoke subagents by name using the Task tool:
 - **build-resolver** - Build error fixing
 - **test-agent** - Unit tests
 - **e2e-runner** - E2E tests
+- **perf-engineer** - Performance benchmarking
 - **security-reviewer** - Security scanning
 - **database-reviewer** - PostgreSQL/Supabase
 - **doc-updater** - Documentation

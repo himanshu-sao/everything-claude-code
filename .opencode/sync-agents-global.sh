@@ -9,6 +9,7 @@ WORKSPACE_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # Source paths
 LOCAL_AGENTS_DIR="$SCRIPT_DIR/agents"
+LOCAL_COMMANDS_DIR="$SCRIPT_DIR/commands"
 LOCAL_SKILLS_DIR="$WORKSPACE_ROOT/skills"
 LOCAL_INSTRUCTIONS_DIR="$WORKSPACE_ROOT/instructions"
 LOCAL_CONFIG_FILE="$SCRIPT_DIR/opencode.json"
@@ -16,6 +17,7 @@ LOCAL_CONFIG_FILE="$SCRIPT_DIR/opencode.json"
 # Global paths
 GLOBAL_ROOT="$HOME/.opencode"
 GLOBAL_AGENTS_DIR="$GLOBAL_ROOT/agents"
+GLOBAL_COMMANDS_DIR="$GLOBAL_ROOT/commands"
 GLOBAL_SKILLS_DIR="$GLOBAL_ROOT/skills"
 GLOBAL_INSTRUCTIONS_DIR="$GLOBAL_ROOT/instructions"
 GLOBAL_CONFIG_DIR="$HOME/.config/opencode"
@@ -38,6 +40,7 @@ echo ""
 
 # Create directories
 mkdir -p "$GLOBAL_AGENTS_DIR"
+mkdir -p "$GLOBAL_COMMANDS_DIR"
 mkdir -p "$GLOBAL_SKILLS_DIR"
 mkdir -p "$GLOBAL_INSTRUCTIONS_DIR"
 mkdir -p "$GLOBAL_CONFIG_DIR"
@@ -68,7 +71,7 @@ sync_dir() {
     echo ""
 }
 
-# --- Function: Sync Config ---
+# --- Function: Sync Config & Patch Paths ---
 sync_config() {
     if [ ! -f "$LOCAL_CONFIG_FILE" ]; then
         echo -e "${RED}✗ Error: Local config not found: $LOCAL_CONFIG_FILE${NC}"
@@ -82,13 +85,17 @@ sync_config() {
         echo -e "${YELLOW}💾 Backup of global config created: $BACKUP_ROOT/opencode.json.bak${NC}"
     fi
 
-    cp "$LOCAL_CONFIG_FILE" "$GLOBAL_CONFIG_FILE"
-    echo -e "${GREEN}✓ Config synced to $GLOBAL_CONFIG_FILE${NC}"
+    # Copy and then patch relative command paths to absolute global paths
+    # This ensures commands work in any directory
+    cat "$LOCAL_CONFIG_FILE" | sed "s|{file:commands/|{file:$GLOBAL_COMMANDS_DIR/|g" > "$GLOBAL_CONFIG_FILE"
+    
+    echo -e "${GREEN}✓ Config synced and patched to $GLOBAL_CONFIG_FILE${NC}"
     echo ""
 }
 
 # Execute Syncs
 sync_dir "$LOCAL_AGENTS_DIR" "$GLOBAL_AGENTS_DIR" "Agents"
+sync_dir "$LOCAL_COMMANDS_DIR" "$GLOBAL_COMMANDS_DIR" "Commands"
 sync_dir "$LOCAL_SKILLS_DIR" "$GLOBAL_SKILLS_DIR" "Skills"
 sync_dir "$LOCAL_INSTRUCTIONS_DIR" "$GLOBAL_INSTRUCTIONS_DIR" "Instructions"
 sync_config
@@ -98,7 +105,7 @@ GLOBAL_README="$GLOBAL_ROOT/README.md"
 cat > "$GLOBAL_README" << EOF
 # Global OpenCode Environment
 
-This directory contains globally available OpenCode agents, skills, and instructions.
+This directory contains globally available OpenCode agents, skills, commands, and instructions.
 
 ## Location
 \`$GLOBAL_ROOT/\`
@@ -126,6 +133,7 @@ echo -e "${GREEN}╚════════════════════
 echo ""
 echo -e "${BLUE}📊 Summary:${NC}"
 echo -e "  ${BLUE}Agents:${NC}       $GLOBAL_AGENTS_DIR"
+echo -e "  ${BLUE}Commands:${NC}     $GLOBAL_COMMAND_DIR"
 echo -e "  ${BLUE}Skills:${NC}       $GLOBAL_SKILLS_DIR"
 echo -e "  ${BLUE}Config:${NC}       $GLOBAL_CONFIG_FILE"
 echo -e "  ${BLUE}Backup:${NC}       $BACKUP_ROOT"
