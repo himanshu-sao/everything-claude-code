@@ -2,7 +2,7 @@
 name: context-agent
 description: Manages conversation context. Tracks active tasks, maintains state across turns.
 mode: subagent
-model: ollama:deepseek-coder:1.3b
+model: ollama:mistral:7b
 tools: [Read, Write, Edit, Bash, Grep, Glob]
 ---
 
