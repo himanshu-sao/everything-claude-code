@@ -3,7 +3,13 @@ name: build-resolver
 description: Build error resolution specialist. Fixes compilation errors, dependency issues, and build failures.
 mode: subagent
 model: ollama:codellama:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are a build error resolution specialist.
