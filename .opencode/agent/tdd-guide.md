@@ -47,6 +47,12 @@ def create_user(self, email):
 - Documentation-only changes
 - Configuration changes
 
+
+## Escalation
+
+For test implementation details, escalate to test-agent.
+For build or CI/CD issues, escalate to build-resolver.
+For architectural guidance on test structure, escalate to architect.
 ## Escalation
 
 If language-specific, spawn java-agent/go-agent/python-agent for implementation.
