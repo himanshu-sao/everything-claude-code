@@ -60,27 +60,8 @@
 | build-resolver | codellama:7b | Build errors |
 | test-agent | codellama:7b | Unit tests |
 | e2e-runner | mistral:7b | E2E tests |
-| security-reviewer | mistral:7b | Security |
-
+| security-reviewer | mistral:7b | Security 
 | git-agent | codellama:7b | Git operations |
-
-## Excel Sub-Agents (under excel-dispatcher)
-
-| Agent | Purpose |
-|-------|---------|
-| excel-formula | Formula creation |
-| excel-vba | VBA macros |
-| excel-chart | Charts |
-| excel-data | Data processing |
-
-## Data Sub-Agents (under data-dispatcher)
-
-| Agent | Purpose |
-|-------|---------|
-| data-cleaning | Data cleaning |
-| data-transform | ETL |
-| data-viz | Visualization |
-| data-sql | SQL queries |
 
 ## Usage
 
@@ -104,10 +85,6 @@ Task: python-agent
 |-------|------|
 | mistral:7b | 776 MB |
 | codellama:7b | 3.8 GB |
-| mistral:7b | 4.4 GB |
-| qwen3-coder:latest | 18 GB |
-
-## Adding New Domain
 
 1. Create domain-dispatcher.md in `.opencode/agents/`
 2. Create sub-agents for that domain
