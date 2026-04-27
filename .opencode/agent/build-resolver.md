@@ -2,7 +2,7 @@
 name: build-resolver
 description: Build error resolution specialist. Fixes compilation errors, dependency issues, and build failures.
 mode: subagent
-model: ollama:deepseek-coder:1.3b
+model: ollama:codellama:7b
 tools: [Read, Write, Edit, Bash, Grep, Glob]
 ---
 
