@@ -27,7 +27,7 @@
 
 | Agent | Mode | Model | Purpose |
 |-------|------|-------|---------|
-| **dispatcher** | primary | deepseek-coder:1.3b | General entry, routes to domains |
+| **dispatcher** | primary | mistral:7b | General entry, routes to domains |
 
 ## Architecture Agents (under task-dispatcher)
 
@@ -41,7 +41,7 @@
 
 | Agent | Mode | Model | Domain |
 |-------|------|-------|--------|
-| task-dispatcher | subagent | deepseek-coder:1.3b | Code/Development |
+| task-dispatcher | subagent | mistral:7b | Code/Development |
 | excel-dispatcher | subagent | mistral:7b | Excel/Spreadsheets |
 | data-dispatcher | subagent | mistral:7b | Data Analysis |
 | infra-dispatcher | subagent | mistral:7b | DevOps/Infra |
@@ -57,13 +57,12 @@
 | shell-agent | codellama:7b | Shell/CLI |
 | tdd-guide | mistral:7b | TDD workflow |
 | code-reviewer | mistral:7b | Code review |
-| build-resolver | deepseek-coder:1.3b | Build errors |
+| build-resolver | codellama:7b | Build errors |
 | test-agent | codellama:7b | Unit tests |
 | e2e-runner | mistral:7b | E2E tests |
 | security-reviewer | mistral:7b | Security |
-| database-reviewer | codellama:7b | PostgreSQL |
-| doc-updater | mistral:7b | Documentation |
-| git-agent | deepseek-coder:1.3b | Git operations |
+
+| git-agent | codellama:7b | Git operations |
 
 ## Excel Sub-Agents (under excel-dispatcher)
 
@@ -103,7 +102,7 @@ Task: python-agent
 
 | Model | Size |
 |-------|------|
-| deepseek-coder:1.3b | 776 MB |
+| mistral:7b | 776 MB |
 | codellama:7b | 3.8 GB |
 | mistral:7b | 4.4 GB |
 | qwen3-coder:latest | 18 GB |
