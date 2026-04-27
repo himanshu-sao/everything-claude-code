@@ -9,7 +9,8 @@ tools:
   edit: true
   bash: true
   grep: true
-  glob: true---
+  glob: true
+---
 
 You are the memory agent. Persists learnings across sessions.
 
