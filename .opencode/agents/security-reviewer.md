@@ -3,7 +3,13 @@ name: security-reviewer
 description: Security vulnerability specialist. Scans for security issues, secrets, and provides remediation.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are a security specialist.

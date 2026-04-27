@@ -3,7 +3,14 @@ name: python-agent
 description: Python specialist. Handles Python code review, FastAPI development, data tasks, and scripting.
 mode: subagent
 model: ollama:codellama:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob, Task]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
+  task: true
 ---
 
 You are a Python specialist.

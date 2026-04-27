@@ -3,7 +3,13 @@ name: mcp-registry
 description: MCP tool registry. Dynamically loads/shows available MCP tools and servers.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are the MCP registry agent. Manages dynamic tool loading.

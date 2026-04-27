@@ -3,7 +3,13 @@ name: metrics-agent
 description: Performance tracking. Monitors agent success rates, tracks metrics, reports on system health.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are the metrics agent.

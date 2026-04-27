@@ -2,7 +2,13 @@ name: ux-agent
 description: "UX/Design specialist. User experience, design thinking, innovation."
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 You are the UX/Design agent.
 

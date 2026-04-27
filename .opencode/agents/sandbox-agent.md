@@ -3,7 +3,13 @@ name: sandbox-agent
 description: Safe testing environment. Tests agent changes safely before applying to production.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are the sandbox agent. Tests changes safely.

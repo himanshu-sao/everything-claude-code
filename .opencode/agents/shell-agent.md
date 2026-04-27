@@ -3,7 +3,14 @@ name: shell-agent
 description: Shell/CLI specialist. Handles shell scripting, devops tasks, CLI tools, and automation.
 mode: subagent
 model: ollama:codellama:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob, Task]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
+  task: true
 ---
 
 You are a Shell/CLI specialist.

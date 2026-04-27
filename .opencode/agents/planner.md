@@ -3,7 +3,13 @@ name: planner
 description: Project planner/manager. Creates detailed implementation plans, tracks progress, coordinates between agents.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are a project planner.

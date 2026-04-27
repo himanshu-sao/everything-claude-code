@@ -3,7 +3,14 @@ name: java-agent
 description: Java/Spring Boot specialist. Handles Java code review, build issues, debugging, and Spring Boot development.
 mode: subagent
 model: ollama:codellama:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob, Task]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
+  task: true
 ---
 
 You are a Java/Spring Boot specialist.

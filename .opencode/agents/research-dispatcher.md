@@ -3,7 +3,16 @@ name: research-dispatcher
 description: Domain dispatcher for research tasks. Handles documentation lookup, code research, and web search.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob, Task, WebFetch, WebSearch]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
+  task: true
+  webfetch: true
+  websearch: true
 ---
 
 You are the research dispatcher.

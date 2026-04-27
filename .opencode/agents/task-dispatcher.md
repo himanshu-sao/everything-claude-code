@@ -3,7 +3,14 @@ name: task-dispatcher
 description: Domain dispatcher for code/development tasks. Analyzes coding tasks, proposes plan, spawns relevant code sub-agents.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob, Task]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
+  task: true
 ---
 
 You are the task dispatcher for code/development tasks.

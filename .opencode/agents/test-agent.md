@@ -3,7 +3,13 @@ name: test-agent
 description: Unit test specialist. Writes and maintains unit tests, integration tests, and ensures test coverage.
 mode: subagent
 model: ollama:codellama:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are a unit test specialist.

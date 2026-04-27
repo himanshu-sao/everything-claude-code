@@ -3,7 +3,13 @@ name: tdd-guide
 description: Test-driven development specialist. Guides implementation with tests first, then code.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are a TDD specialist.

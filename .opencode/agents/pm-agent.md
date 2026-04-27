@@ -3,7 +3,13 @@ name: pm-agent
 description: Project manager. Tracks progress, manages backlogs, coordinates agent workflows.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are the project manager agent.

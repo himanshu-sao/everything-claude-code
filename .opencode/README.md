@@ -1,204 +1,288 @@
-# OpenCode ECC Plugin
+# OpenCode Agent Configuration
 
-> WARNING: This README is specific to OpenCode usage.
-> If you installed ECC via npm (e.g. `npm install opencode-ecc`), refer to the root README instead.
+> **Status:** ✅ Configured and Working  
+> **Last Updated:** 2026-04-27  
+> **Total Agents:** 34 (1 primary + 33 subagents)
 
-Everything Claude Code (ECC) plugin for OpenCode - agents, commands, hooks, and skills.
-
-## Installation
-
-## Installation Overview
-
-There are two ways to use Everything Claude Code (ECC):
-
-1. **npm package (recommended for most users)**
-   Install via npm/bun/yarn and use the `ecc-install` CLI to set up rules and agents.
-
-2. **Direct clone / plugin mode**
-   Clone the repository and run OpenCode directly inside it.
-
-Choose the method that matches your workflow below.
-
-### Option 1: npm Package
+## Quick Start
 
 ```bash
-npm install ecc-universal
+# List all available agents
+opencode agent list
+
+# Invoke an agent
+@planner help me plan a new feature
+@code-reviewer review my latest changes
+@security-reviewer check for vulnerabilities
+
+# Sync agents to global directory
+./sync-agents-global.sh
 ```
 
-Add to your `opencode.json`:
+## Configuration Overview
 
-```json
-{
-  "plugin": ["ecc-universal"]
-}
+This project uses OpenCode's markdown-based agent configuration for maximum maintainability:
+
+- **Primary Agent:** Defined in `opencode.json` (just `build`)
+- **Subagents:** Auto-discovered from `.opencode/agents/*.md` (33 agents)
+- **Format:** Each agent is a separate markdown file with YAML frontmatter
+
+### Why This Approach?
+
+✅ **Maintainable** - Each agent in its own file  
+✅ **Modular** - Easy to add/remove agents  
+✅ **Clean** - JSON config stays simple (137 lines vs 462)  
+✅ **Scalable** - Can grow to 100+ agents without cluttering  
+✅ **Documented** - Each agent file is self-documenting  
+
+## Agent Architecture
+
+```
+                ┌─────────────┐
+                │   BUILD     │  ← Primary agent (JSON)
+                └─────────────┘
+                       │
+    ┌──────────────────┼──────────────────┐
+    ▼                  ▼                  ▼
+dispatcher      task-dispatcher    excel-dispatcher
+(routing)       (code tasks)       (spreadsheets)
+    │                  │                  │
+    ▼                  ▼                  ▼
+[domain agents]  [code agents]    [excel agents]
 ```
 
-This loads the ECC OpenCode plugin module from npm:
-- hook/event integrations
-- bundled custom tools exported by the plugin
+## Available Agents
 
-It does **not** auto-register the full ECC command/agent/instruction catalog in your project config. For the full OpenCode setup, either:
-- run OpenCode inside this repository, or
-- copy the relevant `.opencode/commands/`, `.opencode/prompts/`, `.opencode/instructions/`, and the `instructions`, `agent`, and `command` config entries into your own project
+### Core Development Agents
+- **architect** - System design and architecture decisions
+- **planner** - Task breakdown and implementation planning
+- **builder** - Code implementation with TDD workflow
+- **code-reviewer** - Code quality and best practices review
+- **security-reviewer** - Security vulnerability detection
+- **tdd-guide** - Test-driven development specialist
 
-After installation, the `ecc-install` CLI is also available:
+### Language-Specific Agents
+- **java-agent** - Java/Spring Boot development
+- **go-agent** - Go development
+- **python-agent** - Python/FastAPI development
+- **shell-agent** - Shell scripting and CLI
+
+### Build & Testing Agents
+- **build-resolver** - Build and compilation error fixes
+- **test-agent** - Unit test creation and maintenance
+- **e2e-runner** - End-to-end testing with Playwright
+
+### Specialized Agents
+- **database-reviewer** - Database query optimization
+- **doc-updater** - Documentation maintenance
+- **git-agent** - Git operations and workflows
+- **improver** - Code improvement suggestions
+- **refactor-cleaner** - Dead code cleanup
+
+### Workflow & Coordination Agents
+- **dispatcher** - General task routing
+- **task-dispatcher** - Code task coordination
+- **data-dispatcher** - Data analysis tasks
+- **excel-dispatcher** - Spreadsheet operations
+- **infra-dispatcher** - DevOps/infrastructure tasks
+- **research-dispatcher** - Research and documentation lookup
+
+### Support Agents
+- **complexity-analyzer** - Task complexity assessment
+- **context-agent** - Context management
+- **fallback-agent** - Fallback handling
+- **memory-agent** - Persistent learning across sessions
+- **metrics-agent** - Performance metrics tracking
+- **mcp-registry** - MCP server management
+- **pm-agent** - Project management
+- **sandbox-agent** - Safe execution environment
+- **ux-agent** - User experience optimization
+- **party-mode** - Fun and experimental features
+
+## Agent File Format
+
+Each agent is defined in a markdown file with this structure:
+
+```markdown
+---
+name: agent-name
+description: What this agent does
+mode: subagent
+model: ollama:model-name
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
+---
+
+# Agent Instructions
+
+Your detailed agent prompt and instructions here...
+```
+
+### Required Fields
+- `name` - Agent identifier (lowercase, hyphenated)
+- `description` - Brief description of agent's purpose
+- `mode` - Either `primary` or `subagent`
+- `model` - Ollama model to use (e.g., `ollama:mistral:7b`)
+- `tools` - Object with boolean flags for available tools
+
+### Available Tools
+- `read` - Read files
+- `write` - Write/create files
+- `edit` - Edit existing files
+- `bash` - Execute shell commands
+- `grep` - Search files with regex
+- `glob` - File pattern matching
+- `task` - Spawn sub-tasks
+- `webfetch` - Fetch web content
+- `websearch` - Search the web
+
+## Adding a New Agent
+
+1. Create a new file in `.opencode/agents/`:
+   ```bash
+   touch .opencode/agents/my-new-agent.md
+   ```
+
+2. Add the frontmatter and instructions:
+   ```markdown
+   ---
+   name: my-new-agent
+   description: My specialized agent
+   mode: subagent
+   model: ollama:mistral:7b
+   tools:
+     read: true
+     write: true
+     bash: true
+   ---
+   
+   You are a specialized agent for...
+   ```
+
+3. OpenCode will auto-discover it immediately:
+   ```bash
+   opencode agent list | grep my-new-agent
+   ```
+
+## Modifying an Agent
+
+Simply edit the corresponding `.md` file in `.opencode/agents/`. Changes take effect immediately.
+
+## Removing an Agent
+
+Delete the `.md` file from `.opencode/agents/`. OpenCode will no longer list it.
+
+## Global Agent Setup
+
+To make your agents available globally across all projects:
 
 ```bash
-npx ecc-install typescript
+# Sync agents to global directory
+./sync-agents-global.sh
+
+# Or manually
+cp -r .opencode/agents/* ~/.opencode/agents/
 ```
 
-### Option 2: Direct Use
+The sync script will:
+- Copy all agents to `~/.opencode/agents/`
+- Preserve existing global agents
+- Skip duplicates
+- Create backup before syncing
 
-Clone and run OpenCode in the repository:
+## Model Configuration
 
+### Default Models
+- **mistral:7b** (776 MB) - Planning, orchestration, analysis
+- **codellama:7b** (3.8 GB) - Code implementation, testing
+
+### Changing Models
+Edit the `model` field in any agent's markdown file:
+```yaml
+model: ollama:qwen3-coder:latest  # or any other Ollama model
+```
+
+## Troubleshooting
+
+### Agent Not Showing Up
 ```bash
-git clone https://github.com/affaan-m/everything-claude-code
-cd everything-claude-code
-opencode
+# Check file format
+head -20 .opencode/agents/your-agent.md
+
+# Verify frontmatter has required fields
+grep -E "^(name|mode|model):" .opencode/agents/your-agent.md
+
+# Check for syntax errors
+opencode agent list 2>&1 | grep -i error
 ```
 
-## Features
+### Tool Format Errors
+Ensure tools use object format, not array:
+```yaml
+# ❌ Wrong
+tools: [Read, Write, Edit]
 
-### Agents (12)
+# ✅ Correct
+tools:
+  read: true
+  write: true
+  edit: true
+```
 
-| Agent | Description |
-|-------|-------------|
-| planner | Implementation planning |
-| architect | System design |
-| code-reviewer | Code review |
-| security-reviewer | Security analysis |
-| tdd-guide | Test-driven development |
-| build-error-resolver | Build error fixes |
-| e2e-runner | E2E testing |
-| doc-updater | Documentation |
-| refactor-cleaner | Dead code cleanup |
-| go-reviewer | Go code review |
-| go-build-resolver | Go build errors |
-| database-reviewer | Database optimization |
-
-### Commands (31)
-
-| Command | Description |
-|---------|-------------|
-| `/plan` | Create implementation plan |
-| `/tdd` | TDD workflow |
-| `/code-review` | Review code changes |
-| `/security` | Security review |
-| `/build-fix` | Fix build errors |
-| `/e2e` | E2E tests |
-| `/refactor-clean` | Remove dead code |
-| `/orchestrate` | Multi-agent workflow |
-| `/learn` | Extract patterns |
-| `/checkpoint` | Save progress |
-| `/verify` | Verification loop |
-| `/eval` | Evaluation |
-| `/update-docs` | Update docs |
-| `/update-codemaps` | Update codemaps |
-| `/test-coverage` | Coverage analysis |
-| `/setup-pm` | Package manager |
-| `/go-review` | Go code review |
-| `/go-test` | Go TDD |
-| `/go-build` | Go build fix |
-| `/skill-create` | Generate skills |
-| `/instinct-status` | View instincts |
-| `/instinct-import` | Import instincts |
-| `/instinct-export` | Export instincts |
-| `/evolve` | Cluster instincts |
-| `/promote` | Promote project instincts |
-| `/projects` | List known projects |
-| `/harness-audit` | Audit harness reliability and eval readiness |
-| `/loop-start` | Start controlled agentic loops |
-| `/loop-status` | Check loop state and checkpoints |
-| `/quality-gate` | Run quality gates on file/repo scope |
-| `/model-route` | Route tasks by model and budget |
-
-### Plugin Hooks
-
-| Hook | Event | Purpose |
-|------|-------|---------|
-| Prettier | `file.edited` | Auto-format JS/TS |
-| TypeScript | `tool.execute.after` | Check for type errors |
-| console.log | `file.edited` | Warn about debug statements |
-| Notification | `session.idle` | Desktop notification |
-| Security | `tool.execute.before` | Check for secrets |
-
-### Custom Tools
-
-| Tool | Description |
-|------|-------------|
-| run-tests | Run test suite with options |
-| check-coverage | Analyze test coverage |
-| security-audit | Security vulnerability scan |
-
-## Hook Event Mapping
-
-OpenCode's plugin system maps to Claude Code hooks:
-
-| Claude Code | OpenCode |
-|-------------|----------|
-| PreToolUse | `tool.execute.before` |
-| PostToolUse | `tool.execute.after` |
-| Stop | `session.idle` |
-| SessionStart | `session.created` |
-| SessionEnd | `session.deleted` |
-
-OpenCode has 20+ additional events not available in Claude Code.
-
-### Hook Runtime Controls
-
-OpenCode plugin hooks honor the same runtime controls used by Claude Code/Cursor:
-
+### Validation Script
+Run the verification script:
 ```bash
-export ECC_HOOK_PROFILE=standard
-export ECC_DISABLED_HOOKS="pre:bash:tmux-reminder,post:edit:typecheck"
+.opencode/verify-agents.sh
 ```
 
-- `ECC_HOOK_PROFILE`: `minimal`, `standard` (default), `strict`
-- `ECC_DISABLED_HOOKS`: comma-separated hook IDs to disable
+## Configuration Files
 
-## Skills
+- **`opencode.json`** - Main configuration (primary agent, commands, settings)
+- **`agents/*.md`** - Individual agent definitions (33 files)
+- **`prompts/agents/*.txt`** - Legacy prompt files (optional)
+- **`verify-agents.sh`** - Configuration verification script
+- **`sync-agents-global.sh`** - Global agent sync script
 
-The default OpenCode config loads 11 curated ECC skills via the `instructions` array:
+## Best Practices
 
-- coding-standards
-- backend-patterns
-- frontend-patterns
-- frontend-slides
-- security-review
-- tdd-workflow
-- strategic-compact
-- eval-harness
-- verification-loop
-- api-design
-- e2e-testing
+1. **One Agent Per File** - Keep agents modular and focused
+2. **Clear Descriptions** - Help users understand when to use each agent
+3. **Appropriate Tools** - Only enable tools the agent needs
+4. **Consistent Naming** - Use lowercase with hyphens (e.g., `code-reviewer`)
+5. **Document Escalation** - Specify when to delegate to other agents
+6. **Test Changes** - Run `opencode agent list` after modifications
 
-Additional specialized skills are shipped in `skills/` but not loaded by default to keep OpenCode sessions lean:
+## Migration Notes
 
-- article-writing
-- content-engine
-- market-research
-- investor-materials
-- investor-outreach
+This configuration was migrated from inline JSON definitions to markdown files on 2026-04-27:
 
-## Configuration
+- **Before:** 462-line JSON with 25 inline agent definitions
+- **After:** 137-line JSON + 33 modular markdown files
+- **Benefits:** Better maintainability, easier to add/modify agents
 
-Full configuration in `opencode.json`:
+See `AGENT_MIGRATION.md` for detailed migration history.
 
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "model": "anthropic/claude-sonnet-4-5",
-  "small_model": "anthropic/claude-haiku-4-5",
-  "plugin": ["./plugins"],
-  "instructions": [
-    "skills/tdd-workflow/SKILL.md",
-    "skills/security-review/SKILL.md"
-  ],
-  "agent": { /* 12 agents */ },
-  "command": { /* 24 commands */ }
-}
-```
+## Resources
 
-## License
+- [OpenCode Documentation](https://opencode.ai/docs/agents/)
+- [Agent Configuration Guide](https://opencode.ai/docs/agents/#configure)
+- [Ollama Models](https://ollama.ai/library)
 
-MIT
+## Support
+
+For issues or questions:
+1. Check `opencode agent list` for errors
+2. Run `.opencode/verify-agents.sh` for validation
+3. Review agent markdown files for format issues
+4. Consult OpenCode documentation
+
+---
+
+**Configuration Status:** ✅ Complete and Working  
+**Agents:** 34 total (1 primary + 33 subagents)  
+**Format:** Markdown-based with YAML frontmatter

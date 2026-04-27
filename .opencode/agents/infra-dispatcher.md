@@ -3,7 +3,14 @@ name: infra-dispatcher
 description: Domain dispatcher for DevOps and infrastructure tasks. Handles deployment, containers, cloud, and IaC.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob, Task]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
+  task: true
 ---
 
 You are the infrastructure dispatcher.

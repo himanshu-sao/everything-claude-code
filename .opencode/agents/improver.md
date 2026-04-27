@@ -3,7 +3,13 @@ name: improver
 description: Feedback agent. Collects user feedback, analyzes agent performance, updates agent configurations.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are the improver agent. Your job is continuous improvement of the agent system.
