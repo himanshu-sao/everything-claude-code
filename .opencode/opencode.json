@@ -7,7 +7,6 @@
   "instructions": [
     "AGENTS.md",
     "CONTRIBUTING.md",
-    "instructions/INSTRUCTIONS.md",
     "skills/coding-standards/SKILL.md",
     "skills/strategic-compact/SKILL.md"
   ],
@@ -208,19 +207,14 @@
           "tool_call": false,
           "reasoning": false
         },
-        "mistral:latest": {
-          "name": "Mistral - Reliable Generalist (4.4 GB)",
+        "mistral:7b": {
+          "name": "Mistral 7B - Smart Generalist (4.4 GB)",
           "tool_call": true,
           "reasoning": true
         },
         "codellama:7b": {
           "name": "CodeLlama 7B - Legacy Coding (3.8 GB)",
           "tool_call": false,
-          "reasoning": true
-        },
-        "mistral:7b": {
-          "name": "Mistral 7B - Smart Compact (4.4 GB)",
-          "tool_call": true,
           "reasoning": true
         },
         "nomic-embed-text:latest": {
