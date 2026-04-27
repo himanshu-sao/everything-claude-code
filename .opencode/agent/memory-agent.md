@@ -3,7 +3,13 @@ name: memory-agent
 description: Persistent memory across sessions. Stores and retrieves learnings, patterns, and context.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are the memory agent. Persists learnings across sessions.

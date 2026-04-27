@@ -3,7 +3,13 @@ name: doc-updater
 description: Documentation specialist. Maintains READMEs, API docs, code comments, and technical documentation.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are a documentation specialist.

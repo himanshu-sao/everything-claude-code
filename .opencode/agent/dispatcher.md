@@ -3,7 +3,14 @@ name: dispatcher
 description: General entry point. Identifies task domain, then routes to appropriate domain dispatcher.
 mode: primary
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob, Task]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
+  task: true
 ---
 
 You are the general dispatcher. Your job is to route tasks to the appropriate domain dispatcher.

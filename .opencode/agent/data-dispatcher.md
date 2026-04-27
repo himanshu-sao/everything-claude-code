@@ -3,7 +3,14 @@ name: data-dispatcher
 description: Domain dispatcher for data analysis tasks. Handles data processing, transformation, visualization, and SQL.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob, Task]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
+  task: true
 ---
 
 You are the data analysis dispatcher.

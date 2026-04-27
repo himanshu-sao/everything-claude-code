@@ -3,7 +3,13 @@ name: fallback-agent
 description: Failure handler. Gracefully handles agent failures, retries with different approaches.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are the fallback agent. Handles failures gracefully.
