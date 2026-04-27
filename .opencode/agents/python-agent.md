@@ -2,7 +2,7 @@
 name: python-agent
 description: Python specialist. Handles Python code review, FastAPI development, data tasks, and scripting.
 mode: subagent
-model: ollama:codellama:7b
+model: codellama:7b
 tools:
   read: true
   write: true

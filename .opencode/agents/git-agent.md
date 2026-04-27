@@ -2,7 +2,7 @@
 name: git-agent
 description: Git operations specialist. Handles commits, branches, PRs, merges, and version control workflows.
 mode: subagent
-model: ollama:codellama:7b
+model: codellama:7b
 tools:
   read: true
   write: true
