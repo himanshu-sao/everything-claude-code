@@ -2,7 +2,7 @@
 name: context-agent
 description: Manages conversation context. Tracks active tasks, maintains state across turns.
 mode: subagent
-model: ollama:mistral:7b
+model: mistral:7b
 tools:
   read: true
   write: true

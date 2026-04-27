@@ -2,7 +2,7 @@
 name: mcp-registry
 description: MCP tool registry. Dynamically loads/shows available MCP tools and servers.
 mode: subagent
-model: ollama:mistral:7b
+model: mistral:7b
 tools:
   read: true
   write: true

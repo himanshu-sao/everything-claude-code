@@ -2,7 +2,7 @@
 name: data-dispatcher
 description: Domain dispatcher for data analysis tasks. Handles data processing, transformation, visualization, and SQL.
 mode: subagent
-model: ollama:mistral:7b
+model: mistral:7b
 tools:
   read: true
   write: true

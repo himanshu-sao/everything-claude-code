@@ -2,7 +2,7 @@
 name: e2e-runner
 description: End-to-end testing specialist. Uses Playwright for E2E tests of critical user flows.
 mode: subagent
-model: ollama:mistral:7b
+model: mistral:7b
 tools:
   read: true
   write: true

@@ -2,7 +2,7 @@
 name: dispatcher
 description: General entry point. Identifies task domain, then routes to appropriate domain dispatcher.
 mode: primary
-model: ollama:mistral:7b
+model: mistral:7b
 tools:
   read: true
   write: true
