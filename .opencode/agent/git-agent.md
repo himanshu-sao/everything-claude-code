@@ -2,7 +2,7 @@
 name: git-agent
 description: Git operations specialist. Handles commits, branches, PRs, merges, and version control workflows.
 mode: subagent
-model: ollama:deepseek-coder:1.3b
+model: ollama:codellama:7b
 tools: [Read, Write, Edit, Bash, Grep, Glob]
 ---
 
