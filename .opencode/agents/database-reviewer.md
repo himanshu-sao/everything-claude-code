@@ -2,7 +2,7 @@
 name: database-reviewer
 description: PostgreSQL/Supabase specialist. Handles schema design, query optimization, and database patterns.
 mode: subagent
-model: ollama:mistral:7b
+model: ollama/mistral:7b
 tools:
   read: true
   write: true

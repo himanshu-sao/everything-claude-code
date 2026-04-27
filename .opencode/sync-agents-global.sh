@@ -63,7 +63,7 @@ sync_dir() {
     fi
 
     # Sync
-    rsync -av --delete "$src/" "$dest/" | grep -v 'sending incremental file list' | grep -v './' | grep -v 'total size is' || true
+    rsync -av --delete --exclude 'README.md' "$src/" "$dest/" | grep -v 'sending incremental file list' | grep -v './' | grep -v 'total size is' || true
     echo -e "${GREEN}✓ $name synced to $dest${NC}"
     echo ""
 }

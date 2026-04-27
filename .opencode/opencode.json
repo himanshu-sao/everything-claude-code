@@ -2,23 +2,14 @@
   "$schema": "https://opencode.ai/config.json",
   "model": "ollama/gemma4:e4b",
   "small_model": "ollama/deepseek-coder:1.3b",
-  "default_agent": "build",
+  "default_agent": "chat",
   "autoshare": false,
   "instructions": [
     "AGENTS.md",
     "CONTRIBUTING.md",
     "instructions/INSTRUCTIONS.md",
-    "skills/tdd-workflow/SKILL.md",
-    "skills/security-review/SKILL.md",
     "skills/coding-standards/SKILL.md",
-    "skills/frontend-patterns/SKILL.md",
-    "skills/frontend-slides/SKILL.md",
-    "skills/backend-patterns/SKILL.md",
-    "skills/e2e-testing/SKILL.md",
-    "skills/verification-loop/SKILL.md",
-    "skills/api-design/SKILL.md",
-    "skills/strategic-compact/SKILL.md",
-    "skills/eval-harness/SKILL.md"
+    "skills/strategic-compact/SKILL.md"
   ],
   "plugin": [
     "./plugins",
@@ -239,6 +230,11 @@
         },
         "glm-5:cloud": {
           "name": "GLM-5 Cloud - Pro Multi-modal (-)",
+          "tool_call": true,
+          "reasoning": true
+        },
+        "llama3.2:3b": {
+          "name": "Llama 3.2 3B - Smart Entry (2.0 GB)",
           "tool_call": true,
           "reasoning": true
         }

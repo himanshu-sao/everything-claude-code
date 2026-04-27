@@ -2,7 +2,7 @@
 name: java-agent
 description: Java/Spring Boot specialist. Handles Java code review, build issues, debugging, and Spring Boot development.
 mode: subagent
-model: ollama:mistral:7b
+model: ollama/mistral:7b
 tools:
   read: true
   write: true

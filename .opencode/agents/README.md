@@ -58,7 +58,7 @@ Each agent follows this structure:
 name: agent-name
 description: Brief description
 mode: subagent
-model: ollama:model-name
+model: ollama/model-name
 tools:
   read: true
   write: true

@@ -2,7 +2,7 @@
 name: improver
 description: Feedback agent. Collects user feedback, analyzes agent performance, updates agent configurations.
 mode: subagent
-model: ollama:mistral:7b
+model: ollama/mistral:7b
 tools:
   read: true
   write: true

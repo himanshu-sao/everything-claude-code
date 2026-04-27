@@ -2,7 +2,9 @@
 name: builder
 description: Implementation agent. Executes code following TDD, runs tests, ensures build passes.
 mode: subagent
-model: ollama:mistral:7b
+model: ollama/mistral:7b
+instructions:
+  - "skills/tdd-workflow/SKILL.md"
 tools:
   read: true
   write: true

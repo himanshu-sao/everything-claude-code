@@ -2,7 +2,7 @@
 name: go-agent
 description: Go specialist. Handles Go code review, build issues, concurrency patterns, and API development.
 mode: subagent
-model: ollama:mistral:7b
+model: ollama/mistral:7b
 tools:
   read: true
   write: true

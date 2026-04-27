@@ -2,7 +2,7 @@
 name: complexity-analyzer
 description: Analyzes task complexity and determines appropriate depth/agents needed.
 mode: subagent
-model: ollama:mistral:7b
+model: ollama/mistral:7b
 tools:
   read: true
   write: true

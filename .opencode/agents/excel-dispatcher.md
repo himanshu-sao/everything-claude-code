@@ -2,7 +2,7 @@
 name: excel-dispatcher
 description: Domain dispatcher for Excel and spreadsheet tasks. Handles formulas, VBA, data processing, and charts directly.
 mode: subagent
-model: ollama:mistral:7b
+model: ollama/mistral:7b
 tools:
   read: true
   write: true

@@ -2,7 +2,9 @@
 name: tdd-guide
 description: Test-driven development specialist. Guides implementation with tests first, then code.
 mode: subagent
-model: ollama:mistral:7b
+model: ollama/mistral:7b
+instructions:
+  - "skills/tdd-workflow/SKILL.md"
 tools:
   read: true
   write: true

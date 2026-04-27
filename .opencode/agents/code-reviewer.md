@@ -2,7 +2,7 @@
 name: code-reviewer
 description: General code review specialist. Reviews code for quality, security, and maintainability.
 mode: subagent
-model: ollama:mistral:7b
+model: ollama/mistral:7b
 tools:
   read: true
   write: true
