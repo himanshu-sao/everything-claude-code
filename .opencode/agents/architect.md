@@ -2,7 +2,7 @@
 name: architect
 description: Technical architect. Analyzes requirements, designs system architecture, creates implementation plans, delegates to code agents.
 mode: subagent
-model: mistral:7b
+model: ollama:gemma4:e4b
 tools:
   read: true
   write: true

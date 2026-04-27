@@ -2,7 +2,7 @@
 name: metrics-agent
 description: Performance tracking. Monitors agent success rates, tracks metrics, reports on system health.
 mode: subagent
-model: mistral:7b
+model: ollama:mistral:7b
 tools:
   read: true
   write: true

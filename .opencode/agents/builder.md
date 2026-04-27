@@ -2,7 +2,7 @@
 name: builder
 description: Implementation agent. Executes code following TDD, runs tests, ensures build passes.
 mode: subagent
-model: codellama:7b
+model: ollama:mistral:7b
 tools:
   read: true
   write: true

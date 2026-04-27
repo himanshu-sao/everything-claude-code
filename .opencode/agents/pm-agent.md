@@ -2,7 +2,7 @@
 name: pm-agent
 description: Project manager. Tracks progress, manages backlogs, coordinates agent workflows.
 mode: subagent
-model: mistral:7b
+model: ollama:mistral:7b
 tools:
   read: true
   write: true

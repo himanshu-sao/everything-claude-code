@@ -2,7 +2,7 @@
 name: research-dispatcher
 description: Domain dispatcher for research tasks. Handles documentation lookup, code research, and web search.
 mode: subagent
-model: mistral:7b
+model: ollama:mistral:7b
 tools:
   read: true
   write: true

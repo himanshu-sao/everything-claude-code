@@ -2,7 +2,7 @@
 name: build-resolver
 description: Build error resolution specialist. Fixes compilation errors, dependency issues, and build failures.
 mode: subagent
-model: codellama:7b
+model: ollama:mistral:7b
 tools:
   read: true
   write: true

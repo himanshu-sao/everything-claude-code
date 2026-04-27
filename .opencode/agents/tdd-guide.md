@@ -2,7 +2,7 @@
 name: tdd-guide
 description: Test-driven development specialist. Guides implementation with tests first, then code.
 mode: subagent
-model: mistral:7b
+model: ollama:mistral:7b
 tools:
   read: true
   write: true
@@ -58,7 +58,5 @@ def create_user(self, email):
 
 For test implementation details, escalate to test-agent.
 For build or CI/CD issues, escalate to build-resolver.
-For architectural guidance on test structure, escalate to architect.
-## Escalation
 
 If language-specific, spawn java-agent/go-agent/python-agent for implementation.

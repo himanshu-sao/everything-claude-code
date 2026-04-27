@@ -2,7 +2,7 @@
 name: sandbox-agent
 description: Safe testing environment. Tests agent changes safely before applying to production.
 mode: subagent
-model: mistral:7b
+model: ollama:mistral:7b
 tools:
   read: true
   write: true

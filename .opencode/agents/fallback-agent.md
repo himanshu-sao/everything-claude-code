@@ -2,7 +2,7 @@
 name: fallback-agent
 description: Failure handler. Gracefully handles agent failures, retries with different approaches.
 mode: subagent
-model: mistral:7b
+model: ollama:mistral:7b
 tools:
   read: true
   write: true

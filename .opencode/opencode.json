@@ -3,6 +3,7 @@
   "model": "ollama/gemma4:e4b",
   "small_model": "ollama/deepseek-coder:1.3b",
   "default_agent": "build",
+  "autoshare": false,
   "instructions": [
     "AGENTS.md",
     "CONTRIBUTING.md",
@@ -20,7 +21,11 @@
     "skills/eval-harness/SKILL.md"
   ],
   "plugin": [
-    "./plugins"
+    "./plugins",
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    "@warp-dot-dev/opencode-warp",
+    "opencode-supermemory",
+    "@f97/opencode-morph-fast-apply"
   ],
   "agent": {
     "build": {
@@ -168,6 +173,144 @@
     "projects": {
       "description": "List known projects and instinct stats",
       "template": "{file:commands/projects.md}\n\n$ARGUMENTS"
+    }
+  },
+  "provider": {
+    "google": {
+      "models": {
+        "gemini-2.0-flash": {
+          "reasoning": false
+        }
+      }
+    },
+    "groq": {
+      "models": {
+        "llama-3.3-70b-versatile": {
+          "reasoning": false
+        }
+      }
+    },
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "gemma4:e4b": {
+          "name": "Gemma 4 E4B - Advanced Reasoning (9.6 GB)",
+          "tool_call": true,
+          "reasoning": true
+        },
+        "qwen3-coder:latest": {
+          "name": "Qwen3 Coder - SOTA Coding (18 GB)",
+          "tool_call": true,
+          "reasoning": true
+        },
+        "gpt-oss:20b": {
+          "name": "GPT-OSS 20B - Creative Writing (13 GB)",
+          "reasoning": true,
+          "tool_call": true
+        },
+        "deepseek-coder:1.3b": {
+          "name": "DeepSeek Coder - Ultra-Fast Coding (776 MB)",
+          "tool_call": false,
+          "reasoning": false
+        },
+        "mistral:latest": {
+          "name": "Mistral - Reliable Generalist (4.4 GB)",
+          "tool_call": true,
+          "reasoning": true
+        },
+        "codellama:7b": {
+          "name": "CodeLlama 7B - Legacy Coding (3.8 GB)",
+          "tool_call": false,
+          "reasoning": true
+        },
+        "mistral:7b": {
+          "name": "Mistral 7B - Smart Compact (4.4 GB)",
+          "tool_call": true,
+          "reasoning": true
+        },
+        "nomic-embed-text:latest": {
+          "name": "Nomic Embed - Text Vectorization (274 MB)",
+          "tool_call": false,
+          "reasoning": false
+        },
+        "glm-5:cloud": {
+          "name": "GLM-5 Cloud - Pro Multi-modal (-)",
+          "tool_call": true,
+          "reasoning": true
+        }
+      }
+    },
+    "mcp": {
+      "bob-pr-reviewer": {
+        "type": "local",
+        "command": [
+          "npx",
+          "--yes",
+          "bob-pr-reviewer@latest"
+        ],
+        "env": {
+          "GITHUB_TOKEN": "${env:GITHUB_TOKEN}",
+          "GITHUB_BASE_URL": "https://github.ibm.com/api/v3",
+          "JIRA_ISV_PERSONAL_ACCESS_TOKEN": "${env:JIRA_ISV_PERSONAL_ACCESS_TOKEN}",
+          "JIRA_BASE_URL": "https://jsw.ibm.com"
+        }
+      },
+      "context7": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "@upstash/context7-mcp@2.1.4"
+        ]
+      },
+      "github": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "@modelcontextprotocol/server-github@2025.4.8"
+        ]
+      },
+      "memory": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "@modelcontextprotocol/server-memory@2026.1.26"
+        ]
+      },
+      "playwright": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "@playwright/mcp@0.0.69",
+          "--extension"
+        ]
+      },
+      "sequential-thinking": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "@modelcontextprotocol/server-sequential-thinking@2025.12.18"
+        ]
+      },
+      "token-optimizer-mcp": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "token-optimizer-mcp"
+        ],
+        "env": {
+          "TOKEN_OPTIMIZER_CACHE_DIR": "/Users/himanshusao/.token-optimizer-cache"
+        }
+      }
     }
   },
   "permission": {
