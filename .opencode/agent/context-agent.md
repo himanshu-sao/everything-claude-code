@@ -3,7 +3,13 @@ name: context-agent
 description: Manages conversation context. Tracks active tasks, maintains state across turns.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are the context agent. Manages conversation state.
