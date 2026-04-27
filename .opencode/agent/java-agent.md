@@ -68,4 +68,4 @@ mvn spring-boot:run
 
 ## Escalation
 
-If task requires Go/Python, spawn those agents. If complex, escalate to qwen3-coder.
+If task requires Go/Python, spawn those agents. If complex, escalate to qwen3-coder:latest
