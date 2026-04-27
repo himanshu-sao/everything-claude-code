@@ -3,7 +3,13 @@ name: builder
 description: Implementation agent. Executes code following TDD, runs tests, ensures build passes.
 mode: subagent
 model: ollama:codellama:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are a builder agent.
