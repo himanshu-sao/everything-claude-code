@@ -98,3 +98,10 @@ Always confirm before making changes:
 
 Say "apply" to confirm, or describe what to change instead.
 ```
+
+## Escalation
+
+For performance analysis across all agents, escalate to metrics-agent.
+For feedback integration into system design, escalate to architect.
+For specific agent capability improvements, escalate directly to that agent.
+For major system redesigns, escalate to party-mode.
