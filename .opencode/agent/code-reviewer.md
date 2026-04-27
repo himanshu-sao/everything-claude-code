@@ -3,7 +3,7 @@ name: code-reviewer
 description: General code review specialist. Reviews code for quality, security, and maintainability.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools: [Read, Write, Edit, Bash, Grep, Glob, Task]
 ---
 
 You are a code review specialist.
