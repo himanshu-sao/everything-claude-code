@@ -62,3 +62,10 @@ For complex tasks, delegate per phase.
 ---
 Always present plan first, confirm before proceeding.
 ```
+
+## Escalation
+
+For complex system design questions, escalate to architect.
+For task implementation details, escalate to builder.
+For progress tracking and reporting, escalate to pm-agent.
+For task complexity assessment, escalate to complexity-analyzer.

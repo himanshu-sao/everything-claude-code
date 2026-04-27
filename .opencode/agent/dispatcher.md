@@ -2,7 +2,7 @@
 name: dispatcher
 description: General entry point. Identifies task domain, then routes to appropriate domain dispatcher.
 mode: primary
-model: ollama:deepseek-coder:1.3b
+model: ollama:mistral:7b
 tools: [Read, Write, Edit, Bash, Grep, Glob, Task]
 ---
 

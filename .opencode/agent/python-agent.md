@@ -64,4 +64,4 @@ uvicorn app.main:app --reload
 
 ## Escalation
 
-If task requires Go/Java, spawn those agents. If complex, escalate to qwen3-coder.
+If task requires Go/Java, spawn those agents. If complex, escalate to qwen3-coder:latest

@@ -57,6 +57,12 @@ mvn test -Dcoverage
 go test -v -coverprofile=coverage.out ./...
 ```
 
+
+## Escalation
+
+For test infrastructure setup, escalate to infra-dispatcher.
+For code implementation issues during testing, escalate to builder or task-dispatcher.
+For test framework migration, escalate to task-dispatcher.
 ## Escalation
 
 If complex, spawn e2e-runner for E2E tests.

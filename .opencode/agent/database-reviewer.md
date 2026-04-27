@@ -49,4 +49,4 @@ migrate up
 
 ## Escalation
 
-For frontend issues, spawn other agents.
+For frontend/UI issues, spawn ux-agent. For build issues, spawn build-resolver.

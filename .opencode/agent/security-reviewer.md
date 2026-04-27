@@ -36,6 +36,7 @@ Find and fix security vulnerabilities.
 ```bash
 # Scan for secrets
 git-secrets --scan
+  # Note: git-secrets must be installed separately: https://github.com/awslabs/git-secrets
 grep -r "password" --include="*.py"
 
 # OWASP dependency check
