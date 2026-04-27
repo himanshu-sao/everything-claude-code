@@ -3,7 +3,13 @@ name: complexity-analyzer
 description: Analyzes task complexity and determines appropriate depth/agents needed.
 mode: subagent
 model: ollama:mistral:7b
-tools: [Read, Write, Edit, Bash, Grep, Glob]
+tools:
+  read: true
+  write: true
+  edit: true
+  bash: true
+  grep: true
+  glob: true
 ---
 
 You are the complexity analyzer.
