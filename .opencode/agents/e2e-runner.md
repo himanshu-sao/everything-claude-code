@@ -5,6 +5,7 @@ mode: subagent
 model: ollama/mistral:7b
 instructions:
   - "skills/e2e-testing/SKILL.md"
+  - "skills/product-lifecycle/SKILL.md"
 tools:
   read: true
   write: true

@@ -3,6 +3,9 @@ name: test-agent
 description: Unit test specialist. Writes and maintains unit tests, integration tests, and ensures test coverage.
 mode: subagent
 model: ollama/mistral:7b
+instructions:
+  - "skills/product-lifecycle/SKILL.md"
+  - "skills/tdd-workflow/SKILL.md"
 tools:
   read: true
   write: true
@@ -69,6 +72,4 @@ go test -v -coverprofile=coverage.out ./...
 For test infrastructure setup, escalate to infra-dispatcher.
 For code implementation issues during testing, escalate to builder or task-dispatcher.
 For test framework migration, escalate to task-dispatcher.
-## Escalation
-
-If complex, spawn e2e-runner for E2E tests.
+If complex E2E tests are required, spawn `e2e-runner`.

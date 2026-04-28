@@ -4,6 +4,7 @@ mode: subagent
 model: ollama/mistral:7b
 instructions:
   - "skills/frontend-design/SKILL.md"
+  - "skills/frontend-patterns/SKILL.md"
 tools:
   read: true
   write: true

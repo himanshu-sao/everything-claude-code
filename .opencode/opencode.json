@@ -8,7 +8,8 @@
     "AGENTS.md",
     "CONTRIBUTING.md",
     "skills/coding-standards/SKILL.md",
-    "skills/strategic-compact/SKILL.md"
+    "skills/strategic-compact/SKILL.md",
+    "USER_PREFERENCES.md"
   ],
   "plugin": [
     "./plugins",

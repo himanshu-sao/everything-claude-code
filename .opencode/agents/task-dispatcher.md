@@ -43,6 +43,7 @@ Task: go-agent for [task description]
 - **context-agent** - Conversation state
 - **memory-agent** - Persistent learnings
 - **sandbox-agent** - Safe testing
+- **quality-gate** - Final gatekeeper, enforces multi-pass loops
 
 ### User Experience
 - **ux-agent** - UX design, innovation
@@ -107,10 +108,12 @@ Say "go" to start, or describe what you'd like to change.
 For complex tasks that need multiple agents:
 1. Break task into subtasks
 2. Identify parallelizable vs sequential tasks
-3. Spawn development agent
-4. Spawn testing agent  
-5. Spawn documentation agent
-6. Spawn status-update agent
+3. **MANDATORY RECURSIVE LOOP**: For any production task, plan at least two passes (Implementation -> Review -> Refinement).
+4. Spawn development agent
+5. Spawn testing agent  
+6. Spawn documentation agent
+7. Spawn status-update agent
+8. **Final Sign-off**: Spawn `@quality-gate` as the last step.
 
 ## Confirmation Rules
 

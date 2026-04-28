@@ -5,6 +5,7 @@ mode: subagent
 model: ollama/mistral:7b
 instructions:
   - "skills/product-lifecycle/SKILL.md"
+  - "skills/benchmark/SKILL.md"
 tools:
   read: true
   bash: true

@@ -5,6 +5,9 @@ mode: subagent
 model: ollama/gemma4:e4b
 instructions:
   - "skills/api-design/SKILL.md"
+  - "skills/backend-patterns/SKILL.md"
+  - "skills/hexagonal-architecture/SKILL.md"
+  - "skills/architecture-decision-records/SKILL.md"
 tools:
   read: true
   write: true
@@ -31,11 +34,12 @@ You are a technical architect.
 - Identify key components
 - Note constraints/requirements
 
-### Step 2: Design
+### Step 2: Design & Document
 - System architecture
 - Data models
 - API/gUI structure
 - Tech stack choice
+- **MANDATORY**: If making structural changes, write an Architectural Decision Record (ADR) file documenting the context and consequences of the choice.
 
 ### Step 3: Plan
 - Break into tasks

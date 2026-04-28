@@ -13,6 +13,7 @@ LOCAL_COMMANDS_DIR="$SCRIPT_DIR/commands"
 LOCAL_SKILLS_DIR="$WORKSPACE_ROOT/skills"
 LOCAL_INSTRUCTIONS_DIR="$WORKSPACE_ROOT/instructions"
 LOCAL_CONFIG_FILE="$SCRIPT_DIR/opencode.json"
+LOCAL_PREFS_FILE="$SCRIPT_DIR/USER_PREFERENCES.md"
 
 # Global paths
 GLOBAL_ROOT="$HOME/.opencode"
@@ -20,6 +21,7 @@ GLOBAL_AGENTS_DIR="$GLOBAL_ROOT/agents"
 GLOBAL_COMMANDS_DIR="$GLOBAL_ROOT/commands"
 GLOBAL_SKILLS_DIR="$GLOBAL_ROOT/skills"
 GLOBAL_INSTRUCTIONS_DIR="$GLOBAL_ROOT/instructions"
+GLOBAL_PREFS_FILE="$GLOBAL_ROOT/USER_PREFERENCES.md"
 GLOBAL_CONFIG_DIR="$HOME/.config/opencode"
 GLOBAL_CONFIG_FILE="$GLOBAL_CONFIG_DIR/opencode.json"
 
@@ -98,6 +100,15 @@ sync_dir "$LOCAL_AGENTS_DIR" "$GLOBAL_AGENTS_DIR" "Agents"
 sync_dir "$LOCAL_COMMANDS_DIR" "$GLOBAL_COMMANDS_DIR" "Commands"
 sync_dir "$LOCAL_SKILLS_DIR" "$GLOBAL_SKILLS_DIR" "Skills"
 sync_dir "$LOCAL_INSTRUCTIONS_DIR" "$GLOBAL_INSTRUCTIONS_DIR" "Instructions"
+
+# Sync Preferences
+if [ -f "$LOCAL_PREFS_FILE" ]; then
+    echo -e "${BLUE}🔄 Syncing Preferences...${NC}"
+    cp "$LOCAL_PREFS_FILE" "$GLOBAL_PREFS_FILE"
+    echo -e "${GREEN}✓ Preferences synced to $GLOBAL_PREFS_FILE${NC}"
+    echo ""
+fi
+
 sync_config
 
 # Create/update global README
