@@ -1,6 +1,11 @@
 ---
 name: python-agent
 description: Python specialist. Handles Python code review, FastAPI development, data tasks, and scripting.
+instructions:
+  - "skills/coding-standards/SKILL.md"
+  - "~/.opencode/library/python-patterns/SKILL.md"
+  - "~/.opencode/library/python-testing/SKILL.md"
+  - "~/.opencode/library/django-patterns/SKILL.md"
 mode: subagent
 model: ollama/mistral:7b
 tools:

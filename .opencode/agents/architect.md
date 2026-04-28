@@ -4,6 +4,9 @@ description: Technical architect. Analyzes requirements, designs system architec
 mode: subagent
 model: ollama/gemma4:e4b
 instructions:
+  - "AGENTS.md"
+  - "CONTRIBUTING.md"
+  - "skills/coding-standards/SKILL.md"
   - "skills/api-design/SKILL.md"
   - "skills/backend-patterns/SKILL.md"
   - "skills/hexagonal-architecture/SKILL.md"
@@ -16,6 +19,12 @@ tools:
   grep: true
   glob: true
   task: true
+mcp:
+  sequential-thinking:
+    type: local
+    command: ["npx", "-y", "--prefer-offline", "@modelcontextprotocol/server-sequential-thinking"]
+plugin:
+  - "opencode-supermemory"
 ---
 
 You are a technical architect.

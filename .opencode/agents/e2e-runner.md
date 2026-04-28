@@ -14,6 +14,10 @@ tools:
   grep: true
   glob: true
   task: true
+mcp:
+  playwright:
+    type: local
+    command: ["npx", "-y", "--prefer-offline", "@playwright/mcp", "--extension"]
 ---
 
 You are an E2E testing specialist.

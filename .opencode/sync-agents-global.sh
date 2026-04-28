@@ -87,18 +87,105 @@ sync_config() {
         echo -e "${YELLOW}💾 Backup of global config created: $BACKUP_ROOT/opencode.json.bak${NC}"
     fi
 
-    # Copy and then patch relative command paths to absolute global paths
-    # This ensures commands work in any directory
-    cat "$LOCAL_CONFIG_FILE" | sed "s|{file:commands/|{file:$GLOBAL_COMMANDS_DIR/|g" > "$GLOBAL_CONFIG_FILE"
+    # Copy and then patch ALL relative paths to absolute global paths
+    # This ensures everything works in any directory
+    cat "$LOCAL_CONFIG_FILE" | \
+      sed "s|{file:commands/|{file:$GLOBAL_COMMANDS_DIR/|g" | \
+      sed "s|\"agents-archive/|\"$GLOBAL_ROOT/agents-archive/|g" | \
+      sed "s|\"agents/|\"$GLOBAL_AGENTS_DIR/|g" | \
+      sed "s|\"library/|\"$GLOBAL_ROOT/library/|g" > "$GLOBAL_CONFIG_FILE"
     
     echo -e "${GREEN}✓ Config synced and patched to $GLOBAL_CONFIG_FILE${NC}"
     echo ""
 }
 
-# Execute Syncs
-sync_dir "$LOCAL_AGENTS_DIR" "$GLOBAL_AGENTS_DIR" "Agents"
+# --- Function: Optimize Skills (Mega-Trim) ---
+optimize_skills() {
+    GLOBAL_LIBRARY_DIR="$GLOBAL_ROOT/library"
+    mkdir -p "$GLOBAL_LIBRARY_DIR"
+    
+    echo -e "${BLUE}🎯 Optimizing Skills (Mega-Trim)...${NC}"
+    
+    # Move all folders to Library
+    if [ -d "$GLOBAL_SKILLS_DIR" ] && [ "$(ls -A "$GLOBAL_SKILLS_DIR" 2>/dev/null)" ]; then
+        mv "$GLOBAL_SKILLS_DIR"/* "$GLOBAL_LIBRARY_DIR/" 2>/dev/null || true
+    fi
+
+    # Restore the GLOBAL CORE (Essentials for every agent)
+    CORE_SKILLS=(
+      "agent-sort"
+      "architecture-decision-records"
+      "coding-standards"
+      "configure-ecc"
+      "documentation-lookup"
+      "git-workflow"
+      "product-lifecycle"
+      "strategic-compact"
+      "tdd-workflow"
+      "verification-loop"
+    )
+
+    for skill in "${CORE_SKILLS[@]}"; do
+      if [ -d "$GLOBAL_LIBRARY_DIR/$skill" ]; then
+        cp -r "$GLOBAL_LIBRARY_DIR/$skill" "$GLOBAL_SKILLS_DIR/"
+        echo -e "   ${GREEN}✓ Restored Core:${NC} $skill"
+      fi
+    done
+    
+    echo -e "${GREEN}✓ Global skills optimized. 170+ specialized skills moved to Library.${NC}"
+    echo ""
+}
+
+# Agents: Only chat.md goes to auto-load. All others go to agents-archive.
+# This prevents OpenCode from injecting 40 agent manuals (~30K tokens) into every prompt.
+echo -e "${BLUE}🔄 Syncing Agents (selective)...${NC}"
+AGENTS_ARCHIVE="$GLOBAL_ROOT/agents-archive"
+mkdir -p "$AGENTS_ARCHIVE"
+mkdir -p "$GLOBAL_AGENTS_DIR"
+
+# Copy chat.md to auto-load (the only agent that should be auto-loaded)
+if [ -f "$LOCAL_AGENTS_DIR/chat.md" ]; then
+    cp "$LOCAL_AGENTS_DIR/chat.md" "$GLOBAL_AGENTS_DIR/chat.md"
+    echo -e "   ${GREEN}✅ Auto-load: chat.md${NC}"
+fi
+
+# Archive all other agents to the library
+for agent_file in "$LOCAL_AGENTS_DIR"/*.md; do
+    filename=$(basename "$agent_file")
+    if [ "$filename" != "chat.md" ] && [ "$filename" != "README.md" ]; then
+        cp "$agent_file" "$AGENTS_ARCHIVE/"
+        echo -e "   ${BLUE}📦 Archived: $filename${NC}"
+    fi
+done
+
+# Remove any stale agents from auto-load (except chat.md)
+for agent_file in "$GLOBAL_AGENTS_DIR"/*.md; do
+    filename=$(basename "$agent_file")
+    if [ "$filename" != "chat.md" ]; then
+        rm -f "$agent_file"
+    fi
+done
+echo -e "${GREEN}✓ Agents synced. Only chat.md in auto-load.${NC}"
+echo ""
+
 sync_dir "$LOCAL_COMMANDS_DIR" "$GLOBAL_COMMANDS_DIR" "Commands"
-sync_dir "$LOCAL_SKILLS_DIR" "$GLOBAL_SKILLS_DIR" "Skills"
+
+
+# Skills go DIRECTLY to Library (never to auto-load)
+# This prevents OpenCode from injecting 33,000 tokens into every prompt
+echo -e "${BLUE}🔄 Syncing Skills to Library (not auto-load)...${NC}"
+GLOBAL_LIBRARY_DIR="$GLOBAL_ROOT/library"
+mkdir -p "$GLOBAL_LIBRARY_DIR"
+if [ -d "$LOCAL_SKILLS_DIR" ]; then
+    rsync -av --delete --exclude 'README.md' "$LOCAL_SKILLS_DIR/" "$GLOBAL_LIBRARY_DIR/" | grep -v 'sending incremental file list' | grep -v './' | grep -v 'total size is' || true
+    echo -e "${GREEN}✓ Skills synced to Library: $GLOBAL_LIBRARY_DIR${NC}"
+fi
+
+# Ensure auto-load skills directory is EMPTY
+rm -rf "$GLOBAL_SKILLS_DIR"/*  2>/dev/null || true
+echo -e "${GREEN}✓ Auto-load skills directory cleared (zero bloat).${NC}"
+echo ""
+
 sync_dir "$LOCAL_INSTRUCTIONS_DIR" "$GLOBAL_INSTRUCTIONS_DIR" "Instructions"
 
 # Sync Preferences

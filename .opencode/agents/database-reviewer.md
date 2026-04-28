@@ -1,6 +1,10 @@
 ---
 name: database-reviewer
 description: PostgreSQL/Supabase specialist. Handles schema design, query optimization, and database patterns.
+instructions:
+  - "skills/coding-standards/SKILL.md"
+  - "~/.opencode/library/postgres-patterns/SKILL.md"
+  - "~/.opencode/library/database-migrations/SKILL.md"
 mode: subagent
 model: ollama/mistral:7b
 tools:

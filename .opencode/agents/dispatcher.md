@@ -3,6 +3,8 @@ name: dispatcher
 description: General entry point. Identifies task domain, then routes to appropriate domain dispatcher.
 mode: primary
 model: ollama/mistral:7b
+instructions:
+  - "AGENTS.md"
 tools:
   read: true
   write: true

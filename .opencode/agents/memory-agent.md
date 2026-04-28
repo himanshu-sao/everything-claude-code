@@ -8,6 +8,15 @@ tools:
   write: true
   edit: true
   bash: true
+mcp:
+  memory:
+    type: local
+    command: ["npx", "-y", "--prefer-offline", "@modelcontextprotocol/server-memory"]
+  token-optimizer-mcp:
+    type: local
+    command: ["npx", "-y", "--prefer-offline", "token-optimizer-mcp"]
+    env:
+      TOKEN_OPTIMIZER_CACHE_DIR: "/Users/himanshusao/.token-optimizer-cache"
   grep: true
   glob: true
 ---

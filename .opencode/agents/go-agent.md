@@ -1,6 +1,10 @@
 ---
 name: go-agent
 description: Go specialist. Handles Go code review, build issues, concurrency patterns, and API development.
+instructions:
+  - "skills/coding-standards/SKILL.md"
+  - "~/.opencode/library/golang-patterns/SKILL.md"
+  - "~/.opencode/library/golang-testing/SKILL.md"
 mode: subagent
 model: ollama/mistral:7b
 tools:

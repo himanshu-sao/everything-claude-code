@@ -4,6 +4,9 @@ description: Final gatekeeper for production-ready code and design. Enforces ite
 mode: subagent
 model: ollama/mistral:7b
 instructions:
+  - "AGENTS.md"
+  - "CONTRIBUTING.md"
+  - "skills/coding-standards/SKILL.md"
   - "skills/product-lifecycle/SKILL.md"
 tools:
   read: true

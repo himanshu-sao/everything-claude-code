@@ -4,6 +4,12 @@ description: Implementation agent. Executes code following TDD, runs tests, ensu
 mode: subagent
 model: ollama/mistral:7b
 instructions:
+  - "AGENTS.md"
+  - "CONTRIBUTING.md"
+  - "skills/coding-standards/SKILL.md"
+  - "~/.opencode/library/frontend-design/SKILL.md"
+  - "~/.opencode/library/mcp-server-patterns/SKILL.md"
+  - "~/.opencode/library/frontend-patterns/SKILL.md"
   - "skills/tdd-workflow/SKILL.md"
   - "skills/product-lifecycle/SKILL.md"
 tools:
@@ -13,6 +19,9 @@ tools:
   bash: true
   grep: true
   glob: true
+plugin:
+  - "opencode-supermemory"
+  - "@f97/opencode-morph-fast-apply"
 ---
 
 You are a builder agent.

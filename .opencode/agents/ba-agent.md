@@ -4,13 +4,35 @@ description: Business Analyst. Specialized in requirement gathering, Jira analys
 mode: subagent
 model: ollama/mistral:7b
 instructions:
+  - "AGENTS.md"
+  - "CONTRIBUTING.md"
+  - "skills/coding-standards/SKILL.md"
   - "skills/product-lifecycle/SKILL.md"
+  - "~/.opencode/library/market-research/SKILL.md"
+  - "~/.opencode/library/product-capability/SKILL.md"
+  - "~/.opencode/library/brand-voice/SKILL.md"
+  - "~/.opencode/library/seo/SKILL.md"
+  - "~/.opencode/library/investor-outreach/SKILL.md"
   - "skills/jira-integration/SKILL.md"
 tools:
   read: true
   write: true
   edit: true
   bash: true
+mcp:
+  bob-pr-reviewer:
+    type: local
+    command: ["npx", "--yes", "--prefer-offline", "bob-pr-reviewer"]
+    env:
+      GITHUB_TOKEN: "${env:GITHUB_TOKEN}"
+      GITHUB_BASE_URL: "https://github.ibm.com/api/v3"
+      JIRA_ISV_PERSONAL_ACCESS_TOKEN: "${env:JIRA_ISV_PERSONAL_ACCESS_TOKEN}"
+      JIRA_BASE_URL: "https://jsw.ibm.com"
+  github:
+    type: local
+    command: ["npx", "-y", "--prefer-offline", "@modelcontextprotocol/server-github"]
+plugin:
+  - "superpowers@git+https://github.com/obra/superpowers.git"
 ---
 
 # Role: Business Analyst (BA)
