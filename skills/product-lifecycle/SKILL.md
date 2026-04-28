@@ -29,9 +29,21 @@ This skill defines the mandatory Standard Operating Procedure (SOP) for all deve
 
 ---
 
-## Change Management (Bugs/Refactors)
-When a bug is reported or a requirement changes:
-1. **Re-Analyze**: `@ba-agent` updates the PRD to reflect the corrected behavior.
-2. **Re-Story**: `@story-writer` updates the stories/AC.
-3. **Re-Code**: `@builder` implements the fix following TDD.
-4. **Re-Verify**: `@perf-engineer` ensures no regressions in performance.
+## 🔄 Recursive Multi-Pass Governance
+To ensure production-ready outcomes, all critical outputs must go through a **minimum of two passes**.
+
+### The Review Loop SOP:
+1. **DRAFT**: The primary agent (e.g., `@architect` or `@builder`) produces the first version.
+2. **AUDIT**: A peer agent (e.g., `@code-reviewer`, `@security-reviewer`, or `@perf-engineer`) performs a critical scan.
+3. **REFINE**: The primary agent must address all CRITICAL and HIGH findings from the audit.
+4. **FINAL GATE**: The `@quality-gate` agent must provide final sign-off.
+
+### Recursive Design Loop:
+- **Design Pass 1**: Draft architecture.
+- **Review Pass 2**: Security and Performance audit.
+- **Design Pass 3**: Final refined architecture with invariants and error handling.
+
+### Recursive Code Loop:
+- **Code Pass 1**: TDD Implementation (Red/Green).
+- **Review Pass 2**: Static analysis and readability check.
+- **Code Pass 3**: Refactored production-ready code.
