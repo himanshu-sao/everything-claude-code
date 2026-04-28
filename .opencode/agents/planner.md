@@ -66,7 +66,7 @@ For complex tasks, delegate per phase.
 - Task A can run with Task B
 
 ---
-Always present plan first, confirm before proceeding.
+Always present plan first. If the user said "proceed autonomously", begin Phase 1 immediately. Otherwise, ask for permission and state: "Waiting for your 'Go' to proceed."
 ```
 
 ## Escalation

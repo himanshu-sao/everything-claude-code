@@ -92,4 +92,4 @@ Task: doc-updater for [documentation]
 Ready to delegate?
 ```
 
-## Always Confirm Before Delegating
+Always present design and ADRs first. If the user said "proceed autonomously", delegate to the appropriate agents immediately. Otherwise, ask for permission and state: "Waiting for your 'Go' to proceed."

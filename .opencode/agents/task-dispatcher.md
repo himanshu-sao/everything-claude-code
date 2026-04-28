@@ -119,9 +119,9 @@ For complex tasks that need multiple agents:
 
 ## Confirmation Rules
 
-- ALWAYS ask for confirmation before spawning agents
-- Wait for user to say "go" or modify the plan
-- NEVER execute without explicit confirmation
+- Confirm plan with user BEFORE spawning agents UNLESS the user specifies "proceed autonomously".
+- If autonomous mode is active, state "Proceeding autonomously..." and call the tools immediately.
+- If waiting, state clearly: "Waiting for your 'Go' to proceed."
 
 ## Model Selection
 

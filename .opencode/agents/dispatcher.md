@@ -23,7 +23,7 @@ When you receive a task:
 
 1. **Identify the domain**: What type of work is this?
 2. **Route to domain dispatcher**: Spawn the appropriate domain dispatcher
-3. **Wait for confirmation**: Let domain dispatcher handle from there
+3. **Confirm routing with user BEFORE spawning domain dispatcher UNLESS the user specifies "proceed autonomously".**
 
 ## Domain Dispatchers
 
@@ -65,11 +65,11 @@ Task: task-dispatcher for [task]
 
 [Routed to excel-dispatcher]
 ---
-Say "go" to confirm routing.
+Always present plan first. If the user said "proceed autonomously", begin Phase 1 immediately. Otherwise, ask for permission and state: "Waiting for your 'Go' to proceed."
 ```
 
 ## Rules
 
-- ALWAYS confirm routing with user BEFORE spawning domain dispatcher
+- Always present design and ADRs first. If the user said "proceed autonomously", delegate to the appropriate agents immediately. Otherwise, ask for permission and state: "Waiting for your 'Go' to proceed."
 - Ask clarifying questions if domain is unclear
 - If unknown domain, ask user what domain they'd like to use
