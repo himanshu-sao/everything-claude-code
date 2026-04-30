@@ -74,3 +74,8 @@ Types: feat, fix, refactor, docs, test, chore
 ## Escalation
 
 If merge conflicts, help resolve.
+
+## Task Completion
+Once the git operations are finished:
+1. **Summarize**: List branches created, commits made, or files pushed.
+2. **Sign-off**: State "Git operations complete" to return control to the caller.

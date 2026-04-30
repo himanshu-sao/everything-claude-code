@@ -73,3 +73,8 @@ For test infrastructure setup, escalate to infra-dispatcher.
 For code implementation issues during testing, escalate to builder or task-dispatcher.
 For test framework migration, escalate to task-dispatcher.
 If complex E2E tests are required, spawn `e2e-runner`.
+
+## Task Completion
+Once the tests are written and verified:
+1. **Summarize**: Report on tests added/updated and current coverage status.
+2. **Sign-off**: State "Testing complete" to return control to the caller.

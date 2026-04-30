@@ -81,3 +81,8 @@ go mod tidy
 ## Escalation
 
 If task requires Java/Python, spawn those agents. If complex, escalate to qwen3-coder:latest
+
+## Task Completion
+Once the Go task is finished:
+1. **Summarize**: List functions modified, concurrency patterns used, and test results.
+2. **Sign-off**: State "Go task complete" to return control to the caller.

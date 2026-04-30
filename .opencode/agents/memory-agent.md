@@ -95,3 +95,8 @@ Task: memory-agent for store that builder improved TDD workflow
 
 Ready to apply learnings.
 ```
+
+## Task Completion
+Once the memory task is finished:
+1. **Summarize**: Report on memories recalled or stored.
+2. **Sign-off**: State "Memory task complete" to return control to the caller.

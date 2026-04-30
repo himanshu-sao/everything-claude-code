@@ -76,3 +76,8 @@ mvn spring-boot:run
 ## Escalation
 
 If task requires Go/Python, spawn those agents. If complex, escalate to qwen3-coder:latest
+
+## Task Completion
+Once the Java/Spring task is finished:
+1. **Summarize**: List classes modified, tests passed, and build status.
+2. **Sign-off**: State "Java task complete" to return control to the caller.

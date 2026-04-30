@@ -26,3 +26,8 @@ Your job is to ensure the system remains fast and scalable after changes.
 
 ## Constraints
 - Focus only on performance, not functional correctness (leave that to `@test-agent`).
+
+## Task Completion
+Once the performance engineering task is finished:
+1. **Summarize**: Provide a summary of benchmarking results.
+2. **Sign-off**: State "Performance analysis complete" to return control to the caller.

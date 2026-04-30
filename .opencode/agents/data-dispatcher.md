@@ -30,7 +30,13 @@ When a task is received:
 1. Analyze the data requirement
 2. Plan the approach (tools, libraries, methodology)
 3. Execute using Read, Write, Edit, and Bash tools
-4. Validate results and confirm with user
+4. **Invoke runtime-gatekeeper** to verify environment and execution results
+5. Validate results and confirm with user
+
+## Task Completion
+Once the task is finished:
+1. **Summarize**: Provide a final summary of results.
+2. **Sign-off**: Explicitly state "Task complete" to signal the end of your turn to the caller.
 
 ## Escalation
 For database schema design, escalate to database-reviewer.

@@ -1,16 +1,18 @@
 # OpenCode Agents Directory
 
-This directory contains 33 specialized OpenCode agents for various development tasks.
+This directory contains 35+ specialized OpenCode agents for various development tasks.
 
 ## Quick Reference
 
 ### Core Development
 - `architect.md` - System design and architecture
-- `planner.md` - Task breakdown and planning
+- `api-architect.md` - API design, contracts (OpenAPI)
+- `planner.md` - Product & Planning (PRD/SRS/Stories)
 - `builder.md` - Code implementation with TDD
 - `code-reviewer.md` - Code quality review
 - `security-reviewer.md` - Security analysis
 - `tdd-guide.md` - Test-driven development
+- `runtime-gatekeeper.md` - Environment setup and validation
 
 ### Language-Specific
 - `java-agent.md` - Java/Spring Boot
@@ -25,6 +27,8 @@ This directory contains 33 specialized OpenCode agents for various development t
 
 ### Specialized
 - `database-reviewer.md` - Database optimization
+- `frontend-specialist.md` - React/Next.js/UI implementation
+- `deployment-agent.md` - CI/CD, Docker, and Cloud deployment
 - `doc-updater.md` - Documentation
 - `git-agent.md` - Git operations
 - `improver.md` - Code improvements
@@ -38,13 +42,12 @@ This directory contains 33 specialized OpenCode agents for various development t
 - `research-dispatcher.md` - Research
 
 ### Support
-- `complexity-analyzer.md` - Task complexity
+- `analyzer-agent.md` - Complexity analysis and Performance tracking
+- `ecosystem-optimizer.md` - Continuous Improvement (Meta-Cognitive)
 - `context-agent.md` - Context management
 - `fallback-agent.md` - Fallback handling
 - `memory-agent.md` - Learning persistence
-- `metrics-agent.md` - Performance metrics
 - `mcp-registry.md` - MCP management
-- `pm-agent.md` - Project management
 - `sandbox-agent.md` - Safe execution
 - `ux-agent.md` - UX optimization
 - `party-mode.md` - Experimental features

@@ -13,7 +13,7 @@ Create a detailed implementation plan for: $ARGUMENTS
 1. **Restate Requirements** - Clarify what needs to be built
 2. **Identify Risks** - Surface potential issues, blockers, and dependencies
 3. **Create Step Plan** - Break down implementation into phases
-4. **Wait for Confirmation** - MUST receive user approval before proceeding
+4. **Sign-off or Wait** - If interactive, wait for confirmation. If called by another agent, report completion and return control.
 
 ## Output Format
 
@@ -42,8 +42,10 @@ Create a detailed implementation plan for: $ARGUMENTS
 ### Estimated Complexity
 [HIGH/MEDIUM/LOW with time estimates]
 
+### Task Completion
+If acting autonomously or via a tool call:
+- State "Planning complete" to return control.
+
+Otherwise:
 **WAITING FOR CONFIRMATION**: Proceed with this plan? (yes/no/modify)
-
----
-
 **CRITICAL**: Do NOT write any code until the user explicitly confirms with "yes", "proceed", or similar affirmative response.

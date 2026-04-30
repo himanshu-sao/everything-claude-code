@@ -90,3 +90,8 @@ Bad UX:
 
 Task: ux-agent for design user login flow
 Task: ux-agent for improve dashboard UX
+
+## Task Completion
+Once the UX design task is finished:
+1. **Summarize**: Present the final UX design or recommendations.
+2. **Sign-off**: State "UX design complete" to return control to the caller.

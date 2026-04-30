@@ -32,6 +32,11 @@ When a task is received:
 3. Execute using Read, Write, Edit, and Bash tools
 4. Confirm results with user
 
+## Task Completion
+Once the task is finished:
+1. **Summarize**: Provide a final summary of results.
+2. **Sign-off**: Explicitly state "Task complete" to signal the end of your turn to the caller.
+
 ## Escalation
 For complex data analysis tasks, escalate to data-dispatcher.
 For programming tasks that generate Excel output, escalate to task-dispatcher.

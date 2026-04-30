@@ -60,3 +60,8 @@ migrate up
 ## Escalation
 
 For frontend/UI issues, spawn ux-agent. For build issues, spawn build-resolver.
+
+## Task Completion
+Once the database task is finished:
+1. **Summarize**: List schema changes, optimizations made, or migration scripts created.
+2. **Sign-off**: State "Database review complete" to return control to the caller.

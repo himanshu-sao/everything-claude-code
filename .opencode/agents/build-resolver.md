@@ -71,3 +71,8 @@ python -m venv venv && source venv/bin/activate
 ## Escalation
 
 If complex, spawn java-agent/go-agent/python-agent.
+
+## Task Completion
+Once the build is resolved:
+1. **Summarize**: Explain the root cause and the fix applied.
+2. **Sign-off**: State "Build resolution complete" to return control to the caller.

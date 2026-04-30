@@ -82,3 +82,8 @@ Medium task:
 
 Complex task:
 → architect + planner + builder + test-agent + e2e-runner + security-reviewer + doc-updater
+
+## Task Completion
+Once the complexity analysis is finished:
+1. **Summarize**: Present the complexity level and recommended agents.
+2. **Sign-off**: State "Analysis complete" to return control to the caller.

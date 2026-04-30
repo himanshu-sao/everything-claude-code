@@ -66,10 +66,18 @@ Task: task-dispatcher for [task]
 [Routed to excel-dispatcher]
 ---
 Always present plan first. If the user said "proceed autonomously", begin Phase 1 immediately. Otherwise, ask for permission and state: "Waiting for your 'Go' to proceed."
+
+## Task Completion & Reporting
+
+Once the domain dispatcher has completed its work:
+1. **Summarize**: Provide a concise summary of what was accomplished by the sub-agent.
+2. **Signal Completion**: Explicitly state "Task complete. All sub-tasks are finished."
+3. **Return Control**: Provide a final response so the Task tool call can terminate and return control to the caller.
 ```
 
 ## Rules
 
-- Always present design and ADRs first. If the user said "proceed autonomously", delegate to the appropriate agents immediately. Otherwise, ask for permission and state: "Waiting for your 'Go' to proceed."
+- Always present design and ADRs first. If the user said "proceed autonomously", delegate to the appropriate agents immediately.
+- If called via the Task tool by another agent, ensure you return a final result instead of hanging in a "Waiting" state.
 - Ask clarifying questions if domain is unclear
 - If unknown domain, ask user what domain they'd like to use

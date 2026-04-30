@@ -11,17 +11,23 @@ This is a **production-ready AI coding plugin** providing 48 specialized agents,
 3. **Security-First** — Never compromise on security; validate all inputs
 4. **Immutability** — Always create new objects, never mutate existing ones
 5. **Plan Before Execute** — Plan complex features before writing code
+6. **Sign-off & Return** — Always signal task completion and explicitly return control to the caller
 
 ## Available Agents
 
 | Agent | Purpose | When to Use |
 |-------|---------|-------------|
-| planner | Implementation planning | Complex features, refactoring |
+| planner | Product & Planning (PRD/SRS/Stories) | Requirement gathering to Breakdown |
 | architect | System design and scalability | Architectural decisions |
+| api-architect | API design and contracts | OpenAPI/REST/GraphQL design |
 | tdd-guide | Test-driven development | New features, bug fixes |
 | code-reviewer | Code quality and maintainability | After writing/modifying code |
 | security-reviewer | Vulnerability detection | Before commits, sensitive code |
-| build-error-resolver | Fix build/type errors | When build fails |
+| analyzer-agent | Complexity & Performance analysis | Diagnostic/Metric tasks |
+| ecosystem-optimizer | Continuous Improvement (Meta-Cognitive) | Post-task reflection, prompt tuning |
+| runtime-gatekeeper | Environment setup and validation | Mandatory before handover |
+| frontend-specialist | React/Next.js/UI development | Frontend tasks |
+| deployment-agent | CI/CD and Cloud deployment | Production releases |
 | e2e-runner | End-to-end Playwright testing | Critical user flows |
 | refactor-cleaner | Dead code cleanup | Code maintenance |
 | doc-updater | Documentation and codemaps | Updating docs |
@@ -55,6 +61,13 @@ Use agents proactively without user prompt:
 - Harness config reliability and cost → **harness-optimizer**
 
 Use parallel execution for independent operations — launch multiple agents simultaneously.
+
+## Call & Return Protocol
+
+When an agent is invoked via the **Task** tool:
+1. **Blocked Caller**: The calling agent is blocked until the tool returns.
+2. **Explicit Completion**: The called agent MUST provide a final summary and state "Task complete" or "Sign-off" to terminate its turn.
+3. **Avoid Deadlocks**: Do not wait for user input (e.g., "Waiting for Go") if called as a sub-agent unless explicitly necessary; prioritize reporting results back to the caller.
 
 ## Security Guidelines
 
@@ -109,6 +122,7 @@ Troubleshoot failures: check test isolation → verify mocks → fix implementat
 1. **Plan** — Use planner agent, identify dependencies and risks, break into phases
 2. **TDD** — Use tdd-guide agent, write tests first, implement, refactor
 3. **Review** — Use code-reviewer agent immediately, address CRITICAL/HIGH issues
+3.5 **Validate** — Use runtime-gatekeeper to ensure environment and execution works "out of the box"
 4. **Capture knowledge in the right place**
    - Personal debugging notes, preferences, and temporary context → auto memory
    - Team/project knowledge (architecture decisions, API changes, runbooks) → the project's existing docs structure

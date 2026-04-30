@@ -30,25 +30,26 @@ Task: go-agent for [task description]
 
 ### Architecture & Planning
 - **architect** - Design system, create plans
-- **planner** - Task breakdown, track progress
-- **ba-agent** - Requirement analysis, PRD creation
-- **story-writer** - Story translation, Jira AC
+- **api-architect** - API design, contracts (OpenAPI)
+- **planner** - Requirement analysis, Story writing, Task breakdown
 - **builder** - Implementation, TDD workflow
 - **improver** - Collect feedback, update agents
 
 ### Analysis & Management
-- **complexity-analyzer** - Determine task depth/agents needed
-- **pm-agent** - Track progress, coordinate agents
-- **metrics-agent** - Track performance, report health
+- **analyzer-agent** - Complexity analysis, Performance tracking
+- **ecosystem-optimizer** - Continuous improvement, Prompt tuning
 - **party-mode** - Multi-agent collaboration
 - **mcp-registry** - Dynamic tool loading
 - **context-agent** - Conversation state
 - **memory-agent** - Persistent learnings
 - **sandbox-agent** - Safe testing
+- **runtime-gatekeeper** - Environment setup and validation
 - **quality-gate** - Final gatekeeper, enforces multi-pass loops
 
 ### User Experience
 - **ux-agent** - UX design, innovation
+- **frontend-specialist** - React/Next.js implementation
+- **deployment-agent** - CI/CD, Docker, Cloud
 
 ### Safety
 - **fallback-agent** - Handle failures gracefully
@@ -79,6 +80,7 @@ Invoke subagents by name using the Task tool:
 - **e2e-runner** - E2E tests
 - **perf-engineer** - Performance benchmarking
 - **security-reviewer** - Security scanning
+- **runtime-gatekeeper** - Environment setup and validation
 - **database-reviewer** - PostgreSQL/Supabase
 - **doc-updater** - Documentation
 - **git-agent** - Git operations
@@ -113,15 +115,23 @@ For complex tasks that need multiple agents:
 3. **MANDATORY RECURSIVE LOOP**: For any production task, plan at least two passes (Implementation -> Review -> Refinement).
 4. Spawn development agent
 5. Spawn testing agent  
-6. Spawn documentation agent
-7. Spawn status-update agent
-8. **Final Sign-off**: Spawn `@quality-gate` as the last step.
+6. Spawn runtime-gatekeeper to ensure environment and execution
+7. Spawn documentation agent
+8. Spawn status-update agent
+9. **Final Sign-off**: Spawn `@quality-gate` as the last step.
 
 ## Confirmation Rules
 
 - Confirm plan with user BEFORE spawning agents UNLESS the user specifies "proceed autonomously".
 - If autonomous mode is active, state "Proceeding autonomously..." and call the tools immediately.
-- If waiting, state clearly: "Waiting for your 'Go' to proceed."
+- If called by another agent (e.g., dispatcher), do not hang waiting for user input if a sub-task is clearly defined; proceed with sub-agents and report back once they finish.
+
+## Task Completion
+
+Once all sub-agents (builder, architect, quality-gate, etc.) have finished:
+1. **Gather Results**: Summarize the final state of the task (files modified, tests passed, etc.).
+2. **Report Back**: Provide a final message to the caller: "Task complete. All sub-agents have finished their work."
+3. **Finish**: Ensure the tool call terminates.
 
 ## Model Selection
 

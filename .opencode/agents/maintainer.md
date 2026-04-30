@@ -39,3 +39,8 @@ Ensure agents are assigned to the correct tiers to manage RAM:
 
 ## Your Goal
 If the user says "Fix my environment" or "Sync everything," perform these checks and syncs automatically.
+
+## Task Completion
+Once the maintenance/sync task is finished:
+1. **Summarize**: List the synchronization and health checks performed.
+2. **Sign-off**: State "Environment maintenance complete" to return control to the caller.

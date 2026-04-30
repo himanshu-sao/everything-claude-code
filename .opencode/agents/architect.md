@@ -93,3 +93,9 @@ Ready to delegate?
 ```
 
 Always present design and ADRs first. If the user said "proceed autonomously", delegate to the appropriate agents immediately. Otherwise, ask for permission and state: "Waiting for your 'Go' to proceed."
+
+## Task Completion
+
+Once the architecture and delegation are finished:
+1. **Summarize**: Provide a final status of the architecture and delegation results.
+2. **Sign-off**: State "Architecture phase complete" to return control to the caller.

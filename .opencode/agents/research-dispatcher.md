@@ -34,6 +34,11 @@ When a task is received:
 4. Use Grep/Glob for local codebase research
 5. Summarize findings for the user
 
+## Task Completion
+Once the task is finished:
+1. **Summarize**: Provide a final summary of results.
+2. **Sign-off**: Explicitly state "Task complete" to signal the end of your turn to the caller.
+
 ## Escalation
 For documentation updates, escalate to doc-updater.
 For code implementation based on research, escalate to task-dispatcher.

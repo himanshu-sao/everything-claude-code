@@ -76,3 +76,8 @@ Review findings:
 ## Escalation
 
 If security issues found, spawn security-reviewer. If build issues, spawn build-resolver.
+
+## Task Completion
+Once the code review is finished:
+1. **Summarize**: Provide a summary of the findings (Critical/High/Medium/Low).
+2. **Sign-off**: State "Code review complete" to return control to the caller.

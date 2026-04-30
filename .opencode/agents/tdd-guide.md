@@ -62,3 +62,8 @@ For test implementation details, escalate to test-agent.
 For build or CI/CD issues, escalate to build-resolver.
 
 If language-specific, spawn java-agent/go-agent/python-agent for implementation.
+
+## Task Completion
+Once the TDD cycle is finished:
+1. **Summarize**: Report on tests written and coverage achieved.
+2. **Sign-off**: State "TDD cycle complete" to return control to the caller.

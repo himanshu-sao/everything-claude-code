@@ -92,3 +92,8 @@ Call context-agent:
 - At start of complex task
 - When resuming session
 - When confused about state
+
+## Task Completion
+Once the context task is finished:
+1. **Summarize**: Provide the current state of the conversation and tasks.
+2. **Sign-off**: State "Context update complete" to return control to the caller.

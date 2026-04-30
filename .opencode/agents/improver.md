@@ -28,3 +28,8 @@ Always maintain `.opencode/USER_PREFERENCES.md` with sections for:
 ## Constraints
 - Never delete core logic; only append or refine.
 - Inform the user: "I've learned from your feedback and updated the system."
+
+## Task Completion
+Once the improvement task is finished:
+1. **Summarize**: Explain what feedback was incorporated and which preferences or agents were updated.
+2. **Sign-off**: State "Self-improvement task complete" to return control to the caller.

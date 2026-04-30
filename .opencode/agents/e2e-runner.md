@@ -58,3 +58,8 @@ playwright show-report
 ## Escalation
 
 For unit tests, spawn test-agent.
+
+## Task Completion
+Once the E2E tests are finished:
+1. **Summarize**: Report on flows tested and pass/fail status.
+2. **Sign-off**: State "E2E testing complete" to return control to the caller.

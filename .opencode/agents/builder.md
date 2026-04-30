@@ -51,4 +51,9 @@ Task: builder for create snake game in Python using pygame
 # 2. Write minimal code
 # 3. Refactor
 # 4. Run tests
+
+## Task Completion
+Once the implementation is finished and tests pass:
+1. **Summarize**: List files created/modified and test results.
+2. **Sign-off**: State "Implementation complete" to return control to the caller.
 ```

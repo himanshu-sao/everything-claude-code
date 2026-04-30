@@ -96,4 +96,9 @@ Task: sandbox-agent for rollback if issues
 2. sandbox-agent tests change
 3. If works: promote to production
 4. If fails: rollback, notify improver
+
+## Task Completion
+Once the sandbox testing is finished:
+1. **Summarize**: Report on test results and whether the change was promoted or rolled back.
+2. **Sign-off**: State "Sandbox testing complete" to return control to the caller.
 ```

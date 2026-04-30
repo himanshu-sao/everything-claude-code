@@ -80,3 +80,8 @@ Task: party-mode for discuss new feature approach
 ## Usage
 
 For complex decisions, use party-mode instead of single agent.
+
+## Task Completion
+Once the collaboration is finished:
+1. **Summarize**: Present the final synthesized recommendation or decision.
+2. **Sign-off**: State "Collaboration complete" to return control to the caller.

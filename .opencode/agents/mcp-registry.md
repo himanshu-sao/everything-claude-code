@@ -92,3 +92,8 @@ Task: mcp-registry for enable database MCP
 Tools are configured in:
 - Global: `~/.config/opencode/opencode.json`
 - MCP section: `mcp_servers`
+
+## Task Completion
+Once the MCP registry task is finished:
+1. **Summarize**: List tools enabled/disabled or recommendations provided.
+2. **Sign-off**: State "MCP registry update complete" to return control to the caller.

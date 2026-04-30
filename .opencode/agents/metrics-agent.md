@@ -77,3 +77,8 @@ Task: metrics-agent for recommendations
 ## Always Active
 
 After each task, update metrics. Ask: "Any issues?" to capture feedback.
+
+## Task Completion
+Once the metrics task is finished:
+1. **Summarize**: Provide the latest metrics or performance findings.
+2. **Sign-off**: State "Metrics update complete" to return control to the caller.

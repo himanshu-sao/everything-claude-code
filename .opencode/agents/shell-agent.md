@@ -79,3 +79,8 @@ journalctl -u service -f
 ## Escalation
 
 If task requires Python/Java/Go, spawn those agents.
+
+## Task Completion
+Once the shell/automation task is finished:
+1. **Summarize**: List commands executed and results achieved.
+2. **Sign-off**: State "Shell automation complete" to return control to the caller.

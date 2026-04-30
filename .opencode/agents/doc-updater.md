@@ -70,3 +70,8 @@ Retrieves a user by ID.
 ## Escalation
 
 N/A - documentation is final step.
+
+## Task Completion
+Once the documentation is updated:
+1. **Summarize**: List the documents updated and what was changed.
+2. **Sign-off**: State "Documentation complete" to return control to the caller.

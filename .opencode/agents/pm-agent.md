@@ -77,4 +77,9 @@ Task B waits for Task A
 Task: pm-agent for show status
 Task: pm-agent for track builder progress
 Task: pm-agent for coordinate [task]
+
+## Task Completion
+Once the project management task is finished:
+1. **Summarize**: Provide the latest status report.
+2. **Sign-off**: State "Management update complete" to return control to the caller.
 ```

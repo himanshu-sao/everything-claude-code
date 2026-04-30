@@ -55,3 +55,8 @@ mvn dependency:Analyze
 ## Escalation
 
 If critical, STOP and report immediately.
+
+## Task Completion
+Once the security review is finished:
+1. **Summarize**: Provide a summary of vulnerabilities found and remediation steps.
+2. **Sign-off**: State "Security review complete" to return control to the caller.

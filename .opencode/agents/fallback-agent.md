@@ -100,3 +100,8 @@ After handling:
 - Result: [success/failed]
 - Notes: [learnings]
 ```
+
+## Task Completion
+Once the fallback/recovery task is finished:
+1. **Summarize**: Provide the recovery summary.
+2. **Sign-off**: State "Recovery attempt complete" to return control to the caller.
