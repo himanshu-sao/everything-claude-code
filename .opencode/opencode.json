@@ -4,14 +4,24 @@
   "small_model": "ollama/deepseek-coder:1.3b",
   "default_agent": "chat",
   "autoshare": false,
-  "instructions": [],
+  "instructions": [
+    "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md"
+  ],
   "plugin": [],
   "agent": {
     "chat": {
       "description": "Entry point assistant for greetings and dispatching",
       "mode": "primary",
       "model": "ollama/gemma4:e4b",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "task": true
+      },
       "instructions": [
+        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
         "/Users/himanshusao/.opencode/agents/chat.md"
       ]
     },
@@ -22,18 +32,73 @@
         "/Users/himanshusao/.opencode/agents-archive/architect.md"
       ]
     },
-    "planner": {
-      "description": "Implementation planner for feature breakdown",
+    "project-manager": {
+      "description": "Product & Project Management Specialist. Handles requirements, stories, and AC.",
       "model": "ollama/gemma4:e4b",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "task": true
+      },
       "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/planner.md"
+        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
+        "/Users/himanshusao/.opencode/agents-archive/project-manager.md"
       ]
     },
     "dispatcher": {
-      "description": "High-intelligence task routing and orchestration",
+      "description": "General domain router (Code, Data, Infra, Excel)",
       "model": "ollama/gemma4:e4b",
       "instructions": [
         "/Users/himanshusao/.opencode/agents-archive/dispatcher.md"
+      ]
+    },
+    "tech-lead": {
+      "description": "Orchestrator for development tasks (Architect -> PM -> Developer -> QA)",
+      "model": "ollama/gemma4:e4b",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "task": true
+      },
+      "instructions": [
+        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
+        "/Users/himanshusao/.opencode/agents-archive/tech-lead.md"
+      ]
+    },
+    "data-dispatcher": {
+      "description": "Specialist for data analysis and ETL",
+      "model": "ollama/gemma4:e4b",
+      "instructions": [
+        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
+        "/Users/himanshusao/.opencode/agents-archive/data-dispatcher.md"
+      ]
+    },
+    "infra-dispatcher": {
+      "description": "Specialist for DevOps and Infrastructure",
+      "model": "ollama/gemma4:e4b",
+      "instructions": [
+        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
+        "/Users/himanshusao/.opencode/agents-archive/infra-dispatcher.md"
+      ]
+    },
+    "research-dispatcher": {
+      "description": "Specialist for research and documentation analysis",
+      "model": "ollama/gemma4:e4b",
+      "instructions": [
+        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
+        "/Users/himanshusao/.opencode/agents-archive/research-dispatcher.md"
+      ]
+    },
+    "excel-dispatcher": {
+      "description": "Specialist for spreadsheet and Excel automation",
+      "model": "ollama/gemma4:e4b",
+      "instructions": [
+        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
+        "/Users/himanshusao/.opencode/agents-archive/excel-dispatcher.md"
       ]
     },
     "ba-agent": {
@@ -43,11 +108,19 @@
         "/Users/himanshusao/.opencode/agents-archive/ba-agent.md"
       ]
     },
-    "builder": {
-      "description": "Full-stack application builder",
+    "developer": {
+      "description": "Full-stack application developer and implementation specialist",
       "model": "ollama/qwen2.5-coder:14b",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "task": true
+      },
       "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/builder.md"
+        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
+        "/Users/himanshusao/.opencode/agents-archive/developer.md"
       ]
     },
     "python-agent": {
@@ -76,6 +149,71 @@
       "model": "ollama/gemma4:e4b",
       "instructions": [
         "/Users/himanshusao/.opencode/agents-archive/database-reviewer.md"
+      ]
+    },
+    "qa-engineer": {
+      "description": "Ensures code works out-of-the-box by setting up venv and validating runtime",
+      "model": "ollama/gemma4:e4b",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "task": true
+      },
+      "instructions": [
+        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
+        "/Users/himanshusao/.opencode/agents-archive/qa-engineer.md"
+      ]
+    },
+    "ecosystem-optimizer": {
+      "description": "Continuous improvement agent for prompt tuning and anti-patterns",
+      "model": "ollama/qwen2.5-coder:14b",
+      "instructions": [
+        "/Users/himanshusao/.opencode/agents-archive/ecosystem-optimizer.md"
+      ]
+    },
+    "analyzer-agent": {
+      "description": "Analytical specialist for complexity and metrics",
+      "model": "ollama/gemma4:e4b",
+      "instructions": [
+        "/Users/himanshusao/.opencode/agents-archive/analyzer-agent.md"
+      ]
+    },
+    "ui-engineer": {
+      "description": "Expert in React, Next.js, and modern UI implementation",
+      "model": "ollama/qwen2.5-coder:14b",
+      "instructions": [
+        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
+        "/Users/himanshusao/.opencode/agents-archive/ui-engineer.md"
+      ]
+    },
+    "api-architect": {
+      "description": "Expert in API design and OpenAPI contracts",
+      "model": "ollama/gemma4:e4b",
+      "instructions": [
+        "/Users/himanshusao/.opencode/agents-archive/api-architect.md"
+      ]
+    },
+    "deployment-agent": {
+      "description": "Specialist for CI/CD and Cloud deployment",
+      "model": "ollama/gemma4:e4b",
+      "instructions": [
+        "/Users/himanshusao/.opencode/agents-archive/deployment-agent.md"
+      ]
+    },
+    "system-auditor": {
+      "description": "Health check and diagnostic specialist for the agent ecosystem",
+      "model": "ollama/gemma4:e4b",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "task": true
+      },
+      "instructions": [
+        "/Users/himanshusao/.opencode/agents-archive/system-auditor.md"
       ]
     },
     "security-reviewer": {
@@ -158,7 +296,7 @@
     "plan": {
       "description": "Create a detailed implementation plan for complex features",
       "template": "{file:/Users/himanshusao/.opencode/commands/plan.md}\n\n$ARGUMENTS",
-      "agent": "planner",
+      "agent": "project-manager",
       "subtask": true
     },
     "tdd": {
@@ -200,7 +338,7 @@
     "orchestrate": {
       "description": "Orchestrate multiple agents for complex tasks",
       "template": "{file:/Users/himanshusao/.opencode/commands/orchestrate.md}\n\n$ARGUMENTS",
-      "agent": "planner",
+      "agent": "project-manager",
       "subtask": true
     },
     "learn": {
@@ -290,6 +428,12 @@
     "update-mcps": {
       "description": "Manually update all MCP servers to latest (takes 1-2 mins)",
       "template": "sh /Users/himanshusao/.opencode/scripts/update-mcps.sh"
+    },
+    "heartbeat": {
+      "description": "Perform a full ecosystem health check and agent roll call",
+      "template": "{file:/Users/himanshusao/.opencode/commands/heartbeat.md}\n\n$ARGUMENTS",
+      "agent": "system-auditor",
+      "subtask": true
     }
   },
   "provider": {

@@ -7,12 +7,12 @@ This directory contains 35+ specialized OpenCode agents for various development 
 ### Core Development
 - `architect.md` - System design and architecture
 - `api-architect.md` - API design, contracts (OpenAPI)
-- `planner.md` - Product & Planning (PRD/SRS/Stories)
-- `builder.md` - Code implementation with TDD
+- `project-manager.md` - Product & Project Management (PRD/Stories)
+- `developer.md` - Code implementation with TDD
 - `code-reviewer.md` - Code quality review
 - `security-reviewer.md` - Security analysis
 - `tdd-guide.md` - Test-driven development
-- `runtime-gatekeeper.md` - Environment setup and validation
+- `qa-engineer.md` - Environment setup and validation
 
 ### Language-Specific
 - `java-agent.md` - Java/Spring Boot
@@ -27,7 +27,7 @@ This directory contains 35+ specialized OpenCode agents for various development 
 
 ### Specialized
 - `database-reviewer.md` - Database optimization
-- `frontend-specialist.md` - React/Next.js/UI implementation
+- `ui-engineer.md` - React/Next.js/UI implementation
 - `deployment-agent.md` - CI/CD, Docker, and Cloud deployment
 - `doc-updater.md` - Documentation
 - `git-agent.md` - Git operations
@@ -35,7 +35,7 @@ This directory contains 35+ specialized OpenCode agents for various development 
 
 ### Workflow Coordination
 - `dispatcher.md` - General routing
-- `task-dispatcher.md` - Code tasks
+- `tech-lead.md` - Code tasks
 - `data-dispatcher.md` - Data analysis
 - `excel-dispatcher.md` - Spreadsheets
 - `infra-dispatcher.md` - DevOps
@@ -81,7 +81,7 @@ Agents are auto-discovered by OpenCode:
 opencode agent list
 
 # Invoke an agent
-@planner help me plan a feature
+@project-manager help me plan a feature
 @code-reviewer review my code
 ```
 

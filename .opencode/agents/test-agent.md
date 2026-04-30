@@ -70,8 +70,8 @@ go test -v -coverprofile=coverage.out ./...
 ## Escalation
 
 For test infrastructure setup, escalate to infra-dispatcher.
-For code implementation issues during testing, escalate to builder or task-dispatcher.
-For test framework migration, escalate to task-dispatcher.
+For code implementation issues during testing, escalate to developer or tech-lead.
+For test framework migration, escalate to tech-lead.
 If complex E2E tests are required, spawn `e2e-runner`.
 
 ## Task Completion

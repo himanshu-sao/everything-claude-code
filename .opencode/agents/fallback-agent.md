@@ -59,13 +59,13 @@ You are the fallback agent. Handles failures gracefully.
 ## Example Flow
 
 ```
-## Failure: builder failed to compile Python
+## Failure: developer failed to compile Python
 
 ### Reason: Missing dependencies
 
 ### Recovery Plan:
 1. Try: shell-agent to install dependencies
-2. Then: Retry builder
+2. Then: Retry developer
 
 ### OR
 
@@ -84,7 +84,7 @@ Ready to recover with [strategy]?
 
 The dispatcher should route failed tasks here:
 ```
-Task: fallback-agent for recover builder failure
+Task: fallback-agent for recover developer failure
 Task: fallback-agent for analyze what went wrong
 ```
 

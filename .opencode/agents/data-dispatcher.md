@@ -30,7 +30,7 @@ When a task is received:
 1. Analyze the data requirement
 2. Plan the approach (tools, libraries, methodology)
 3. Execute using Read, Write, Edit, and Bash tools
-4. **Invoke runtime-gatekeeper** to verify environment and execution results
+4. **Invoke @qa-engineer** to verify environment and execution results
 5. Validate results and confirm with user
 
 ## Task Completion
@@ -40,5 +40,5 @@ Once the task is finished:
 
 ## Escalation
 For database schema design, escalate to database-reviewer.
-For complex ML/analysis tasks, escalate to task-dispatcher.
+For complex ML/analysis tasks, escalate to tech-lead.
 For data quality/security issues, escalate to security-reviewer.

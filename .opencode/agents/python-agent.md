@@ -80,6 +80,6 @@ If task requires Go/Java, spawn those agents. If complex, escalate to qwen3-code
 
 ## Task Completion
 Once the Python task is finished:
-1. **Validate**: Invoke `runtime-gatekeeper` to ensure the script/environment is functional.
+1. **Validate**: Invoke `@qa-engineer` to ensure the script/environment is functional.
 2. **Summarize**: List scripts created/modified, libraries used, and test results.
 3. **Sign-off**: State "Python task complete" to return control to the caller.

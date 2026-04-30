@@ -30,7 +30,7 @@ When a task is received:
 1. Analyze the infrastructure requirement
 2. Plan the approach (tools, providers, best practices)
 3. Execute using Read, Write, Edit, and Bash tools
-4. **Invoke runtime-gatekeeper** to verify infrastructure setup and access
+4. **Invoke @qa-engineer** to verify infrastructure setup and access
 5. Validate and confirm with user
 
 ## Task Completion

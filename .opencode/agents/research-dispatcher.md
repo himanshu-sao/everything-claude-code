@@ -41,5 +41,5 @@ Once the task is finished:
 
 ## Escalation
 For documentation updates, escalate to doc-updater.
-For code implementation based on research, escalate to task-dispatcher.
+For code implementation based on research, escalate to tech-lead.
 For technical accuracy review, escalate to code-reviewer.

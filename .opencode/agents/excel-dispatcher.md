@@ -39,4 +39,4 @@ Once the task is finished:
 
 ## Escalation
 For complex data analysis tasks, escalate to data-dispatcher.
-For programming tasks that generate Excel output, escalate to task-dispatcher.
+For programming tasks that generate Excel output, escalate to tech-lead.

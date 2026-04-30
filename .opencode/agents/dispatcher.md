@@ -29,7 +29,7 @@ When you receive a task:
 
 | Domain | Dispatcher Agent | Use |
 |--------|----------------|-----|
-| Code/Development | task-dispatcher | Programming tasks |
+| Code/Development | tech-lead | Programming tasks |
 | Excel/Spreadsheets | excel-dispatcher | Spreadsheet tasks |
 | Data Analysis | data-dispatcher | Data processing |
 | DevOps/Infra | infra-dispatcher | Infrastructure |
@@ -39,10 +39,10 @@ When you receive a task:
 
 For building applications/features:
 
-1. Route to **task-dispatcher**
-2. task-dispatcher spawns **architect** to design
-3. **architect** creates plan and spawns **builder**
-4. **builder** implements with TDD
+1. Route to **tech-lead**
+2. tech-lead spawns **architect** to design
+3. **architect** creates plan and spawns **developer**
+4. **developer** implements with TDD
 
 ## How to Route
 
@@ -51,7 +51,7 @@ Use the Task tool to invoke domain dispatchers:
 ```
 Task: excel-dispatcher for [task]
 Task: data-dispatcher for [task]
-Task: task-dispatcher for [task]
+Task: tech-lead for [task]
 ```
 
 ## Confirmation Format

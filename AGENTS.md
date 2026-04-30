@@ -17,17 +17,13 @@ This is a **production-ready AI coding plugin** providing 48 specialized agents,
 
 | Agent | Purpose | When to Use |
 |-------|---------|-------------|
-| planner | Product & Planning (PRD/SRS/Stories) | Requirement gathering to Breakdown |
+| project-manager | Product & Project Management | Requirements, Stories, & Breakdown |
+| tech-lead | Engineering Orchestration | Technical leadership & Workflow |
+| developer | Code Implementation | TDD, logic, and core development |
+| qa-engineer | Quality Assurance & Runtime | Env setup, validation, smoke tests |
+| ui-engineer | Frontend & UX | React, Next.js, and Tailwind CSS |
 | architect | System design and scalability | Architectural decisions |
 | api-architect | API design and contracts | OpenAPI/REST/GraphQL design |
-| tdd-guide | Test-driven development | New features, bug fixes |
-| code-reviewer | Code quality and maintainability | After writing/modifying code |
-| security-reviewer | Vulnerability detection | Before commits, sensitive code |
-| analyzer-agent | Complexity & Performance analysis | Diagnostic/Metric tasks |
-| ecosystem-optimizer | Continuous Improvement (Meta-Cognitive) | Post-task reflection, prompt tuning |
-| runtime-gatekeeper | Environment setup and validation | Mandatory before handover |
-| frontend-specialist | React/Next.js/UI development | Frontend tasks |
-| deployment-agent | CI/CD and Cloud deployment | Production releases |
 | e2e-runner | End-to-end Playwright testing | Critical user flows |
 | refactor-cleaner | Dead code cleanup | Code maintenance |
 | doc-updater | Documentation and codemaps | Updating docs |
@@ -52,7 +48,7 @@ This is a **production-ready AI coding plugin** providing 48 specialized agents,
 ## Agent Orchestration
 
 Use agents proactively without user prompt:
-- Complex feature requests → **planner**
+- Complex feature requests → **project-manager**
 - Code just written/modified → **code-reviewer**
 - Bug fix or new feature → **tdd-guide**
 - Architectural decision → **architect**
@@ -119,10 +115,10 @@ Troubleshoot failures: check test isolation → verify mocks → fix implementat
 
 ## Development Workflow
 
-1. **Plan** — Use planner agent, identify dependencies and risks, break into phases
-2. **TDD** — Use tdd-guide agent, write tests first, implement, refactor
-3. **Review** — Use code-reviewer agent immediately, address CRITICAL/HIGH issues
-3.5 **Validate** — Use runtime-gatekeeper to ensure environment and execution works "out of the box"
+1. **Plan** — Use **project-manager** agent, identify dependencies and risks, break into phases
+2. **TDD** — Use **tdd-guide** agent, write tests first, implement, refactor
+3. **Review** — Use **code-reviewer** agent immediately, address CRITICAL/HIGH issues
+3.5 **Validate** — Use **qa-engineer** to ensure environment and execution works "out of the box"
 4. **Capture knowledge in the right place**
    - Personal debugging notes, preferences, and temporary context → auto memory
    - Team/project knowledge (architecture decisions, API changes, runbooks) → the project's existing docs structure

@@ -87,13 +87,16 @@ sync_config() {
         echo -e "${YELLOW}💾 Backup of global config created: $BACKUP_ROOT/opencode.json.bak${NC}"
     fi
 
-    # Copy and then patch ALL relative paths to absolute global paths
-    # This ensures everything works in any directory
-    cat "$LOCAL_CONFIG_FILE" | \
+    # Copy and then patch ALL local project paths to global paths
+    # Use direct string replacement for known relative patterns
+    sed "s|/Users/.*/AGENTS.md|$GLOBAL_ROOT/AGENTS.md|g" "$LOCAL_CONFIG_FILE" | \
+      sed "s|\.opencode/agents-archive/|$GLOBAL_ROOT/agents-archive/|g" | \
+      sed "s|\.opencode/agents/|$GLOBAL_AGENTS_DIR/|g" | \
       sed "s|{file:commands/|{file:$GLOBAL_COMMANDS_DIR/|g" | \
-      sed "s|\"agents-archive/|\"$GLOBAL_ROOT/agents-archive/|g" | \
-      sed "s|\"agents/|\"$GLOBAL_AGENTS_DIR/|g" | \
       sed "s|\"library/|\"$GLOBAL_ROOT/library/|g" > "$GLOBAL_CONFIG_FILE"
+    
+    # Cleanup any accidentally doubled paths from previous runs
+    sed -i '' "s|/Users/himanshusao//Users/himanshusao|/Users/himanshusao|g" "$GLOBAL_CONFIG_FILE"
     
     echo -e "${GREEN}✓ Config synced and patched to $GLOBAL_CONFIG_FILE${NC}"
     echo ""
@@ -198,6 +201,16 @@ fi
 
 sync_config
 
+# Sync Global Source of Truth (AGENTS.md)
+LOCAL_AGENTS_DOC="$PROJECT_ROOT/AGENTS.md"
+GLOBAL_AGENTS_DOC="$GLOBAL_ROOT/AGENTS.md"
+if [ -f "$LOCAL_AGENTS_DOC" ]; then
+    echo -e "${BLUE}🔄 Syncing Team Source of Truth (AGENTS.md)...${NC}"
+    cp "$LOCAL_AGENTS_DOC" "$GLOBAL_AGENTS_DOC"
+    echo -e "${GREEN}✓ Global Source of Truth updated: $GLOBAL_AGENTS_DOC${NC}"
+    echo ""
+fi
+
 # Create/update global README
 GLOBAL_README="$GLOBAL_ROOT/README.md"
 cat > "$GLOBAL_README" << EOF
@@ -234,9 +247,10 @@ echo -e "  ${BLUE}Agents:${NC}       $GLOBAL_AGENTS_DIR"
 echo -e "  ${BLUE}Commands:${NC}     $GLOBAL_COMMAND_DIR"
 echo -e "  ${BLUE}Skills:${NC}       $GLOBAL_SKILLS_DIR"
 echo -e "  ${BLUE}Config:${NC}       $GLOBAL_CONFIG_FILE"
+echo -e "  ${BLUE}Source of Truth:${NC} $GLOBAL_ROOT/AGENTS.md"
 echo -e "  ${BLUE}Backup:${NC}       $BACKUP_ROOT"
 echo ""
 echo -e "${GREEN}Next steps:${NC}"
 echo -e "  1. Test with: ${YELLOW}opencode agent list${NC}"
-echo -e "  2. Use agents: ${YELLOW}@planner help me plan...${NC}"
+echo -e "  2. Use agents: ${YELLOW}@project-manager help me plan...${NC}"
 echo ""
