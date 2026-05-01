@@ -142,11 +142,9 @@ mkdir -p "$GLOBAL_AGENTS_DIR"
 
 CORE_AGENTS=(
     "chat.md"
-    "agent-supervisor.md"
     "tech-lead.md"
     "project-manager.md"
     "architect.md"
-    "dispatcher.md"
     "developer.md"
     "qa-engineer.md"
     "tdd-guide.md"

@@ -2,7 +2,7 @@
 
 This is a **production-ready AI coding plugin** providing 48 specialized agents, 183 skills, 79 commands, and automated hook workflows for software development.
 
-**Version:** 1.10.0
+**Version:** 1.11.0
 
 ## Core Principles
 
@@ -18,7 +18,7 @@ This is a **production-ready AI coding plugin** providing 48 specialized agents,
 | Agent | Purpose | When to Use |
 |-------|---------|-------------|
 | project-manager | Product & Project Management | Requirements, Stories, & Breakdown |
-| tech-lead | Engineering Orchestration | Technical leadership & Workflow |
+| tech-lead | Absolute Orchestration | The Single Source of Truth and Unified Execution Layer |
 | developer | Code Implementation | TDD, logic, and core development |
 | qa-engineer | Quality Assurance & Runtime | Env setup, validation, smoke tests |
 | ui-engineer | Frontend & UX | React, Next.js, and Tailwind CSS |
@@ -65,7 +65,9 @@ When an agent is invoked via the **Task** tool:
 2. **Explicit Completion**: The called agent MUST provide a final summary and state "Task complete" or "Sign-off" to terminate its turn.
 3. **Avoid Deadlocks (BLOCK EMISSION)**: Do not wait for user input or ask questions in plain text. If you need clarification, approval, or have a question for the user, you MUST prefix your response with "BLOCK: [Your Question]" and explicitly sign off to terminate your turn.
 4. **State Resumption (BLOCK MANAGEMENT)**: If an outer agent receives an output from a sub-agent prefixed with "BLOCK:", the outer agent MUST immediately stop, report "BLOCK: [Sub-agent's Question]" to its caller, and sign off. When later invoked with the user's answer, it must re-invoke the blocked sub-agent with the new context.
-5. **Mandatory Supervision**: For all complex workflows involving multiple agents, you MUST route your `task` calls through the **agent-supervisor**. Direct delegation to sub-agents (e.g., `tech-lead` -> `project-manager`) is prohibited to ensure centralized stack monitoring. Use `subagent_type: "agent-supervisor"` and specify the target agent in the prompt.
+5. **The Absolute Orchestrator**: The `tech-lead` is the "Single Source of Truth". All complex workflows MUST be routed through the `tech-lead`. Direct delegation between sub-agents (e.g., `developer` -> `project-manager`) is prohibited to ensure centralized stack monitoring.
+6. **Supervisor-Proxy Execution**: Worker agents (e.g., developers, architects) lack file-writing permissions. They MUST return executable actions as text blocks formatted as `EXECUTE: write path/to/file.ext \n ``` \n [code] \n ````. The Supervisor (Tech-Lead) will parse and execute these blocks.
+7. **Session Logging**: The Tech-Lead MUST maintain a state file in `.opencode/sessions/` detailing the call stack, context, and actions performed during the current task.
 
 ## Security Guidelines
 

@@ -84,6 +84,15 @@ This repo is the raw code only. The guides explain everything.
 
 ## What's New
 
+### v1.11.0 — Nexus-Super-Manus Architecture (May 2026)
+
+- **Absolute Orchestration** — The `tech-lead` is now the **Single Source of Truth** and **Unified Execution Layer**. All write/bash tools are centralized to the Tech-Lead, while workers use the new **Proxy Execution** protocol.
+- **Super-Manus 4-Pillar Lifecycle** — Persistent planning in `.planning/[task-slug]/` with `01_PLAN.md`, `02_DESIGN.md`, `03_DEPS.md`, and `04_TESTS.md`.
+- **Triage Tiering** — Automatic task categorization (Tier 1-3) with User Overrides ("quickly" vs "professionally").
+- **Checkpointed Progress** — Plan-driven checkpoints with atomic task tracking (the "task-based approach").
+- **SDLC Hardening Skills** — New `stack-locker` (tech stack freezing) and `env-paving` (portable environment initialization) skills.
+- **Model Mapping Optimization** — Optimized fleet using `Codestral 22B` for triage, `Gemma 4` for orchestration, and `DeepSeek Coder V2` for architecture.
+
 ### v1.10.0 — Surface Refresh, Operator Workflows, and ECC 2.0 Alpha (Apr 2026)
 
 - **Dashboard GUI** — New Tkinter-based desktop application (`ecc_dashboard.py` or `npm run dashboard`) with dark/light theme toggle, font customization, and project logo in header and taskbar.

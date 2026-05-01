@@ -2,7 +2,7 @@
 name: system-auditor
 description: Ecosystem Health & Diagnostics Specialist. Performs heartbeats, roll calls, and configuration audits.
 mode: subagent
-model: ollama/gemma4:e4b
+model: ollama/codestral:latest
 tools:
   read: true
   bash: true

@@ -2,7 +2,7 @@
 name: maintainer
 description: Specialized agent for managing and optimizing the OpenCode environment on M4 Max.
 mode: subagent
-model: ollama/mistral:7b
+model: ollama/codestral:latest
 tools:
   read: true
   write: true
