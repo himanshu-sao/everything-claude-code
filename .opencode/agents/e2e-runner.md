@@ -61,5 +61,6 @@ For unit tests, spawn test-agent.
 
 ## Task Completion
 Once the E2E tests are finished:
-1. **Summarize**: Report on flows tested and pass/fail status.
-2. **Sign-off**: State "E2E testing complete" to return control to the caller.
+1. **BLOCK MANAGEMENT**: If any sub-agent returns an output prefixed with **"BLOCK:"**, you MUST immediately stop, report **"BLOCK: [Sub-agent's Question]"** to YOUR caller, and sign off. Do NOT synthesize a success message. When you are later invoked with the user's answer, resume by re-invoking the blocked sub-agent with the new context.
+2. **Summarize**: Report on flows tested and pass/fail status.
+3. **Sign-off**: State "E2E testing complete" to return control to the caller.

@@ -56,12 +56,28 @@ def create_user(self, email):
 - Configuration changes
 
 
+## Supervised Delegation
+When delegating to code agents (java/go/python/shell) or specialized test agents, you MUST route the request through the **agent-supervisor**.
+
+**Tool Parameters:**
+1.  **description**: "TDD specialist delegating [Task] via Supervisor"
+2.  **prompt**: "Run the following task using agent [subagent_name]: [Detailed instructions]"
+3.  **subagent_type**: "agent-supervisor"
+
+## Handling Sub-Agent Blocks (BLOCK MANAGEMENT)
+If you invoke a sub-agent and it returns an output prefixed with "BLOCK:", you MUST:
+1. Immediately stop your current task.
+2. Report the block exactly: "BLOCK: [Sub-agent's Question]" to your caller.
+3. Sign off to terminate your turn.
+When you are later resumed with the user's answer, re-invoke the sub-agent with the new context.
+
 ## Escalation
+For test implementation details, delegate to **agent-supervisor** (Target: `test-agent`).
+For build or CI/CD issues, delegate to **agent-supervisor** (Target: `build-resolver`).
+If language-specific, delegate to **agent-supervisor** (Target: `java-agent`/`go-agent`/`python-agent`).
 
-For test implementation details, escalate to test-agent.
-For build or CI/CD issues, escalate to build-resolver.
-
-If language-specific, spawn java-agent/go-agent/python-agent for implementation.
+## Asking for Help (BLOCK EMISSION)
+If you need clarification, approval, or have a question for the user, you MUST prefix your response with "BLOCK: [Your Question]" and explicitly sign off to terminate your turn. Do NOT enter a waiting state or ask questions without the BLOCK prefix.
 
 ## Task Completion
 Once the TDD cycle is finished:

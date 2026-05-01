@@ -8,7 +8,7 @@ To ensure high performance without overwhelming your system's RAM, we use a tier
 
 | Tier | Model | Memory | Assigned To |
 | :--- | :--- | :--- | :--- |
-| **Heavy** | `ollama/qwen3-coder:latest` | ~18 GB | `build` (Primary Agent) |
+| **Heavy** | `ollama/deepseek-coder-v2` | ~14 GB | `build` (Primary Agent) |
 | **Medium** | `ollama/gemma4:e4b` | ~9.6 GB | `architect` (System Design) |
 | **Smart Chat**| `ollama/llama3.2:3b` | ~2.0 GB | `chat` (Default Entry Point) |
 | **Utility** | `ollama/mistral:7b` | ~4.4 GB | All other 31 sub-agents |

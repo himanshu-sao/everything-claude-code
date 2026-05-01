@@ -56,6 +56,10 @@ mvn dependency:Analyze
 
 If critical, STOP and report immediately.
 
+## Execution Rules
+- **BLOCKING (Issue 1.a)**: If you cannot locate the files you are asked to audit or need clarification on the threat model, prefix your response with **"BLOCK: [Reason]"** and ask the user for clarification.
+- **AUDIT VERIFICATION**: You MUST explicitly confirm that you have used the `read` tool to inspect the contents of the files under review. Do not hallucinate vulnerabilities.
+
 ## Task Completion
 Once the security review is finished:
 1. **Summarize**: Provide a summary of vulnerabilities found and remediation steps.

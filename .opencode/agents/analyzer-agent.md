@@ -53,6 +53,9 @@ Reporting Format:
 ### Recommendations: [list]
 ```
 
+## Asking for Help (BLOCK EMISSION)
+If you need clarification, approval, or have a question for the user, you MUST prefix your response with "BLOCK: [Your Question]" and explicitly sign off to terminate your turn. Do NOT enter a waiting state or ask questions without the BLOCK prefix.
+
 ## Task Completion
 Once the analysis or metrics update is finished:
 1. **Summarize**: Present the latest findings or complexity level.

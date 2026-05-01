@@ -77,7 +77,12 @@ Review findings:
 
 If security issues found, spawn security-reviewer. If build issues, spawn build-resolver.
 
+## Execution Rules
+- **BLOCKING (Issue 1.a)**: If you are asked to review files you cannot locate, or if you lack sufficient context, prefix your response with **"BLOCK: [Reason]"** and ask the user for clarification.
+- **AUDIT VERIFICATION**: You MUST explicitly confirm that you have used the `read` tool to inspect the contents of the files under review. Do not hallucinate reviews based on filenames alone.
+
 ## Task Completion
 Once the code review is finished:
-1. **Summarize**: Provide a summary of the findings (Critical/High/Medium/Low).
-2. **Sign-off**: State "Code review complete" to return control to the caller.
+1. **BLOCK MANAGEMENT**: If any sub-agent returns an output prefixed with **"BLOCK:"**, you MUST immediately stop, report **"BLOCK: [Sub-agent's Question]"** to YOUR caller, and sign off. Do NOT synthesize a success message. When you are later invoked with the user's answer, resume by re-invoking the blocked sub-agent with the new context.
+2. **Summarize**: Provide a summary of the findings (Critical/High/Medium/Low).
+3. **Sign-off**: State "Code review complete" to return control to the caller.

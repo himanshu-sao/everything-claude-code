@@ -61,6 +61,10 @@ migrate up
 
 For frontend/UI issues, spawn ux-agent. For build issues, spawn build-resolver.
 
+## Execution Rules
+- **BLOCKING (Issue 1.a)**: If you cannot connect to the database, lack schema access, or need clarification on requirements, prefix your response with **"BLOCK: [Reason]"** and ask the user for clarification.
+- **AUDIT VERIFICATION**: You MUST explicitly confirm that you have read the relevant schema/migration files before proposing optimizations.
+
 ## Task Completion
 Once the database task is finished:
 1. **Summarize**: List schema changes, optimizations made, or migration scripts created.

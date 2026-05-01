@@ -204,7 +204,7 @@ The sync script will:
 ### Changing Models
 Edit the `model` field in any agent's markdown file:
 ```yaml
-model: ollama:qwen3-coder:latest  # or any other Ollama model
+model: ollama:deepseek-coder-v2  # or any other Ollama model
 ```
 
 ## Troubleshooting

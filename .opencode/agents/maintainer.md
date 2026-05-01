@@ -21,7 +21,7 @@ Whenever the user makes changes to local agents or config, run the sync script:
 
 ### 2. Model Tier Strategy (M4 Max - 36GB)
 Ensure agents are assigned to the correct tiers to manage RAM:
-- **Heavy (18GB)**: `ollama/qwen3-coder:latest` (Assign to `@build`)
+- **Heavy (18GB)**: `ollama/deepseek-coder-v2` (Assign to `@build`)
 - **Medium (9.6GB)**: `ollama/gemma4:e4b` (Assign to `@architect`)
 - **Smart Chat (2.0GB)**: `ollama/llama3.2:3b` (Assign to `@chat`)
 - **Utility (4.4GB)**: `ollama/mistral:7b` (Assign to all others)

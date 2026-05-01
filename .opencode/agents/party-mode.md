@@ -83,5 +83,6 @@ For complex decisions, use party-mode instead of single agent.
 
 ## Task Completion
 Once the collaboration is finished:
-1. **Summarize**: Present the final synthesized recommendation or decision.
-2. **Sign-off**: State "Collaboration complete" to return control to the caller.
+1. **BLOCK MANAGEMENT**: If any sub-agent returns an output prefixed with **"BLOCK:"**, you MUST immediately stop, report **"BLOCK: [Sub-agent's Question]"** to YOUR caller, and sign off. Do NOT synthesize a success message. When you are later invoked with the user's answer, resume by re-invoking the blocked sub-agent with the new context.
+2. **Summarize**: Present the final synthesized recommendation or decision.
+3. **Sign-off**: State "Collaboration complete" to return control to the caller.

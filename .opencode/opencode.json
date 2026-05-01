@@ -5,7 +5,7 @@
   "default_agent": "chat",
   "autoshare": false,
   "instructions": [
-    "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md"
+    "/Users/himanshusao/.opencode/AGENTS.md"
   ],
   "plugin": [],
   "agent": {
@@ -21,226 +21,14 @@
         "task": true
       },
       "instructions": [
-        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
+        "/Users/himanshusao/.opencode/AGENTS.md",
         "/Users/himanshusao/.opencode/agents/chat.md"
-      ]
-    },
-    "architect": {
-      "description": "Technical architect for system design and ADRs",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/architect.md"
-      ]
-    },
-    "project-manager": {
-      "description": "Product & Project Management Specialist. Handles requirements, stories, and AC.",
-      "model": "ollama/gemma4:e4b",
-      "tools": {
-        "read": true,
-        "write": true,
-        "edit": true,
-        "bash": true,
-        "task": true
-      },
-      "instructions": [
-        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
-        "/Users/himanshusao/.opencode/agents-archive/project-manager.md"
-      ]
-    },
-    "dispatcher": {
-      "description": "General domain router (Code, Data, Infra, Excel)",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/dispatcher.md"
-      ]
-    },
-    "tech-lead": {
-      "description": "Orchestrator for development tasks (Architect -> PM -> Developer -> QA)",
-      "model": "ollama/gemma4:e4b",
-      "tools": {
-        "read": true,
-        "write": true,
-        "edit": true,
-        "bash": true,
-        "task": true
-      },
-      "instructions": [
-        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
-        "/Users/himanshusao/.opencode/agents-archive/tech-lead.md"
-      ]
-    },
-    "data-dispatcher": {
-      "description": "Specialist for data analysis and ETL",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
-        "/Users/himanshusao/.opencode/agents-archive/data-dispatcher.md"
-      ]
-    },
-    "infra-dispatcher": {
-      "description": "Specialist for DevOps and Infrastructure",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
-        "/Users/himanshusao/.opencode/agents-archive/infra-dispatcher.md"
-      ]
-    },
-    "research-dispatcher": {
-      "description": "Specialist for research and documentation analysis",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
-        "/Users/himanshusao/.opencode/agents-archive/research-dispatcher.md"
-      ]
-    },
-    "excel-dispatcher": {
-      "description": "Specialist for spreadsheet and Excel automation",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
-        "/Users/himanshusao/.opencode/agents-archive/excel-dispatcher.md"
-      ]
-    },
-    "ba-agent": {
-      "description": "Business analyst for requirements and Jira",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/ba-agent.md"
-      ]
-    },
-    "developer": {
-      "description": "Full-stack application developer and implementation specialist",
-      "model": "ollama/qwen2.5-coder:14b",
-      "tools": {
-        "read": true,
-        "write": true,
-        "edit": true,
-        "bash": true,
-        "task": true
-      },
-      "instructions": [
-        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
-        "/Users/himanshusao/.opencode/agents-archive/developer.md"
-      ]
-    },
-    "python-agent": {
-      "description": "Python, Django, and Fast API specialist",
-      "model": "ollama/qwen2.5-coder:14b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/python-agent.md"
-      ]
-    },
-    "java-agent": {
-      "description": "Java, Spring Boot, and Maven specialist",
-      "model": "ollama/qwen2.5-coder:14b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/java-agent.md"
-      ]
-    },
-    "go-agent": {
-      "description": "Golang and microservices specialist",
-      "model": "ollama/qwen2.5-coder:14b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/go-agent.md"
-      ]
-    },
-    "database-reviewer": {
-      "description": "SQL and Database architecture specialist",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/database-reviewer.md"
-      ]
-    },
-    "qa-engineer": {
-      "description": "Ensures code works out-of-the-box by setting up venv and validating runtime",
-      "model": "ollama/gemma4:e4b",
-      "tools": {
-        "read": true,
-        "write": true,
-        "edit": true,
-        "bash": true,
-        "task": true
-      },
-      "instructions": [
-        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
-        "/Users/himanshusao/.opencode/agents-archive/qa-engineer.md"
-      ]
-    },
-    "ecosystem-optimizer": {
-      "description": "Continuous improvement agent for prompt tuning and anti-patterns",
-      "model": "ollama/qwen2.5-coder:14b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/ecosystem-optimizer.md"
-      ]
-    },
-    "analyzer-agent": {
-      "description": "Analytical specialist for complexity and metrics",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/analyzer-agent.md"
-      ]
-    },
-    "ui-engineer": {
-      "description": "Expert in React, Next.js, and modern UI implementation",
-      "model": "ollama/qwen2.5-coder:14b",
-      "instructions": [
-        "/Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/AGENTS.md",
-        "/Users/himanshusao/.opencode/agents-archive/ui-engineer.md"
-      ]
-    },
-    "api-architect": {
-      "description": "Expert in API design and OpenAPI contracts",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/api-architect.md"
-      ]
-    },
-    "deployment-agent": {
-      "description": "Specialist for CI/CD and Cloud deployment",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/deployment-agent.md"
-      ]
-    },
-    "system-auditor": {
-      "description": "Health check and diagnostic specialist for the agent ecosystem",
-      "model": "ollama/gemma4:e4b",
-      "tools": {
-        "read": true,
-        "write": true,
-        "edit": true,
-        "bash": true,
-        "task": true
-      },
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/system-auditor.md"
-      ]
-    },
-    "security-reviewer": {
-      "description": "Security audit and vulnerability specialist",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/security-reviewer.md"
-      ]
-    },
-    "code-reviewer": {
-      "description": "Code quality and maintainability specialist",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/code-reviewer.md"
-      ]
-    },
-    "tdd-guide": {
-      "description": "Test Driven Development and coverage specialist",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/tdd-guide.md"
       ]
     },
     "build": {
       "description": "Primary coding agent for development work",
       "mode": "primary",
-      "model": "ollama/qwen2.5-coder:14b",
+      "model": "ollama/deepseek-coder-v2",
       "tools": {
         "write": true,
         "edit": true,
@@ -248,48 +36,6 @@
         "read": true,
         "changed-files": true
       }
-    },
-    "build-error-resolver": {
-      "description": "Fix build and TypeScript errors with minimal changes",
-      "model": "ollama/qwen2.5-coder:14b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/build-error-resolver.md"
-      ]
-    },
-    "e2e-runner": {
-      "description": "Generate and run E2E tests with Playwright",
-      "model": "ollama/qwen2.5-coder:14b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/e2e-runner.md"
-      ]
-    },
-    "refactor-cleaner": {
-      "description": "Remove dead code and consolidate duplicates",
-      "model": "ollama/qwen2.5-coder:14b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/refactor-cleaner.md"
-      ]
-    },
-    "doc-updater": {
-      "description": "Update documentation and codemaps",
-      "model": "ollama/gemma4:e4b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/doc-updater.md"
-      ]
-    },
-    "go-reviewer": {
-      "description": "Go code review specialist",
-      "model": "ollama/qwen2.5-coder:14b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/go-reviewer.md"
-      ]
-    },
-    "go-build-resolver": {
-      "description": "Fix Go build errors",
-      "model": "ollama/qwen2.5-coder:14b",
-      "instructions": [
-        "/Users/himanshusao/.opencode/agents-archive/go-build-resolver.md"
-      ]
     }
   },
   "command": {
@@ -458,17 +204,33 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
+        "deepseek-coder-v2": {
+          "name": "DeepSeek Coder v2 - Advanced Coding (18 GB)",
+          "tool_call": true,
+          "reasoning": true,
+          "limit": {
+            "context": 64000,
+            "output": 4096
+          },
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
         "gemma4:e4b": {
           "name": "Gemma 4 E4B - Advanced Reasoning (9.6 GB)",
+          "limit": {
+            "context": 120000,
+            "output": 4096
+          },
           "tool_call": true,
           "reasoning": true
         },
-        "qwen2.5-coder:14b": {
-          "name": "Qwen2.5 Coder - SOTA Coding (9 GB)",
-          "tool_call": true,
-          "reasoning": true
-        },
-        "gpt-oss:20b": {
+        "gpt-oss:latest": {
           "name": "GPT-OSS 20B - Creative Writing (13 GB)",
           "reasoning": true,
           "tool_call": true

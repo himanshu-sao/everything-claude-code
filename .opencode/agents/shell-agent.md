@@ -82,5 +82,6 @@ If task requires Python/Java/Go, spawn those agents.
 
 ## Task Completion
 Once the shell/automation task is finished:
-1. **Summarize**: List commands executed and results achieved.
-2. **Sign-off**: State "Shell automation complete" to return control to the caller.
+1. **BLOCK MANAGEMENT**: If any sub-agent returns an output prefixed with **"BLOCK:"**, you MUST immediately stop, report **"BLOCK: [Sub-agent's Question]"** to YOUR caller, and sign off. Do NOT synthesize a success message. When you are later invoked with the user's answer, resume by re-invoking the blocked sub-agent with the new context.
+2. **Summarize**: List commands executed and results achieved.
+3. **Sign-off**: State "Shell automation complete" to return control to the caller.

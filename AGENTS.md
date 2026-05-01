@@ -63,7 +63,9 @@ Use parallel execution for independent operations — launch multiple agents sim
 When an agent is invoked via the **Task** tool:
 1. **Blocked Caller**: The calling agent is blocked until the tool returns.
 2. **Explicit Completion**: The called agent MUST provide a final summary and state "Task complete" or "Sign-off" to terminate its turn.
-3. **Avoid Deadlocks**: Do not wait for user input (e.g., "Waiting for Go") if called as a sub-agent unless explicitly necessary; prioritize reporting results back to the caller.
+3. **Avoid Deadlocks (BLOCK EMISSION)**: Do not wait for user input or ask questions in plain text. If you need clarification, approval, or have a question for the user, you MUST prefix your response with "BLOCK: [Your Question]" and explicitly sign off to terminate your turn.
+4. **State Resumption (BLOCK MANAGEMENT)**: If an outer agent receives an output from a sub-agent prefixed with "BLOCK:", the outer agent MUST immediately stop, report "BLOCK: [Sub-agent's Question]" to its caller, and sign off. When later invoked with the user's answer, it must re-invoke the blocked sub-agent with the new context.
+5. **Mandatory Supervision**: For all complex workflows involving multiple agents, you MUST route your `task` calls through the **agent-supervisor**. Direct delegation to sub-agents (e.g., `tech-lead` -> `project-manager`) is prohibited to ensure centralized stack monitoring. Use `subagent_type: "agent-supervisor"` and specify the target agent in the prompt.
 
 ## Security Guidelines
 

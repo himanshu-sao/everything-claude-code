@@ -14,6 +14,7 @@ LOCAL_SKILLS_DIR="$WORKSPACE_ROOT/skills"
 LOCAL_INSTRUCTIONS_DIR="$WORKSPACE_ROOT/instructions"
 LOCAL_CONFIG_FILE="$SCRIPT_DIR/opencode.json"
 LOCAL_PREFS_FILE="$SCRIPT_DIR/USER_PREFERENCES.md"
+PROJECT_ROOT="$WORKSPACE_ROOT"
 
 # Global paths
 GLOBAL_ROOT="$HOME/.opencode"
@@ -35,9 +36,9 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}╔════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║   OpenCode Global Environment Sync           ║${NC}"
-echo -e "${BLUE}╚════════════════════════════════════════════════╝${NC}"
+printf "%b\n" "${BLUE}╔════════════════════════════════════════════════╗${NC}"
+printf "%b\n" "${BLUE}║   OpenCode Global Environment Sync           ║${NC}"
+printf "%b\n" "${BLUE}╚════════════════════════════════════════════════╝${NC}"
 echo ""
 
 # Create directories
@@ -55,11 +56,11 @@ sync_dir() {
     local name="$3"
     
     if [ ! -d "$src" ]; then
-        echo -e "${YELLOW}⚠️  Skip: $name directory not found at $src${NC}"
+        printf "%b\n" "${YELLOW}⚠️  Skip: $name directory not found at $src${NC}"
         return
     fi
 
-    echo -e "${BLUE}🔄 Syncing $name...${NC}"
+    printf "%b\n" "${BLUE}🔄 Syncing $name...${NC}"
     
     # Backup existing
     if [ -d "$dest" ] && [ "$(ls -A "$dest" 2>/dev/null)" ]; then
@@ -69,36 +70,29 @@ sync_dir() {
 
     # Sync
     rsync -av --delete --exclude 'README.md' "$src/" "$dest/" | grep -v 'sending incremental file list' | grep -v './' | grep -v 'total size is' || true
-    echo -e "${GREEN}✓ $name synced to $dest${NC}"
+    printf "%b\n" "${GREEN}✓ $name synced to $dest${NC}"
     echo ""
 }
 
 # --- Function: Sync Config & Patch Paths ---
 sync_config() {
     if [ ! -f "$LOCAL_CONFIG_FILE" ]; then
-        echo -e "${RED}✗ Error: Local config not found: $LOCAL_CONFIG_FILE${NC}"
+        printf "%b\n" "${RED}✗ Error: Local config not found: $LOCAL_CONFIG_FILE${NC}"
         return
     fi
 
-    echo -e "${BLUE}🔄 Syncing Configuration...${NC}"
+    printf "%b\n" "${BLUE}🔄 Syncing Configuration...${NC}"
     
     if [ -f "$GLOBAL_CONFIG_FILE" ]; then
         cp "$GLOBAL_CONFIG_FILE" "$BACKUP_ROOT/opencode.json.bak"
-        echo -e "${YELLOW}💾 Backup of global config created: $BACKUP_ROOT/opencode.json.bak${NC}"
+        printf "%b\n" "${YELLOW}💾 Backup of global config created: $BACKUP_ROOT/opencode.json.bak${NC}"
     fi
 
-    # Copy and then patch ALL local project paths to global paths
-    # Use direct string replacement for known relative patterns
-    sed "s|/Users/.*/AGENTS.md|$GLOBAL_ROOT/AGENTS.md|g" "$LOCAL_CONFIG_FILE" | \
-      sed "s|\.opencode/agents-archive/|$GLOBAL_ROOT/agents-archive/|g" | \
-      sed "s|\.opencode/agents/|$GLOBAL_AGENTS_DIR/|g" | \
-      sed "s|{file:commands/|{file:$GLOBAL_COMMANDS_DIR/|g" | \
-      sed "s|\"library/|\"$GLOBAL_ROOT/library/|g" > "$GLOBAL_CONFIG_FILE"
+    # Use the new python patching script to avoid path-doubling and other regex bugs
+    cp "$LOCAL_CONFIG_FILE" "$GLOBAL_CONFIG_FILE"
+    python3 "$SCRIPT_DIR/scripts/patch-config.py" "$GLOBAL_CONFIG_FILE" "$GLOBAL_ROOT" "$GLOBAL_AGENTS_DIR" "$GLOBAL_COMMANDS_DIR"
     
-    # Cleanup any accidentally doubled paths from previous runs
-    sed -i '' "s|/Users/himanshusao//Users/himanshusao|/Users/himanshusao|g" "$GLOBAL_CONFIG_FILE"
-    
-    echo -e "${GREEN}✓ Config synced and patched to $GLOBAL_CONFIG_FILE${NC}"
+    printf "%b\n" "${GREEN}✓ Config synced and patched to $GLOBAL_CONFIG_FILE${NC}"
     echo ""
 }
 
@@ -107,7 +101,7 @@ optimize_skills() {
     GLOBAL_LIBRARY_DIR="$GLOBAL_ROOT/library"
     mkdir -p "$GLOBAL_LIBRARY_DIR"
     
-    echo -e "${BLUE}🎯 Optimizing Skills (Mega-Trim)...${NC}"
+    printf "%b\n" "${BLUE}🎯 Optimizing Skills (Mega-Trim)...${NC}"
     
     # Move all folders to Library
     if [ -d "$GLOBAL_SKILLS_DIR" ] && [ "$(ls -A "$GLOBAL_SKILLS_DIR" 2>/dev/null)" ]; then
@@ -131,44 +125,61 @@ optimize_skills() {
     for skill in "${CORE_SKILLS[@]}"; do
       if [ -d "$GLOBAL_LIBRARY_DIR/$skill" ]; then
         cp -r "$GLOBAL_LIBRARY_DIR/$skill" "$GLOBAL_SKILLS_DIR/"
-        echo -e "   ${GREEN}✓ Restored Core:${NC} $skill"
+        printf "%b\n" "   ${GREEN}✓ Restored Core:${NC} $skill"
       fi
     done
     
-    echo -e "${GREEN}✓ Global skills optimized. 170+ specialized skills moved to Library.${NC}"
+    printf "%b\n" "${GREEN}✓ Global skills optimized. 170+ specialized skills moved to Library.${NC}"
     echo ""
 }
 
-# Agents: Only chat.md goes to auto-load. All others go to agents-archive.
-# This prevents OpenCode from injecting 40 agent manuals (~30K tokens) into every prompt.
-echo -e "${BLUE}🔄 Syncing Agents (selective)...${NC}"
+# Agents: Define core fleet for auto-load. Others go to agents-archive.
+# This keeps the system fast while maintaining the mission-critical orchestrators.
+printf "%b\n" "${BLUE}🔄 Syncing Agents (selective)...${NC}"
 AGENTS_ARCHIVE="$GLOBAL_ROOT/agents-archive"
 mkdir -p "$AGENTS_ARCHIVE"
 mkdir -p "$GLOBAL_AGENTS_DIR"
 
-# Copy chat.md to auto-load (the only agent that should be auto-loaded)
-if [ -f "$LOCAL_AGENTS_DIR/chat.md" ]; then
-    cp "$LOCAL_AGENTS_DIR/chat.md" "$GLOBAL_AGENTS_DIR/chat.md"
-    echo -e "   ${GREEN}✅ Auto-load: chat.md${NC}"
-fi
+CORE_AGENTS=(
+    "chat.md"
+    "agent-supervisor.md"
+    "tech-lead.md"
+    "project-manager.md"
+    "architect.md"
+    "dispatcher.md"
+    "developer.md"
+    "qa-engineer.md"
+    "tdd-guide.md"
+)
 
-# Archive all other agents to the library
+is_core_agent() {
+    local filename="$1"
+    for core in "${CORE_AGENTS[@]}"; do
+        [[ "$filename" == "$core" ]] && return 0
+    done
+    return 1
+}
+
+# Sync Local to Global (Active or Archive)
 for agent_file in "$LOCAL_AGENTS_DIR"/*.md; do
     filename=$(basename "$agent_file")
-    if [ "$filename" != "chat.md" ] && [ "$filename" != "README.md" ]; then
+    if is_core_agent "$filename"; then
+        cp "$agent_file" "$GLOBAL_AGENTS_DIR/$filename"
+        printf "%b\n" "   ${GREEN}✅ Auto-load:${NC} $filename"
+    elif [ "$filename" != "README.md" ]; then
         cp "$agent_file" "$AGENTS_ARCHIVE/"
-        echo -e "   ${BLUE}📦 Archived: $filename${NC}"
+        printf "%b\n" "   ${BLUE}📦 Archived:${NC} $filename"
     fi
 done
 
-# Remove any stale agents from auto-load (except chat.md)
+# Remove any stale agents from auto-load that are NOT in the core fleet
 for agent_file in "$GLOBAL_AGENTS_DIR"/*.md; do
     filename=$(basename "$agent_file")
-    if [ "$filename" != "chat.md" ]; then
+    if ! is_core_agent "$filename"; then
         rm -f "$agent_file"
     fi
 done
-echo -e "${GREEN}✓ Agents synced. Only chat.md in auto-load.${NC}"
+printf "%b\n" "${GREEN}✓ Agents synced. Core fleet is active in auto-load.${NC}"
 echo ""
 
 sync_dir "$LOCAL_COMMANDS_DIR" "$GLOBAL_COMMANDS_DIR" "Commands"
@@ -176,26 +187,26 @@ sync_dir "$LOCAL_COMMANDS_DIR" "$GLOBAL_COMMANDS_DIR" "Commands"
 
 # Skills go DIRECTLY to Library (never to auto-load)
 # This prevents OpenCode from injecting 33,000 tokens into every prompt
-echo -e "${BLUE}🔄 Syncing Skills to Library (not auto-load)...${NC}"
+printf "%b\n" "${BLUE}🔄 Syncing Skills to Library (not auto-load)...${NC}"
 GLOBAL_LIBRARY_DIR="$GLOBAL_ROOT/library"
 mkdir -p "$GLOBAL_LIBRARY_DIR"
 if [ -d "$LOCAL_SKILLS_DIR" ]; then
     rsync -av --delete --exclude 'README.md' "$LOCAL_SKILLS_DIR/" "$GLOBAL_LIBRARY_DIR/" | grep -v 'sending incremental file list' | grep -v './' | grep -v 'total size is' || true
-    echo -e "${GREEN}✓ Skills synced to Library: $GLOBAL_LIBRARY_DIR${NC}"
+    printf "%b\n" "${GREEN}✓ Skills synced to Library: $GLOBAL_LIBRARY_DIR${NC}"
 fi
 
 # Ensure auto-load skills directory is EMPTY
 rm -rf "$GLOBAL_SKILLS_DIR"/*  2>/dev/null || true
-echo -e "${GREEN}✓ Auto-load skills directory cleared (zero bloat).${NC}"
+printf "%b\n" "${GREEN}✓ Auto-load skills directory cleared (zero bloat).${NC}"
 echo ""
 
 sync_dir "$LOCAL_INSTRUCTIONS_DIR" "$GLOBAL_INSTRUCTIONS_DIR" "Instructions"
 
 # Sync Preferences
 if [ -f "$LOCAL_PREFS_FILE" ]; then
-    echo -e "${BLUE}🔄 Syncing Preferences...${NC}"
+    printf "%b\n" "${BLUE}🔄 Syncing Preferences...${NC}"
     cp "$LOCAL_PREFS_FILE" "$GLOBAL_PREFS_FILE"
-    echo -e "${GREEN}✓ Preferences synced to $GLOBAL_PREFS_FILE${NC}"
+    printf "%b\n" "${GREEN}✓ Preferences synced to $GLOBAL_PREFS_FILE${NC}"
     echo ""
 fi
 
@@ -205,9 +216,9 @@ sync_config
 LOCAL_AGENTS_DOC="$PROJECT_ROOT/AGENTS.md"
 GLOBAL_AGENTS_DOC="$GLOBAL_ROOT/AGENTS.md"
 if [ -f "$LOCAL_AGENTS_DOC" ]; then
-    echo -e "${BLUE}🔄 Syncing Team Source of Truth (AGENTS.md)...${NC}"
+    printf "%b\n" "${BLUE}🔄 Syncing Team Source of Truth (AGENTS.md)...${NC}"
     cp "$LOCAL_AGENTS_DOC" "$GLOBAL_AGENTS_DOC"
-    echo -e "${GREEN}✓ Global Source of Truth updated: $GLOBAL_AGENTS_DOC${NC}"
+    printf "%b\n" "${GREEN}✓ Global Source of Truth updated: $GLOBAL_AGENTS_DOC${NC}"
     echo ""
 fi
 
@@ -238,19 +249,19 @@ Backups are created in \`$GLOBAL_ROOT/backups/\` before each sync.
 **Last synced:** $(date)
 EOF
 
-echo -e "${GREEN}╔════════════════════════════════════════════════╗${NC}"
-echo -e "${GREEN}║   ✓ Global Environment Sync Complete!          ║${NC}"
-echo -e "${GREEN}╚════════════════════════════════════════════════╝${NC}"
+printf "%b\n" "${GREEN}╔════════════════════════════════════════════════╗${NC}"
+printf "%b\n" "${GREEN}║   ✓ Global Environment Sync Complete!          ║${NC}"
+printf "%b\n" "${GREEN}╚════════════════════════════════════════════════╝${NC}"
 echo ""
-echo -e "${BLUE}📊 Summary:${NC}"
-echo -e "  ${BLUE}Agents:${NC}       $GLOBAL_AGENTS_DIR"
-echo -e "  ${BLUE}Commands:${NC}     $GLOBAL_COMMAND_DIR"
-echo -e "  ${BLUE}Skills:${NC}       $GLOBAL_SKILLS_DIR"
-echo -e "  ${BLUE}Config:${NC}       $GLOBAL_CONFIG_FILE"
-echo -e "  ${BLUE}Source of Truth:${NC} $GLOBAL_ROOT/AGENTS.md"
-echo -e "  ${BLUE}Backup:${NC}       $BACKUP_ROOT"
+printf "%b\n" "${BLUE}📊 Summary:${NC}"
+printf "%b\n" "  ${BLUE}Agents:${NC}       $GLOBAL_AGENTS_DIR"
+printf "%b\n" "  ${BLUE}Commands:${NC}     $GLOBAL_COMMAND_DIR"
+printf "%b\n" "  ${BLUE}Skills:${NC}       $GLOBAL_SKILLS_DIR"
+printf "%b\n" "  ${BLUE}Config:${NC}       $GLOBAL_CONFIG_FILE"
+printf "%b\n" "  ${BLUE}Source of Truth:${NC} $GLOBAL_ROOT/AGENTS.md"
+printf "%b\n" "  ${BLUE}Backup:${NC}       $BACKUP_ROOT"
 echo ""
-echo -e "${GREEN}Next steps:${NC}"
-echo -e "  1. Test with: ${YELLOW}opencode agent list${NC}"
-echo -e "  2. Use agents: ${YELLOW}@project-manager help me plan...${NC}"
+printf "%b\n" "${GREEN}Next steps:${NC}"
+printf "%b\n" "  1. Test with: ${YELLOW}opencode agent list${NC}"
+printf "%b\n" "  2. Use agents: ${YELLOW}@project-manager help me plan...${NC}"
 echo ""

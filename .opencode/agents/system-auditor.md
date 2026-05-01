@@ -65,5 +65,6 @@ Generate a summary in this format:
 ```
 
 ## Task Completion
-1. **Summarize**: Present the Heartbeat Report.
-2. **Sign-off**: State "Heartbeat check complete" to return control.
+1. **BLOCK MANAGEMENT**: If any sub-agent returns an output prefixed with **"BLOCK:"**, you MUST immediately stop, report **"BLOCK: [Sub-agent's Question]"** to YOUR caller, and sign off. Do NOT synthesize a success message. When you are later invoked with the user's answer, resume by re-invoking the blocked sub-agent with the new context.
+2. **Summarize**: Present the Heartbeat Report.
+3. **Sign-off**: State "Heartbeat check complete" to return control.
