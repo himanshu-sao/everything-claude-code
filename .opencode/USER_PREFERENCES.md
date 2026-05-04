@@ -16,5 +16,27 @@ This file is the "Memory" of the OpenCode environment. All agents must read this
 - **Dispatcher**: Use the Chat agent as the primary entry point for simple tasks.
 - **Tone**: Professional, concise, and production-oriented.
 
+
+## 🚦 Pipeline Gates
+- **gate_mode**: `strict` — User must approve each design phase before pipeline advances.
+- **continue_phrase**: Use phase-specific phrases (see table below).
+- **per_phase_phrases**: `true`
+
+### Gate Continue Phrases
+| Phase Completed | Required Phrase |
+|---|---|
+| Planning (`docs/PLAN.md`) | `plan approved` |
+| Architecture (`docs/ARCHITECTURE.md`) | `arch lgtm` |
+| Quality Gate (validation report) | `quality ok` |
+| QA Test Matrix (`docs/QA_TESTCASES.md`) | `qa approved` |
+| TDD Stubs (`docs/TDD_STUBS.md`) | `tdd ready` |
+| Build complete (all code written) | `build start` *(triggers build phase)* |
+
+### Gate Behavior Rules
+- **User must type the exact continue phrase** to advance to the next phase.
+- If user types `block: [reason]`, the current phase must be revised before proceeding.
+- Gate mode can be set to `relaxed` (warning only) or `off` (legacy NO PAUSES behavior) by asking `@improver` to update this file.
+- *(Managed by `@improver` based on your feedback.)*
+
 ---
 *Note: This file is managed by the `@improver` agent based on your feedback.*
