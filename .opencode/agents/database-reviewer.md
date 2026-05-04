@@ -6,7 +6,6 @@ instructions:
   - "~/.opencode/library/postgres-patterns/SKILL.md"
   - "~/.opencode/library/database-migrations/SKILL.md"
 mode: subagent
-model: ollama/codestral
 tools:
   read: true
   write: true

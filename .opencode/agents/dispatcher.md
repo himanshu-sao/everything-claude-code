@@ -2,7 +2,6 @@
 name: dispatcher
 description: General entry point. Identifies task domain, then routes to appropriate domain dispatcher.
 mode: primary
-model: ollama/llama3.2:3b
 instructions:
   - "AGENTS.md"
 tools:
@@ -85,7 +84,7 @@ If you need clarification, approval, or have a question for the user, you MUST p
 ## Task Completion & Reporting
 
 Once the domain dispatcher has completed its work (or if it returns a BLOCK):
-1. **BLOCK MANAGEMENT**: If the sub-agent returns an output prefixed with **"BLOCK:"**, you MUST immediately stop, report **"BLOCK: [Sub-agent's Question]"** to YOUR caller, and sign off. Do NOT synthesize a success message. When you are later invoked with the user's answer, resume by re-invoking the blocked sub-agent with the new context.
+1. **BLOCK MANAGEMENT**: If the task tool returns **"Task initiated"** or a result starting with **"BLOCK:"**, you MUST immediately stop, report it EXACTLY as received (maintaining the "BLOCK:" prefix), and sign off. Do NOT synthesize a success message or add "Thinking" steps after receiving a block.
 2. **Summarize**: If successful, provide a concise summary of what was accomplished by the sub-agent.
 3. **Signal Completion**: Explicitly state "Task complete. All sub-tasks are finished."
 4. **Return Control**: Provide a final response so the Task tool call can terminate and return control to the caller.

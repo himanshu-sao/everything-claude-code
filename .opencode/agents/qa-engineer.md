@@ -2,7 +2,6 @@
 name: qa-engineer
 description: Ensures code works out-of-the-box by setting up venv and validating runtime
 mode: subagent
-model: ollama/gemma4:e4b
 tools:
   read: true
   write: true

@@ -2,7 +2,6 @@
 name: analyzer-agent
 description: Analytical Specialist. Handles complexity assessment, performance metrics, and system health reporting.
 mode: subagent
-model: ollama/gemma4:e4b
 tools:
   read: true
   write: true

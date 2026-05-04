@@ -1,7 +1,6 @@
 name: ux-agent
 description: "UX/Design specialist. User experience, design thinking, innovation."
 mode: subagent
-model: ollama/llama3.2:3b
 instructions:
   - "skills/frontend-design/SKILL.md"
   - "skills/frontend-patterns/SKILL.md"

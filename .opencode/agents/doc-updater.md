@@ -2,7 +2,6 @@
 name: doc-updater
 description: Documentation specialist. Maintains READMEs, API docs, code comments, and technical documentation.
 mode: subagent
-model: ollama/llama3.2:3b
 tools:
   read: true
   write: true

@@ -2,7 +2,6 @@
 name: infra-dispatcher
 description: Domain dispatcher for DevOps and infrastructure tasks. Handles deployment, containers, cloud, and IaC.
 mode: subagent
-model: ollama/llama3.2:3b
 tools:
   read: true
   write: true
@@ -35,7 +34,7 @@ When a task is received:
 
 ## Task Completion
 Once the task is finished:
-1. **BLOCK MANAGEMENT**: If any sub-agent returns an output prefixed with **"BLOCK:"**, you MUST immediately stop, report **"BLOCK: [Sub-agent's Question]"** to YOUR caller, and sign off. Do NOT synthesize a success message. When you are later invoked with the user's answer, resume by re-invoking the blocked sub-agent with the new context.
+1. **BLOCK MANAGEMENT**: If the task tool returns **"Task initiated"** or a result starting with **"BLOCK:"**, you MUST immediately stop, report it EXACTLY as received to YOUR caller, and sign off. Do NOT synthesize a success message or add "Thinking" steps after receiving a block.
 2. **Summarize**: Provide a final summary of results.
 3. **Sign-off**: Explicitly state "Task complete" to signal the end of your turn to the caller.
 

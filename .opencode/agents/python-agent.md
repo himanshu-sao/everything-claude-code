@@ -7,7 +7,6 @@ instructions:
   - "~/.opencode/library/python-testing/SKILL.md"
   - "~/.opencode/library/django-patterns/SKILL.md"
 mode: subagent
-model: ollama/codestral
 tools:
   read: true
   write: true

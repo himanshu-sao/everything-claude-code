@@ -2,7 +2,6 @@
 name: metrics-agent
 description: Performance tracking. Monitors agent success rates, tracks metrics, reports on system health.
 mode: subagent
-model: ollama/llama3.2:3b
 tools:
   read: true
   write: true

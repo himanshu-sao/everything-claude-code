@@ -2,7 +2,6 @@
 name: context-agent
 description: Manages conversation context. Tracks active tasks, maintains state across turns.
 mode: subagent
-model: ollama/llama3.2:3b
 tools:
   read: true
   write: true

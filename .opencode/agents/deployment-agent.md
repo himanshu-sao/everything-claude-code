@@ -2,7 +2,6 @@
 name: deployment-agent
 description: Deployment Specialist. Handles CI/CD pipelines, Dockerization, and cloud infrastructure deployment.
 mode: subagent
-model: ollama/llama3.2:3b
 instructions:
   - "skills/infra-dispatcher/SKILL.md"
 tools:

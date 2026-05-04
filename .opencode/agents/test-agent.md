@@ -2,7 +2,6 @@
 name: test-agent
 description: Unit test specialist. Writes and maintains unit tests, integration tests, and ensures test coverage.
 mode: subagent
-model: ollama/codestral
 instructions:
   - "skills/product-lifecycle/SKILL.md"
   - "skills/tdd-workflow/SKILL.md"

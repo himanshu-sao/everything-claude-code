@@ -2,7 +2,6 @@
 name: quality-gate
 description: Final gatekeeper for production-ready code and design. Enforces iterative refinement loops.
 mode: subagent
-model: ollama/gemma4:e4b
 instructions:
   - "AGENTS.md"
   - "CONTRIBUTING.md"

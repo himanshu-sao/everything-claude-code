@@ -2,7 +2,6 @@
 name: perf-engineer
 description: Performance Engineer. Specialized in load testing, latency analysis, and benchmarking.
 mode: subagent
-model: ollama/llama3.2:3b
 instructions:
   - "skills/product-lifecycle/SKILL.md"
   - "skills/benchmark/SKILL.md"

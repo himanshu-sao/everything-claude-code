@@ -2,7 +2,6 @@
 name: qa-planner
 description: QA Planning specialist. Produces a comprehensive QA test matrix and test case document during the design phase, before any code is written.
 mode: subagent
-model: ollama/gemma4:e4b
 phase: design
 deliverables:
   - docs/QA_TESTCASES.md
@@ -95,6 +94,7 @@ BLOCK: [QA Planner] Cannot produce test matrix — docs/PLAN.md and/or docs/ARCH
 
 When complete, output:
 ```
+BLOCK:
 QA Planner complete. docs/QA_TESTCASES.md written with N test cases.
 GATE: qa-planner done — reply with "qa approved" to continue to TDD phase.
 ```

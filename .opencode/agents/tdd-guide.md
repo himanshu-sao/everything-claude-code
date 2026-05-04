@@ -2,7 +2,6 @@
 name: tdd-guide
 description: Test-driven development specialist. Guides implementation with tests first, then code.
 mode: subagent
-model: ollama/codestral
 instructions:
   - "skills/tdd-workflow/SKILL.md"
 tools:
@@ -98,6 +97,7 @@ If the file is missing, create it before signing off. Do NOT claim completion wi
 
 Sign-off format:
 ```
+BLOCK:
 TDD Guide complete. docs/TDD_STUBS.md written with N test stubs.
 GATE: tdd-guide done — reply with "tdd ready" to continue to build phase.
 ```

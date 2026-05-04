@@ -2,7 +2,7 @@
 
 This is a **production-ready AI coding plugin** providing 48 specialized agents, 183 skills, 79 commands, and automated hook workflows for software development.
 
-**Version:** 1.10.0
+**Version:** 1.11.0
 
 ## Core Principles
 
@@ -11,14 +11,17 @@ This is a **production-ready AI coding plugin** providing 48 specialized agents,
 3. **Security-First** — Never compromise on security; validate all inputs
 4. **Immutability** — Always create new objects, never mutate existing ones
 5. **Plan Before Execute** — Plan complex features before writing code
-6. **Sign-off & Return** — Always signal task completion and explicitly return control to the caller
+6. **Sign-off & Return** — Always signal task completion and explicitly return control to the caller.
+7. **Deliverable Verification (MANDATORY)** — You are FORBIDDEN from reporting a task as complete or a design as finished unless you have verified that the expected files exist on disk using `read` or `list_dir`. Do NOT simulate work "internally."
+8. **Context Continuity (MANDATORY)** — When delegating via the `task` tool, you MUST include the project name and the full content (or a mandatory `read` instruction) of the previous phase's deliverable in the `prompt`. Sub-agents do NOT share memory; you must provide their context explicitly.
+9. **Gate Registry Protocol (MANDATORY)** — If you hit a gate (user approval required), you MUST write the gate details to `.opencode/GATE.json` before signing off. Every caller agent MUST check this file immediately after a `task` returns to ensure visibility.
 
 ## Available Agents
 
 | Agent | Purpose | When to Use |
 |-------|---------|-------------|
 | project-manager | Product & Project Management | Requirements, Stories, & Breakdown |
-| tech-lead | Engineering Orchestration | Technical leadership & Workflow |
+| tech-lead | Absolute Orchestration | The Single Source of Truth and Unified Execution Layer |
 | developer | Code Implementation | TDD, logic, and core development |
 | qa-engineer | Quality Assurance & Runtime | Env setup, validation, smoke tests |
 | ui-engineer | Frontend & UX | React, Next.js, and Tailwind CSS |
@@ -64,8 +67,33 @@ When an agent is invoked via the **Task** tool:
 1. **Blocked Caller**: The calling agent is blocked until the tool returns.
 2. **Explicit Completion**: The called agent MUST provide a final summary and state "Task complete" or "Sign-off" to terminate its turn.
 3. **Avoid Deadlocks (BLOCK EMISSION)**: Do not wait for user input or ask questions in plain text. If you need clarification, approval, or have a question for the user, you MUST prefix your response with "BLOCK: [Your Question]" and explicitly sign off to terminate your turn.
-4. **State Resumption (BLOCK MANAGEMENT)**: If an outer agent receives an output from a sub-agent prefixed with "BLOCK:", the outer agent MUST immediately stop, report "BLOCK: [Sub-agent's Question]" to its caller, and sign off. When later invoked with the user's answer, it must re-invoke the blocked sub-agent with the new context.
-5. **Mandatory Supervision**: For all complex workflows involving multiple agents, you MUST route your `task` calls through the **agent-supervisor**. Direct delegation to sub-agents (e.g., `tech-lead` -> `project-manager`) is prohibited to ensure centralized stack monitoring. Use `subagent_type: "agent-supervisor"` and specify the target agent in the prompt.
+4. **State Resumption (BLOCK MANAGEMENT)**: If an outer agent receives an output from a sub-agent prefixed with "BLOCK:" (or a "Task initiated" placeholder), the outer agent MUST immediately stop, report it EXACTLY as received to its caller, and sign off. When later invoked with the user's answer, it must re-invoke the blocked sub-agent with the new context.
+5. **The Absolute Orchestrator**: The `tech-lead` is the "Single Source of Truth". All complex workflows MUST be routed through the `tech-lead`. Direct delegation between sub-agents (e.g., `developer` -> `project-manager`) is prohibited to ensure centralized stack monitoring.
+6. **Task Stack Monitoring**: The Tech-Lead MUST ensure any blocks or stalls are immediately bubbled up to the user by propagating the "BLOCK:" prefix.
+7. **Zero-Silence Mandate (CRITICAL)**: If a tool call (especially `task`) returns a result that is empty, blank, or contains only a `task_id` without a `task_result` summary, you MUST NOT assume the task is "processing in the background." You MUST treat this as a **System Stall** and report: `BLOCK: System Stall detected in [Agent Name]. The tool returned no progress data.`
+8. **Zero-Work Detection (MANDATORY)**: If you call a sub-agent and the `task_result` shows **0 toolcalls** and no new files on disk, you MUST treat the sub-agent as having failed/yapped. Do NOT summarize its text as success. Immediately retry once with a "STRICT_TOOL_USE" instruction or report a `BLOCK: Hallucination detected.`
+
+## 8. Tool Parameter Requirements (MANDATORY)
+
+To prevent `SchemaError`, you MUST provide all required parameters for tool calls. Do NOT output these as text; use the built-in tool-use mechanism.
+
+- **task**: Requires `subagent_type` (target agent name), `prompt` (detailed instructions), and `description` (short summary of the task goal). **IMPORTANT**: `subagent_type` MUST be all lowercase (e.g., `tech-lead`, `agent-supervisor`). **CRITICAL SCHEMA RULE**: Do NOT include the `task_id` parameter in your tool call under ANY circumstances unless explicitly provided by the user to resume a task. NEVER set it to null. Omit it completely.
+- **write**: Requires `path` and `content`.
+- **edit**: Requires `path` and `changes`.
+- **bash**: Requires `command` and `description`.
+- **grep_search**: Requires `SearchPath` and `Query`.
+
+## 9. XML Tool Protocol (FOR LOCAL MODELS)
+
+If you are running on a local model (via Ollama/Local-Bridge) and native tool calls are failing, you MUST use the following XML format in your plain-text response. The OpenCode harness will intercept and execute these:
+
+```xml
+<tool_call>
+{"name": "tool_name", "arguments": {"arg1": "value1"}}
+</tool_call>
+```
+
+**CRITICAL**: Do NOT "hallucinate" the result. Wait for the harness to provide the `<tool_result>` in the next turn.
 
 ## Security Guidelines
 

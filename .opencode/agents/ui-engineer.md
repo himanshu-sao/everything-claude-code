@@ -2,7 +2,6 @@
 name: ui-engineer
 description: Expert in React, Next.js, and modern UI implementation
 mode: subagent
-model: ollama/codestral
 tools:
   read: true
   write: true

@@ -2,7 +2,6 @@
 name: maintainer
 description: Specialized agent for managing and optimizing the OpenCode environment on M4 Max.
 mode: subagent
-model: ollama/llama3.2:3b
 tools:
   read: true
   write: true

@@ -2,7 +2,6 @@
 name: improver
 description: Self-evolution agent. Collects user feedback, tracks preferences, and updates agent instructions/skills.
 mode: subagent
-model: ollama/llama3.2:3b
 tools:
   read: true
   write: true
