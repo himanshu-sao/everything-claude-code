@@ -4,7 +4,7 @@
   "small_model": "ollama/deepseek-coder:1.3b",
   "default_agent": "chat",
   "autoshare": false,
-  "instructions": [".opencode/instructions/AGENTS.md"],
+    "instructions": [".opencode/instructions/INSTRUCTIONS.md"],
   "plugin": [],
   "agent": {
     "chat": {
@@ -18,7 +18,7 @@
         "bash": true,
         "task": true
       },
-      "instructions": [".opencode/instructions/AGENTS.md", ".opencode/agents/chat.md"]
+            "instructions": [".opencode/instructions/INSTRUCTIONS.md", ".opencode/agents/chat.md"]
     },
     "build": {
       "description": "Primary coding agent for development work",
