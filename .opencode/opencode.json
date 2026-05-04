@@ -4,9 +4,7 @@
   "small_model": "ollama/deepseek-coder:1.3b",
   "default_agent": "chat",
   "autoshare": false,
-  "instructions": [
-    "/Users/himanshusao/.opencode/AGENTS.md"
-  ],
+  "instructions": [".opencode/instructions/AGENTS.md"],
   "plugin": [],
   "agent": {
     "chat": {
@@ -20,10 +18,7 @@
         "bash": true,
         "task": true
       },
-      "instructions": [
-        "/Users/himanshusao/.opencode/AGENTS.md",
-        "/Users/himanshusao/.opencode/agents/chat.md"
-      ]
+      "instructions": [".opencode/instructions/AGENTS.md", ".opencode/agents/chat.md"]
     },
     "build": {
       "description": "Primary coding agent for development work",
@@ -41,234 +36,50 @@
   "command": {
     "plan": {
       "description": "Create a detailed implementation plan for complex features",
-      "template": "{file:/Users/himanshusao/.opencode/commands/plan.md}\n\n$ARGUMENTS",
+      "template": "{file:.opencode/commands/plan.md}\n\n$ARGUMENTS",
       "agent": "project-manager",
       "subtask": true
     },
     "tdd": {
       "description": "Enforce TDD workflow with 80%+ test coverage",
-      "template": "{file:/Users/himanshusao/.opencode/commands/tdd.md}\n\n$ARGUMENTS",
+      "template": "{file:.opencode/commands/tdd.md}\n\n$ARGUMENTS",
       "agent": "tdd-guide",
       "subtask": true
     },
     "code-review": {
       "description": "Review code for quality, security, and maintainability",
-      "template": "{file:/Users/himanshusao/.opencode/commands/code-review.md}\n\n$ARGUMENTS",
+      "template": "{file:.opencode/commands/code-review.md}\n\n$ARGUMENTS",
       "agent": "code-reviewer",
       "subtask": true
     },
     "security": {
       "description": "Run comprehensive security review",
-      "template": "{file:/Users/himanshusao/.opencode/commands/security.md}\n\n$ARGUMENTS",
+      "template": "{file:.opencode/commands/security.md}\n\n$ARGUMENTS",
       "agent": "security-reviewer",
       "subtask": true
     },
     "build-fix": {
       "description": "Fix build and TypeScript errors with minimal changes",
-      "template": "{file:/Users/himanshusao/.opencode/commands/build-fix.md}\n\n$ARGUMENTS",
+      "template": "{file:.opencode/commands/build-fix.md}\n\n$ARGUMENTS",
       "agent": "build-error-resolver",
       "subtask": true
     },
     "e2e": {
       "description": "Generate and run E2E tests with Playwright",
-      "template": "{file:/Users/himanshusao/.opencode/commands/e2e.md}\n\n$ARGUMENTS",
-      "agent": "e2e-runner",
+      "template": "{file:.opencode/commands/e2e.md}\n\n$ARGUMENTS",
+      "agent": "e2e-runner"
+    },
+    "design": {
+      "description": "Run the full design pipeline (plan -> architecture -> quality-gate -> qa-plan -> tdd stubs) with user gate checkpoints",
+      "template": "{file:.opencode/commands/design.md}\n\n$ARGUMENTS",
+      "agent": "pipeline-orchestrator",
       "subtask": true
     },
-    "refactor-clean": {
-      "description": "Remove dead code and consolidate duplicates",
-      "template": "{file:/Users/himanshusao/.opencode/commands/refactor-clean.md}\n\n$ARGUMENTS",
-      "agent": "refactor-cleaner",
-      "subtask": true
-    },
-    "orchestrate": {
-      "description": "Orchestrate multiple agents for complex tasks",
-      "template": "{file:/Users/himanshusao/.opencode/commands/orchestrate.md}\n\n$ARGUMENTS",
-      "agent": "project-manager",
-      "subtask": true
-    },
-    "learn": {
-      "description": "Extract patterns and learnings from session",
-      "template": "{file:/Users/himanshusao/.opencode/commands/learn.md}\n\n$ARGUMENTS"
-    },
-    "checkpoint": {
-      "description": "Save verification state and progress",
-      "template": "{file:/Users/himanshusao/.opencode/commands/checkpoint.md}\n\n$ARGUMENTS"
-    },
-    "verify": {
-      "description": "Run verification loop",
-      "template": "{file:/Users/himanshusao/.opencode/commands/verify.md}\n\n$ARGUMENTS"
-    },
-    "eval": {
-      "description": "Run evaluation against criteria",
-      "template": "{file:/Users/himanshusao/.opencode/commands/eval.md}\n\n$ARGUMENTS"
-    },
-    "update-docs": {
-      "description": "Update documentation",
-      "template": "{file:/Users/himanshusao/.opencode/commands/update-docs.md}\n\n$ARGUMENTS",
-      "agent": "doc-updater",
-      "subtask": true
-    },
-    "update-codemaps": {
-      "description": "Update codemaps",
-      "template": "{file:/Users/himanshusao/.opencode/commands/update-codemaps.md}\n\n$ARGUMENTS",
-      "agent": "doc-updater",
-      "subtask": true
-    },
-    "test-coverage": {
-      "description": "Analyze test coverage",
-      "template": "{file:/Users/himanshusao/.opencode/commands/test-coverage.md}\n\n$ARGUMENTS",
-      "agent": "tdd-guide",
-      "subtask": true
-    },
-    "setup-pm": {
-      "description": "Configure package manager",
-      "template": "{file:/Users/himanshusao/.opencode/commands/setup-pm.md}\n\n$ARGUMENTS"
-    },
-    "go-review": {
-      "description": "Go code review",
-      "template": "{file:/Users/himanshusao/.opencode/commands/go-review.md}\n\n$ARGUMENTS",
-      "agent": "go-reviewer",
-      "subtask": true
-    },
-    "go-test": {
-      "description": "Go TDD workflow",
-      "template": "{file:/Users/himanshusao/.opencode/commands/go-test.md}\n\n$ARGUMENTS",
-      "agent": "tdd-guide",
-      "subtask": true
-    },
-    "go-build": {
-      "description": "Fix Go build errors",
-      "template": "{file:/Users/himanshusao/.opencode/commands/go-build.md}\n\n$ARGUMENTS",
-      "agent": "go-build-resolver",
-      "subtask": true
-    },
-    "skill-create": {
-      "description": "Generate skills from git history",
-      "template": "{file:/Users/himanshusao/.opencode/commands/skill-create.md}\n\n$ARGUMENTS"
-    },
-    "instinct-status": {
-      "description": "View learned instincts",
-      "template": "{file:/Users/himanshusao/.opencode/commands/instinct-status.md}\n\n$ARGUMENTS"
-    },
-    "instinct-import": {
-      "description": "Import instincts",
-      "template": "{file:/Users/himanshusao/.opencode/commands/instinct-import.md}\n\n$ARGUMENTS"
-    },
-    "instinct-export": {
-      "description": "Export instincts",
-      "template": "{file:/Users/himanshusao/.opencode/commands/instinct-export.md}\n\n$ARGUMENTS"
-    },
-    "evolve": {
-      "description": "Cluster instincts into skills",
-      "template": "{file:/Users/himanshusao/.opencode/commands/evolve.md}\n\n$ARGUMENTS"
-    },
-    "promote": {
-      "description": "Promote project instincts to global scope",
-      "template": "{file:/Users/himanshusao/.opencode/commands/promote.md}\n\n$ARGUMENTS"
-    },
-    "projects": {
-      "description": "List known projects and instinct stats",
-      "template": "{file:/Users/himanshusao/.opencode/commands/projects.md}\n\n$ARGUMENTS"
-    },
-    "update-mcps": {
-      "description": "Manually update all MCP servers to latest (takes 1-2 mins)",
-      "template": "sh /Users/himanshusao/.opencode/scripts/update-mcps.sh"
-    },
-    "heartbeat": {
-      "description": "Perform a full ecosystem health check and agent roll call",
-      "template": "{file:/Users/himanshusao/.opencode/commands/heartbeat.md}\n\n$ARGUMENTS",
-      "agent": "system-auditor",
+    "qa-plan": {
+      "description": "Generate a QA test matrix document for the current feature",
+      "template": "Read docs/PLAN.md and docs/ARCHITECTURE.md, then produce docs/QA_TESTCASES.md with a full test matrix.\n\n$ARGUMENTS",
+      "agent": "qa-planner",
       "subtask": true
     }
-  },
-  "provider": {
-    "google": {
-      "models": {
-        "gemini-2.0-flash": {
-          "reasoning": false
-        }
-      }
-    },
-    "groq": {
-      "models": {
-        "llama-3.3-70b-versatile": {
-          "reasoning": false
-        }
-      }
-    },
-    "ollama": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Ollama (local)",
-      "options": {
-        "baseURL": "http://localhost:11434/v1"
-      },
-      "models": {
-        "deepseek-coder-v2": {
-          "name": "DeepSeek Coder v2 - Advanced Coding (18 GB)",
-          "tool_call": true,
-          "reasoning": true,
-          "limit": {
-            "context": 64000,
-            "output": 4096
-          },
-          "modalities": {
-            "input": [
-              "text"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        },
-        "gemma4:e4b": {
-          "name": "Gemma 4 E4B - Advanced Reasoning (9.6 GB)",
-          "limit": {
-            "context": 120000,
-            "output": 4096
-          },
-          "tool_call": true,
-          "reasoning": true
-        },
-        "gpt-oss:latest": {
-          "name": "GPT-OSS 20B - Creative Writing (13 GB)",
-          "reasoning": true,
-          "tool_call": true
-        },
-        "deepseek-coder:1.3b": {
-          "name": "DeepSeek Coder - Ultra-Fast Coding (776 MB)",
-          "tool_call": false,
-          "reasoning": false
-        },
-        "mistral:7b": {
-          "name": "Mistral 7B - Smart Generalist (4.4 GB)",
-          "tool_call": true,
-          "reasoning": false
-        },
-        "codellama:7b": {
-          "name": "CodeLlama 7B - Legacy Coding (3.8 GB)",
-          "tool_call": false,
-          "reasoning": false
-        },
-        "nomic-embed-text:latest": {
-          "name": "Nomic Embed - Text Vectorization (274 MB)",
-          "tool_call": false,
-          "reasoning": false
-        },
-        "glm-5:cloud": {
-          "name": "GLM-5 Cloud - Pro Multi-modal (-)",
-          "tool_call": true,
-          "reasoning": false
-        },
-        "llama3.2:3b": {
-          "name": "Llama 3.2 3B - Smart Entry (2.0 GB)",
-          "tool_call": true,
-          "reasoning": false
-        }
-      }
-    }
-  },
-  "permission": {
-    "mcp_*": "ask"
   }
 }
