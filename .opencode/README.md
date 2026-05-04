@@ -1,8 +1,8 @@
 # OpenCode Agent Configuration
 
 > **Status:** ✅ Configured and Working  
-> **Last Updated:** 2026-04-27  
-> **Total Agents:** 34 (1 primary + 33 subagents)
+> **Last Updated:** 2026-05-03
+> **Total Agents:** 36 (1 primary + 35 subagents)
 
 ## Quick Start
 
@@ -284,5 +284,72 @@ For issues or questions:
 ---
 
 **Configuration Status:** ✅ Complete and Working  
+
+---
+
+## Pipeline & Gate System (v2 — opencode branch)
+
+> **Added:** 2026-05-03 | Resolves: QA diagram not being generated, no user checkpoints
+
+### Problem Solved
+
+Previously, `tech-lead` used a **NO PAUSES** autonomous chain. This caused:
+- `qa-engineer` (verify) was called at build-time, not design-time — no QA test matrix ever generated
+- Chain silently dropped phases when prior agent stalled
+- No user visibility or approval between design phases
+
+### New Two-Phase Architecture
+
+```
+User Request
+    ↓
+@tech-lead
+    ↓
+  PHASE A: Design (pipeline-orchestrator)
+  ┌──────────────────────────────────────────────────────
+  │ [1] project-manager  → docs/PLAN.md
+  │         GATE 1/5: "plan approved"
+  │ [2] architect        → docs/ARCHITECTURE.md
+  │         GATE 2/5: "arch lgtm"
+  │ [3] quality-gate     → architecture validation
+  │         GATE 3/5: "quality ok"
+  │ [4] qa-planner       → docs/QA_TESTCASES.md  ← NEW
+  │         GATE 4/5: "qa approved"
+  │ [5] tdd-guide        → docs/TDD_STUBS.md
+  │         GATE 5/5: "tdd ready"
+  └──────────────────────────────────────────────────────
+        User approves: "build start"
+    ↓
+  PHASE B: Build (tech-lead supervised chain)
+  ┌──────────────────────────────────────────────────────
+  │ [1] developer        → source code
+  │ [2] ui-engineer      → frontend (if applicable)
+  │ [3] qa-engineer      → smoke tests
+  │ [4] security-reviewer → audit
+  └──────────────────────────────────────────────────────
+```
+
+### New Agents (v2)
+
+| Agent | File | Purpose |
+|---|---|---|
+| `pipeline-orchestrator` | `agents/pipeline-orchestrator.md` | Runs design pipeline with 5 gate checkpoints |
+| `qa-planner` | `agents/qa-planner.md` | Generates `docs/QA_TESTCASES.md` at design time |
+
+### New Commands (v2)
+
+| Command | Agent | Purpose |
+|---|---|---|
+| `/design` | `pipeline-orchestrator` | Full 5-phase design pipeline with gates |
+| `/qa-plan` | `qa-planner` | Standalone QA test matrix generation |
+
+### Gate Mode
+
+Controlled by `USER_PREFERENCES.md` under `## Pipeline Gates`:
+- `strict` (default): Must type exact phrase to advance
+- `relaxed`: Warning only, proceeds automatically
+- `off`: Legacy NO PAUSES behavior
+
+To change: ask `@improver` to update `USER_PREFERENCES.md`.
 **Agents:** 34 total (1 primary + 33 subagents)  
 **Format:** Markdown-based with YAML frontmatter
