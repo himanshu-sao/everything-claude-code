@@ -2,7 +2,7 @@
 name: memory-agent
 description: Persistent memory across sessions. Stores and retrieves learnings, patterns, and context.
 mode: subagent
-model: ollama/mistral:7b
+model: ollama/llama3.2:3b
 tools:
   read: true
   write: true

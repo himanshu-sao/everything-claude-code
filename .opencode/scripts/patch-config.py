@@ -3,7 +3,7 @@ import sys
 import os
 import re
 
-def patch_config(config_path, global_root, global_agents_dir, global_commands_dir):
+def patch_config(config_path, global_root, global_agents_dir, global_commands_dir, global_instructions_dir):
     if not os.path.exists(config_path):
         print(f"Error: {config_path} not found")
         return
@@ -13,14 +13,14 @@ def patch_config(config_path, global_root, global_agents_dir, global_commands_di
         content = f.read()
 
     # Regex to catch both relative and absolute paths to .opencode
-    # Matches: "/Users/.../.opencode/agents/" or ".opencode/agents/"
-    content = re.sub(r'\"[^"]*/\.opencode/agents/([^"]*)\"', f'"{global_agents_dir}/\\1"', content)
-    content = re.sub(r'\"[^"]*/\.opencode/agents-archive/([^"]*)\"', f'"{global_root}/agents-archive/\\1"', content)
-    content = re.sub(r'\"[^"]*/AGENTS.md\"', f'"{global_root}/AGENTS.md"', content)
-    content = re.sub(r'\{file:[^}]*/\.opencode/commands/([^}]*)\}', f'{{file:{global_commands_dir}/\\1}}', content)
+    # Matches: "/Users/.../.opencode/agents/" or ".opencode/agents/" or "agents/"
+    content = re.sub(r'\"(?:[^"]*/)?(?:\.opencode/)?agents/([^"]*)\"', f'"{global_agents_dir}/\\1"', content)
+    content = re.sub(r'\"(?:[^"]*/)?(?:\.opencode/)?agents-archive/([^"]*)\"', f'"{global_root}/agents-archive/\\1"', content)
+    content = re.sub(r'\"(?:[^"]*/)?(?:\.opencode/)?AGENTS.md\"', f'"{global_root}/AGENTS.md"', content)
+    content = re.sub(r'\{file:(?:[^}]*/)?(?:\.opencode/)?commands/([^}]*)\}', f'{{file:{global_commands_dir}/\\1}}', content)
     
-    # Also handle the legacy {file:commands/ format
-    content = re.sub(r'\{file:commands/([^}]*)\}', f'{{file:{global_commands_dir}/\\1}}', content)
+    # Patch instructions paths
+    content = re.sub(r'\"(?:[^"]*/)?(?:\.opencode/)?instructions/([^"]*)\"', f'"{global_instructions_dir}/\\1"', content)
 
     # Parse back to JSON to do structural fixes
     config = json.loads(content)
@@ -42,7 +42,7 @@ def patch_config(config_path, global_root, global_agents_dir, global_commands_di
         json.dump(config, f, indent=2)
 
 if __name__ == "__main__":
-    if len(sys.argv) > 4:
-        patch_config(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    if len(sys.argv) > 5:
+        patch_config(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
     else:
-        print("Usage: python3 patch-config.py <path> <global_root> <global_agents_dir> <global_commands_dir>")
+        print("Usage: python3 patch-config.py <path> <global_root> <global_agents_dir> <global_commands_dir> <global_instructions_dir>")

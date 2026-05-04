@@ -29,7 +29,7 @@ When you receive a request like "Run task X using agent Y":
 1. **Update Stack**: Read `.opencode/TASK_STATE.json`. Append "Y" to `active_stack`. Write updated file.
 2. **Execute Task**: Call `task` tool with `subagent_type` (Y) and `prompt`.
 3. **Analyze Output**:
-   - **If "BLOCK:"**: Set `status` to "BLOCKED". Output `BLOCK: [Sub-agent's Question]`. Sign off immediately.
+   - **If "BLOCK:"**: Set `status` to "BLOCKED". Output the exact sub-agent response starting from "BLOCK:". Sign off immediately. **DO NOT** attempt deliverable verification if the sub-agent is blocked or waiting for user input.
    - **If Success**: Proceed to Deliverable Verification step.
    - **If Stall (no output returned)**: Increment retry counter. If retries < 2, re-delegate with more explicit prompt. If retries == 2, emit `BLOCK: [Supervisor] Agent Y has stalled after 2 retries. Manual intervention required.`
 

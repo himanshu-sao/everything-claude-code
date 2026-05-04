@@ -2,7 +2,7 @@
 name: ecosystem-optimizer
 description: Continuous Improvement Agent. Analyzes conversation logs to extract anti-patterns, optimize agent prompts, and propose system updates.
 mode: subagent
-model: ollama/deepseek-coder-v2:32b  # High reasoning model recommended, or cloud model (claude-3.5-sonnet)
+model: ollama/codestral  # High reasoning model recommended, or cloud model (claude-3.5-sonnet)
 tools:
   read: true
   write: true

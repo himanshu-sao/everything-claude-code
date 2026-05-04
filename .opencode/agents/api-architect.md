@@ -2,7 +2,7 @@
 name: api-architect
 description: API Architect. Specializes in REST/GraphQL design, API contracts (OpenAPI), and frontend/backend integration.
 mode: subagent
-model: ollama/mistral:7b
+model: ollama/gemma4:e4b
 instructions:
   - "skills/api-design/SKILL.md"
   - "skills/backend-patterns/SKILL.md"

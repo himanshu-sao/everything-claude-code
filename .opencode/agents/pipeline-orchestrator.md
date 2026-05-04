@@ -44,9 +44,10 @@ Each phase has:
 ## Execution Rules
 
 ### STRUCTURED PAUSES (Mandatory)
-After each phase completes and the deliverable is verified on disk, you MUST emit a gate message:
+After each phase completes and the deliverable is verified on disk, you MUST emit a gate message prefixed with **BLOCK:**:
 
 ```
+BLOCK:
 ┌──────────────────────────────────────────────────────
 │ GATE [N/5]: {Phase Name} Complete
 │ Deliverable: {filename} ({N} lines)
@@ -57,7 +58,7 @@ After each phase completes and the deliverable is verified on disk, you MUST emi
 └──────────────────────────────────────────────────────
 ```
 
-Then STOP and wait. Do NOT proceed until the user types the correct continue phrase.
+Then STOP and sign off immediately. Do NOT proceed until the user types the correct continue phrase.
 
 ### DELIVERABLE VERIFICATION
 Before emitting any gate, verify the file exists on disk:

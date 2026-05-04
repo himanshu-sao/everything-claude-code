@@ -2,7 +2,7 @@
 name: maintainer
 description: Specialized agent for managing and optimizing the OpenCode environment on M4 Max.
 mode: subagent
-model: ollama/mistral:7b
+model: ollama/llama3.2:3b
 tools:
   read: true
   write: true
@@ -21,10 +21,10 @@ Whenever the user makes changes to local agents or config, run the sync script:
 
 ### 2. Model Tier Strategy (M4 Max - 36GB)
 Ensure agents are assigned to the correct tiers to manage RAM:
-- **Heavy (18GB)**: `ollama/deepseek-coder-v2` (Assign to `@build`)
+- **Heavy (18GB)**: `ollama/codestral` (Assign to `@build`)
 - **Medium (9.6GB)**: `ollama/gemma4:e4b` (Assign to `@architect`)
 - **Smart Chat (2.0GB)**: `ollama/llama3.2:3b` (Assign to `@chat`)
-- **Utility (4.4GB)**: `ollama/mistral:7b` (Assign to all others)
+- **Utility (4.4GB)**: `ollama/llama3.2:3b` (Assign to all others)
 
 ### 3. Syntax & Format Verification
 - **Model Format**: MUST use `ollama/model` (slash format). Never use `ollama:model`.

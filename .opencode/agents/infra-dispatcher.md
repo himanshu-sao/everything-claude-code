@@ -2,7 +2,7 @@
 name: infra-dispatcher
 description: Domain dispatcher for DevOps and infrastructure tasks. Handles deployment, containers, cloud, and IaC.
 mode: subagent
-model: ollama/mistral:7b
+model: ollama/llama3.2:3b
 tools:
   read: true
   write: true

@@ -2,7 +2,7 @@
 name: party-mode
 description: Multi-agent collaboration. Brings multiple agents together to discuss and collaborate.
 mode: subagent
-model: ollama/mistral:7b
+model: ollama/llama3.2:3b
 tools:
   read: true
   write: true

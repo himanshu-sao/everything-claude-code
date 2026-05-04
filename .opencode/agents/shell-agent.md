@@ -2,7 +2,7 @@
 name: shell-agent
 description: Shell/CLI specialist. Handles shell scripting, devops tasks, CLI tools, and automation.
 mode: subagent
-model: ollama/mistral:7b
+model: ollama/llama3.2:3b
 tools:
   read: true
   write: true

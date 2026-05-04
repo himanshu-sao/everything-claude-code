@@ -60,9 +60,11 @@ The pipeline-orchestrator will:
 4. Run qa-planner → `docs/QA_TESTCASES.md`
 5. Run tdd-guide → `docs/TDD_STUBS.md`
 
-Each step has a **user gate checkpoint**. The pipeline will pause and ask the user to approve before moving to the next phase. **You must wait for the pipeline-orchestrator to fully complete (all 5 phases) before starting Phase B.**
+Each step has a **user gate checkpoint**. The pipeline will pause and ask the user to approve before moving to the next phase. 
 
-Wait for the pipeline to emit: `"Design phase is complete. Handoff to tech-lead for build phase."`
+**STRICT RULE**: You are FORBIDDEN from approving gates or bypassing user checkpoints. If the pipeline-orchestrator emits a **BLOCK:** or a gate message, you MUST immediately stop, report it to the user exactly as received, and sign off. Do NOT attempt to "help" by approving it yourself.
+
+Wait for the pipeline-orchestrator to fully complete (all 5 phases) before starting Phase B. Wait for the pipeline to emit: `"Design phase is complete. Handoff to tech-lead for build phase."`
 
 Then wait for the user to reply with `"build start"` before proceeding.
 

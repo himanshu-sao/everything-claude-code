@@ -6,7 +6,7 @@ instructions:
   - "~/.opencode/library/golang-patterns/SKILL.md"
   - "~/.opencode/library/golang-testing/SKILL.md"
 mode: subagent
-model: ollama/mistral:7b
+model: ollama/codestral
 tools:
   read: true
   write: true

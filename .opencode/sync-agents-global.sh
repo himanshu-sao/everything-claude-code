@@ -90,7 +90,7 @@ sync_config() {
 
     # Use the new python patching script to avoid path-doubling and other regex bugs
     cp "$LOCAL_CONFIG_FILE" "$GLOBAL_CONFIG_FILE"
-    python3 "$SCRIPT_DIR/scripts/patch-config.py" "$GLOBAL_CONFIG_FILE" "$GLOBAL_ROOT" "$GLOBAL_AGENTS_DIR" "$GLOBAL_COMMANDS_DIR"
+    python3 "$SCRIPT_DIR/scripts/patch-config.py" "$GLOBAL_CONFIG_FILE" "$GLOBAL_ROOT" "$GLOBAL_AGENTS_DIR" "$GLOBAL_COMMANDS_DIR" "$GLOBAL_INSTRUCTIONS_DIR"
     
     printf "%b\n" "${GREEN}✓ Config synced and patched to $GLOBAL_CONFIG_FILE${NC}"
     echo ""

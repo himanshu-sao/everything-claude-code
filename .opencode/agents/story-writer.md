@@ -2,7 +2,7 @@
 name: story-writer
 description: Product Owner / Story Writer. Translates PRDs and requirements into actionable user stories and Jira tickets.
 mode: subagent
-model: ollama/mistral:7b
+model: ollama/gemma4:e4b
 instructions:
   - "skills/product-lifecycle/SKILL.md"
   - "skills/jira-integration/SKILL.md"

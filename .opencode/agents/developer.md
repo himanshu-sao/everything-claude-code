@@ -2,7 +2,7 @@
 name: developer
 description: Full-stack application developer and implementation specialist
 mode: subagent
-model: ollama/deepseek-coder-v2
+model: ollama/codestral
 tools:
   read: true
   write: true

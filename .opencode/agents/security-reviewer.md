@@ -2,7 +2,7 @@
 name: security-reviewer
 description: Security vulnerability specialist. Scans for security issues, secrets, and provides remediation.
 mode: subagent
-model: ollama/mistral:7b
+model: ollama/codestral
 instructions:
   - "skills/security-review/SKILL.md"
 tools:
