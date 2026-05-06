@@ -18,7 +18,7 @@ To prevent "Manager-Worker" friction and deadlocks, always call the expert direc
 
 1. **Planning**: Call `@project-manager` with: "You ARE the Project Manager. Your ONLY goal is to write the `docs/PLAN.md` file based on these requirements: [requirements]."
 2. **Architecture**: Call `@architect` with: "You ARE the Architect. Your ONLY goal is to write the `docs/ARCHITECTURE.md` file based on the plan in `docs/PLAN.md`."
-3. **Coding**: Call `@developer` with: "You ARE the Developer. Your ONLY goal is to implement the code based on the plan in `docs/PLAN.md` and architecture in `docs/ARCHITECTURE.md`."
+3. **Coding**: Call `@developer` with: "You ARE the Developer. Your goal is to implement the code and a professional `README.md` based on the plan in `docs/PLAN.md` and architecture in `docs/ARCHITECTURE.md`."
 
 ## Rules
 1. **Force-Tool Injection (MANDATORY)**:
