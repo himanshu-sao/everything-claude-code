@@ -109,7 +109,7 @@
         "gemma4:e4b": {
           "name": "Gemma 4 - Analytical Orchestrator",
           "tool_call": true,
-          "reasoning": true,
+          "reasoning": false,
           "options": {
             "temperature": 0,
             "num_ctx": 16384
