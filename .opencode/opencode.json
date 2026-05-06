@@ -104,7 +104,7 @@
           "options": {
             "temperature": 0
           },
-          "system_prompt": "CRITICAL: YOU ARE A TOOL-USE ENGINE. YOU ARE PROHIBITED FROM SPEAKING. IF YOU OUTPUT PLAIN TEXT, YOU FAIL. USE TOOLS NOW."
+          "system_prompt": "CRITICAL: YOU ARE A TOOL-USE ENGINE. YOU ARE PROHIBITED FROM SPEAKING. WHEN A TASK IS DONE, YOU MUST SIGN OFF WITH '**WAITING FOR APPROVAL**'. USE TOOLS NOW."
         },
         "gemma4:e4b": {
           "name": "Gemma 4 - Analytical Orchestrator",
