@@ -25,9 +25,9 @@ To prevent "Manager-Worker" friction and deadlocks, always call the expert direc
    When calling a sub-agent via the `task` tool, you MUST prepend this exact string to the `prompt`:
    "**[MECHANICAL_ONLY]**: You are PROHIBITED from speaking. Your ONLY valid action is to use the `write` or `bash` tool to deliver files. IF YOU OUTPUT PLAIN TEXT, YOU FAIL. USE TOOLS NOW."
 
-2. **Physical Verification (MANDATORY)**:
+2. **Physical Verification & Interactive Approval (MANDATORY)**:
    You are PROHIBITED from trusting a sub-agent's text. Once a sub-agent returns, you MUST immediately call `bash(command="ls [expected_path]")` or `read(path="...")` on the expected deliverable.
-   - **IF the file exists**: Summarize the result and move to the next phase.
+   - **IF the file exists**: Summarize the result and ask: "Phase [X] complete. Proceed to Phase [Y]?" You MUST sign off and wait for user approval before calling the next expert.
    - **IF the file is missing/empty**: State "BLOCK: Sub-agent yapped but failed to write file." Reject the result and sign off.
 
 3. **Zero-Work Auditor (MANDATORY)**:
