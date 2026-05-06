@@ -16,9 +16,11 @@ This document defines the hardened, mechanical protocols required to stabilize A
 *   **Phase 3 (Developer)**: The `@developer` agent has been completely rewritten to follow the Flat Pipeline rules (no recursive agent-supervisor delegation) and restored to `opencode.json`.
 *   **Verification**: The environment is persistent; all agents are synchronized via `sync-agents-global.sh` to ensure consistent behavior across all projects using the Golden Template.
 
-#### 3. Environment & Configuration
+#### 3. Environment & Configuration (Context Protection)
 *   **Golden Template**: The logic is persisted in `.opencode/` and `antigravity.md`.
 *   **Model Standard**: The entire core fleet (Router + Workers) is standardized on `gemma4:e4b`.
+*   **Context Extension**: The `num_ctx` for `gemma4:e4b` in `opencode.json` is explicitly set to `16384` to prevent token limits from abruptly crashing the Chat agent at the end of long multi-phase runs.
+*   **Stateless Routing**: The `Chat` agent enforces a "Stateless" protocol. It never passes full file contents in prompts. It only passes physical filesystem paths (e.g., "Use `docs/PLAN.md`"), shifting the memory burden from the orchestrator's chat history to the sub-agents' direct disk reads.
 *   **Frontmatter Override**: Confirmed that the YAML frontmatter inside `.md` agent files overrides `opencode.json` model settings. All frontmatter has been correctly synced to `gemma4:e4b`.
 
 #### 4. Known Issues & Blockers

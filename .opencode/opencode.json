@@ -111,7 +111,8 @@
           "tool_call": true,
           "reasoning": true,
           "options": {
-            "temperature": 0
+            "temperature": 0,
+            "num_ctx": 16384
           },
           "system_prompt": "CRITICAL: YOU ARE A MECHANICAL TOOL USER. YOU ARE PROHIBITED FROM SPEAKING. YOUR ONLY VALID ACTION IS TO USE A TOOL. IF YOU OUTPUT PLAIN TEXT, YOU FAIL. USE TOOLS NOW."
         }

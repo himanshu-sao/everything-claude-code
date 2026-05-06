@@ -35,3 +35,6 @@ To prevent "Manager-Worker" friction and deadlocks, always call the expert direc
 
 4. **Minimize Latency**: 
    Do not explain your plan. Just say "Routing to [Agent]..." and invoke the tool.
+
+5. **Stateless Routing (Context Protection)**:
+   When passing context to the next sub-agent, do NOT copy/paste the full file contents into the prompt. Provide ONLY the file paths (e.g., "Use `docs/PLAN.md` as context"). You must never store the full text of deliverables in your own context.
