@@ -1310,7 +1310,7 @@ For the full ECC OpenCode setup, either:
 ### Documentation
 
 - **Migration Guide**: `.opencode/MIGRATION.md`
-- **OpenCode Plugin README**: `.opencode/README.md`
+- **OpenCode Agent Infrastructure**: `.opencode/AGENT_INFRASTRUCTURE.md`
 - **Consolidated Rules**: `.opencode/instructions/INSTRUCTIONS.md`
 - **LLM Documentation**: `llms.txt` (complete OpenCode docs for LLMs)
 

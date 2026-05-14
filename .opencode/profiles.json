@@ -1,0 +1,22 @@
+{
+  "nvidia": {
+    "name": "Nvidia NIM (High Performance)",
+    "model": "nvidia/qwen/qwen3-coder-480b-a35b-instruct",
+    "small_model": "nvidia/deepseek-ai/deepseek-v4-flash",
+    "tiers": {
+      "power": "nvidia/qwen/qwen3-coder-480b-a35b-instruct",
+      "balanced": "nvidia/meta/llama-3.3-70b-instruct",
+      "fast": "nvidia/deepseek-ai/deepseek-v4-flash"
+    }
+  },
+  "ollama-local": {
+    "name": "Local Ollama (Flat)",
+    "model": "local-bridge/gemma4:e4b",
+    "small_model": "local-bridge/gemma4:e4b",
+    "tiers": {
+      "power": "local-bridge/gemma4:e4b",
+      "balanced": "local-bridge/gemma4:e4b",
+      "fast": "local-bridge/gemma4:e4b"
+    }
+  }
+}

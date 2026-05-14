@@ -2,7 +2,7 @@
 name: project-manager
 description: PHASE 1: Planning. Creates docs/PLAN.md.
 mode: subagent
-model: local-bridge/gemma4:e4b
+model: nvidia/meta/llama-3.3-70b-instruct
 tools:
   read: true
   write: true

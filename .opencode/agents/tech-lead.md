@@ -2,7 +2,7 @@
 name: tech-lead
 description: The Ultimate Router. Send all your requests here.
 mode: subagent
-model: local-bridge/gemma4:e4b
+model: nvidia/deepseek-ai/deepseek-v4-flash
 tools:
   read: true
   task: true

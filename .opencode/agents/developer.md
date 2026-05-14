@@ -2,7 +2,7 @@
 name: developer
 description: PHASE 3: Implementation. Implements code and README.md.
 mode: subagent
-model: local-bridge/gemma4:e4b
+model: nvidia/qwen/qwen3-coder-480b-a35b-instruct
 tools:
   read: true
   write: true

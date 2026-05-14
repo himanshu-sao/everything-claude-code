@@ -1,4 +1,4 @@
-# OpenCode Agent Configuration
+# OpenCode Agent Infrastructure
 
 > **Status:** ✅ Configured and Working  
 > **Last Updated:** 2026-05-03
@@ -195,7 +195,22 @@ The sync script will:
 - Skip duplicates
 - Create backup before syncing
 
-## Model Configuration
+## Model Management & Switching
+
+This project supports a tiered model strategy for different providers (Nvidia, Ollama, etc.).
+
+See **[MODEL_MANAGEMENT.md](file:///Users/himanshusao/Work/src/extra/himanshu-sao/everything-claude-code/.opencode/MODEL_MANAGEMENT.md)** for details on how to switch providers and manage tiers.
+
+### Quick Switch:
+```bash
+# Switch to Nvidia NIM
+python3 .opencode/switch-provider.py nvidia
+
+# Switch to Local Ollama
+python3 .opencode/switch-provider.py ollama-local
+```
+
+## Global Agent Setup
 
 ### Default Models
 - **mistral:7b** (776 MB) - Planning, orchestration, analysis

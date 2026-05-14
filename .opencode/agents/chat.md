@@ -2,7 +2,7 @@
 name: chat
 description: Entry point assistant. Coordinates the Expert-Direct workflow.
 mode: primary
-model: local-bridge/gemma4:e4b
+model: nvidia/deepseek-ai/deepseek-v4-flash
 tools:
   read: true
   bash: true

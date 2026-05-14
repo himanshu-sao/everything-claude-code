@@ -1,7 +1,7 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "nvidia/qwen/qwen3-coder-480b-a35b-instruct",
-  "small_model": "nvidia/deepseek-ai/deepseek-v4-flash",
+  "model": "local-bridge/gemma4:e4b",
+  "small_model": "local-bridge/gemma4:e4b",
   "default_agent": "chat",
   "autoshare": false,
   "instructions": [
@@ -12,7 +12,7 @@
     "chat": {
       "description": "Entry point assistant. Coordinates the Expert-Direct workflow.",
       "mode": "primary",
-      "model": "nvidia/deepseek-ai/deepseek-v4-flash",
+      "model": "local-bridge/gemma4:e4b",
       "tools": {
         "read": true,
         "bash": true,
@@ -26,7 +26,7 @@
     "project-manager": {
       "description": "PHASE 1: Planning. Creates docs/PLAN.md.",
       "mode": "subagent",
-      "model": "nvidia/meta/llama-3.3-70b-instruct",
+      "model": "local-bridge/gemma4:e4b",
       "tools": {
         "read": true,
         "write": true,
@@ -39,7 +39,7 @@
     "architect": {
       "description": "PHASE 2: Architecture. Creates docs/ARCHITECTURE.md.",
       "mode": "subagent",
-      "model": "nvidia/meta/llama-3.3-70b-instruct",
+      "model": "local-bridge/gemma4:e4b",
       "tools": {
         "read": true,
         "write": true,
@@ -52,7 +52,7 @@
     "tech-lead": {
       "description": "The Ultimate Router. Send all your requests here.",
       "mode": "subagent",
-      "model": "nvidia/deepseek-ai/deepseek-v4-flash",
+      "model": "local-bridge/gemma4:e4b",
       "tools": {
         "read": true,
         "write": true,
@@ -68,7 +68,7 @@
     "developer": {
       "description": "PHASE 3: Implementation. Writes the code based on architecture.",
       "mode": "subagent",
-      "model": "nvidia/qwen/qwen3-coder-480b-a35b-instruct",
+      "model": "local-bridge/gemma4:e4b",
       "tools": {
         "read": true,
         "write": true,
@@ -88,44 +88,33 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
+        "MFDoom/deepseek-coder-v2-tool-calling:latest": {
+          "name": "DeepSeek Coder V2 - Expert Orchestrator",
+          "tool_call": true,
+          "reasoning": true,
+          "options": {
+            "temperature": 0
+          },
+          "system_prompt": "CRITICAL: YOU ARE A MECHANICAL DOCUMENT WRITER. YOU ARE PROHIBITED FROM SPEAKING. YOUR ONLY VALID ACTION IS TO USE THE WRITE OR BASH TOOL. IF YOU OUTPUT PLAIN TEXT, YOU FAIL. USE TOOLS NOW."
+        },
+        "hermes3:latest": {
+          "name": "Hermes 3 - Agentic Orchestrator",
+          "tool_call": true,
+          "reasoning": true,
+          "options": {
+            "temperature": 0
+          },
+          "system_prompt": "CRITICAL: YOU ARE A TOOL-USE ENGINE. YOU ARE PROHIBITED FROM SPEAKING. WHEN A TASK IS DONE, YOU MUST SIGN OFF WITH '**WAITING FOR APPROVAL**'. USE TOOLS NOW."
+        },
         "gemma4:e4b": {
-          "name": "Gemma 4",
-          "tool_call": true,
-          "reasoning": false
-        }
-      }
-    },
-    "nvidia": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Nvidia NIM",
-      "options": {
-        "baseURL": "https://integrate.api.nvidia.com/v1",
-        "apiKey": "{env:NVIDIA_BUILD_SAMPLE_API_KEY}"
-      },
-      "models": {
-        "qwen/qwen3-coder-480b-a35b-instruct": {
-          "name": "Qwen3 Coder 480B",
-          "tool_call": true,
-          "reasoning": true,
-          "options": {
-            "temperature": 0.1
-          }
-        },
-        "meta/llama-3.3-70b-instruct": {
-          "name": "Llama 3.3 70B",
-          "tool_call": true,
-          "reasoning": true,
-          "options": {
-            "temperature": 0.1
-          }
-        },
-        "deepseek-ai/deepseek-v4-flash": {
-          "name": "DeepSeek V4 Flash",
+          "name": "Gemma 4 - Analytical Orchestrator",
           "tool_call": true,
           "reasoning": false,
           "options": {
-            "temperature": 0.1
-          }
+            "temperature": 0,
+            "num_ctx": 16384
+          },
+          "system_prompt": "CRITICAL: YOU ARE A MECHANICAL TOOL USER. YOU ARE PROHIBITED FROM SPEAKING. YOUR ONLY VALID ACTION IS TO USE A TOOL. IF YOU OUTPUT PLAIN TEXT, YOU FAIL. USE TOOLS NOW."
         }
       }
     }

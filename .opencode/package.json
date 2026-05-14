@@ -25,7 +25,7 @@
     "prompts",
     "instructions",
     "opencode.json",
-    "README.md"
+    "AGENT_INFRASTRUCTURE.md"
   ],
   "scripts": {
     "build": "tsc",
