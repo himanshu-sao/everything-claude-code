@@ -2,7 +2,7 @@
 # OpenCode Global Environment Sync Script
 # Syncs local agents, skills, and configuration to global ~/.opencode/ directory
 
-set -e
+set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORKSPACE_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -36,6 +36,13 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
+# Acquire global sync lock (if flock is available)
+SYNC_LOCK="$HOME/.config/opencode/sync.lock"
+exec 200>"$SYNC_LOCK"
+if command -v flock >/dev/null 2>&1; then
+  flock -n 200 || { echo "Failed to acquire sync lock" >&2; exit 1; }
+fi
+
 printf "%b\n" "${BLUE}╔════════════════════════════════════════════════╗${NC}"
 printf "%b\n" "${BLUE}║   OpenCode Global Environment Sync (Nuclear) ║${NC}"
 printf "%b\n" "${BLUE}╚════════════════════════════════════════════════╝${NC}"
@@ -46,6 +53,7 @@ mkdir -p "$GLOBAL_COMMANDS_DIR"
 mkdir -p "$GLOBAL_SKILLS_DIR"
 mkdir -p "$GLOBAL_INSTRUCTIONS_DIR"
 mkdir -p "$GLOBAL_CONFIG_DIR"
+mkdir -p "$GLOBAL_ROOT/scripts"
 mkdir -p "$BACKUP_ROOT"
 
 # --- Function: Sync Directory ---
@@ -83,6 +91,7 @@ AGENTS_ARCHIVE="$GLOBAL_ROOT/agents-archive"
 mkdir -p "$AGENTS_ARCHIVE"
 
 # CORE_AGENTS: Excludes orchestrators to prevent deadlocks.
+# dummy-agent.md is included for integration testing.
 CORE_AGENTS=(
     "chat.md"
     "project-manager.md"
@@ -93,6 +102,7 @@ CORE_AGENTS=(
     "tdd-guide.md"
     "ui-engineer.md"
     "agent-supervisor.md"
+    "dummy-agent.md"
 )
 
 is_core_agent() {
@@ -130,6 +140,14 @@ if [ -d "$LOCAL_SKILLS_DIR" ]; then
     printf "${GREEN}✓ Skills synced to Library.${NC}\n"
 fi
 rm -rf "$GLOBAL_SKILLS_DIR"/*  2>/dev/null || true
+
+# Sync scripts
+printf "🔄 Syncing Scripts...\n"
+LOCAL_SCRIPTS_DIR="$SCRIPT_DIR/scripts"
+if [ -d "$LOCAL_SCRIPTS_DIR" ]; then
+    rsync -av --delete "$LOCAL_SCRIPTS_DIR/" "$GLOBAL_ROOT/scripts/" | grep -v 'sending' || true
+    printf "${GREEN}✓ Scripts synced.${NC}\n"
+fi
 
 sync_dir "$LOCAL_INSTRUCTIONS_DIR" "$GLOBAL_INSTRUCTIONS_DIR" "Instructions"
 sync_config

@@ -1,5 +1,13 @@
 #!/bin/bash
 # OpenCode Agent Configuration Verification Script
+set -euo pipefail
+
+# Acquire verification lock (if flock is available)
+VERIFY_LOCK="$HOME/.config/opencode/verify.lock"
+exec 200>"$VERIFY_LOCK"
+if command -v flock >/dev/null 2>&1; then
+  flock -n 200 || { echo "Failed to acquire verify lock" >&2; exit 1; }
+fi
 
 echo "🔍 OpenCode Agent Configuration Verification"
 echo "=============================================="
@@ -74,18 +82,61 @@ fi
 
 echo ""
 
-# Summary
-echo "📋 Summary:"
-echo "  Total agents: $agent_count (markdown) + $json_agents (JSON) = $((agent_count + json_agents))"
+# Check scripts directory
+echo "📜 Scripts:"
+EXPECTED_SCRIPTS=("add_task.sh" "update_task.sh" "read_task.sh" "heartbeat.sh" "monitor_tasks.sh" "start_monitor.sh" "stop_monitor.sh")
+scripts_ok=0
+for script in "${EXPECTED_SCRIPTS[@]}"; do
+    if [ -f ".opencode/scripts/$script" ]; then
+        if [ -x ".opencode/scripts/$script" ]; then
+            echo "  ✅ $script (executable)"
+        else
+            echo "  ⚠️  $script (not executable)"
+            ((scripts_ok++))
+        fi
+    else
+        echo "  ❌ $script missing"
+        ((scripts_ok++))
+    fi
+done
+if [ $scripts_ok -eq 0 ]; then
+    echo "  ✅ All scripts present and executable"
+fi
+
 echo ""
 
-if [ $invalid_count -eq 0 ] && [ "$json_agents" -eq 1 ]; then
+# Check global sync status
+echo "🌐 Global Sync (${HOME}/.config/opencode):"
+if [ -d "$HOME/.config/opencode/scripts" ]; then
+    global_scripts=$(ls -1 "$HOME/.config/opencode/scripts/"*.sh 2>/dev/null | wc -l | tr -d ' ')
+    echo "  ✅ Global scripts: $global_scripts files"
+else
+    echo "  ⚠️  Global scripts directory missing (run sync-agents-global.sh)"
+fi
+if [ -f "$HOME/.config/opencode/agents/dummy-agent.md" ]; then
+    echo "  ✅ Global dummy-agent.md present"
+else
+    echo "  ⚠️  Global dummy-agent.md missing (run sync-agents-global.sh)"
+fi
+
+echo ""
+
+# Summary
+echo "📋 Summary:"
+echo "  Agent files: $agent_count | JSON agents: $json_agents | Scripts: $(( ${#EXPECTED_SCRIPTS[@]} - scripts_ok ))/${#EXPECTED_SCRIPTS[@]}"
+if [ -d "$HOME/.config/opencode/scripts" ]; then
+    global_scripts=$(ls -1 "$HOME/.config/opencode/scripts/"*.sh 2>/dev/null | wc -l | tr -d ' ')
+    echo "  Global sync: scripts ($global_scripts), dummy-agent: $([ -f "$HOME/.config/opencode/agents/dummy-agent.md" ] && echo 'yes' || echo 'no')"
+fi
+echo ""
+
+if [ $invalid_count -eq 0 ] && [ "$json_agents" -eq 1 ] && [ $scripts_ok -eq 0 ]; then
     echo "✅ Configuration is correct!"
     echo ""
     echo "Next steps:"
-    echo "  1. Test with: opencode agents list"
-    echo "  2. Try invoking an agent: @planner"
-    echo "  3. Check agent discovery works"
+    echo "  1. Run sync-agents-global.sh to sync to global"
+    echo "  2. Test with: opencode agents list"
+    echo "  3. Try invoking an agent: @planner"
 else
     echo "⚠️  Some issues found - review above"
 fi
