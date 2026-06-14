@@ -20,7 +20,7 @@ mkdir -p "$(dirname \"$TASKS_FILE\")"
 mkdir -p "$HEARTBEAT_DIR"
 
 # 1. Add a task for the developer agent
-TASK_ID=$(bash .opencode/scripts/add_task.sh developer)
+TASK_ID=$(bash ~/.config/opencode/scripts/add_task.sh developer)
 assert [ -n "$TASK_ID" ]
 # Verify the task exists and is pending
 STATUS=$(jq -r ".tasks[] | select(.id == \"$TASK_ID\") | .status" "$TASKS_FILE")
@@ -28,7 +28,7 @@ assert [ "$STATUS" = "pending" ]
 
 # 2. Update to running with a fake PID
 FAKE_PID=12345
-bash .opencode/scripts/update_task.sh "$TASK_ID" "{\"status\":\"running\",\"pid\":$FAKE_PID}"
+bash ~/.config/opencode/scripts/update_task.sh "$TASK_ID" "{\"status\":\"running\",\"pid\":$FAKE_PID}"
 STATUS=$(jq -r ".tasks[] | select(.id == \"$TASK_ID\") | .status" "$TASKS_FILE")
 PID=$(jq -r ".tasks[] | select(.id == \"$TASK_ID\") | .pid" "$TASKS_FILE")
 assert [ "$STATUS" = "running" ]
@@ -39,7 +39,7 @@ OLD_TS=$(( $(date +%s) - 100 ))
 echo "$OLD_TS" > "$HEARTBEAT_DIR/heartbeat.developer"
 
 # 4. Run the monitor in background (it will check every 10 s)
-bash .opencode/scripts/monitor_tasks.sh &
+bash ~/.config/opencode/scripts/monitor_tasks.sh &
 MONITOR_PID=$!
 # Give it a little time to detect the stale heartbeat
 sleep 12

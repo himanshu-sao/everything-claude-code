@@ -21,7 +21,8 @@ while true; do
   while IFS= read -r id; do
     [ -n "$id" ] && RUNNING_IDS+=("$id")
   done < <(jq -r '.tasks[] | select(.status == "running") | .id' "$TASKS_FILE")
-  for ID in "${RUNNING_IDS[@]}"; do
+  if [ ${#RUNNING_IDS[@]} -gt 0 ]; then
+    for ID in "${RUNNING_IDS[@]}"; do
     AGENT=$(jq -r ".tasks[] | select(.id == \"$ID\") | .agent" "$TASKS_FILE")
     HB_FILE="$HEARTBEAT_DIR/heartbeat.$AGENT"
     if [ ! -f "$HB_FILE" ]; then
@@ -45,6 +46,7 @@ while true; do
       jq "(.tasks[] | select(.id == \"$ID\")) |= (.status = \"error\" | .pid = null)" "$TASKS_FILE" > "$TASKS_FILE.tmp" && mv "$TASKS_FILE.tmp" "$TASKS_FILE"
     fi
   done
+  fi
 
   sleep $SLEEP_INTERVAL
 done

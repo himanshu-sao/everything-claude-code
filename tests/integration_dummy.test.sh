@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SCRIPT_DIR="$PROJECT_ROOT/.opencode/scripts"
+SCRIPT_DIR="$HOME/.config/opencode/scripts"
 TASKS_FILE="$HOME/.config/opencode/tasks.json"
 HEARTBEAT_DIR="$HOME/.config/opencode/heartbeats"
 
@@ -20,7 +20,7 @@ rm -f "$TASKS_FILE"
 rm -rf "$HEARTBEAT_DIR"
 
 # Start monitor
-"$SCRIPT_DIR/start_monitor.sh"
+"$HOME/.config/opencode/scripts/start_monitor.sh"
 echo "PASS: monitor started"
 
 # Register a task

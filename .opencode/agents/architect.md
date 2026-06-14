@@ -12,15 +12,15 @@ tools:
 <!-- Orchestration Boilerplate -->
 ```bash
 # Register task
-TASK_ID=$(bash .opencode/scripts/add_task.sh architect)
+TASK_ID=$(bash ~/.config/opencode/scripts/add_task.sh architect)
 # Start heartbeat
-bash .opencode/scripts/heartbeat.sh architect &
+bash ~/.config/opencode/scripts/heartbeat.sh architect &
 HB_PID=$!
 # Mark running
-bash .opencode/scripts/update_task.sh "$TASK_ID" "{\"status\":\"running\",\"pid\":$HB_PID}"
+bash ~/.config/opencode/scripts/update_task.sh "$TASK_ID" "{\"status\":\"running\",\"pid\":$HB_PID}"
 # Your work (write docs/ARCHITECTURE.md) ...
 # On success
-bash .opencode/scripts/update_task.sh "$TASK_ID" "{\"status\":\"done\",\"pid\":null}"
+bash ~/.config/opencode/scripts/update_task.sh "$TASK_ID" "{\"status\":\"done\",\"pid\":null}"
 # Cleanup heartbeat
 kill $HB_PID 2>/dev/null || true
 ```
